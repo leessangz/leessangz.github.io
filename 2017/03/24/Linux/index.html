@@ -1,0 +1,1111 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Linux中的用户
+在Linux中一般分为两个用户：
+root用户：一个特殊的管理账户，也被称为超级用户，在Windows中相当于administrato管理&amp;gt;员。root已接近完整的系统控制，对系统损害几乎有无限的能力，在平时的生产环境中，除非需要做特定的操作，否则一般情况下不在root用户下对系统进行操作。
+普通用户：         普通用户也叫非特权用户，它对系统操作的权限有限，所以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 基础">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/Linux/index.html">
+<meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="Linux中的用户
+在Linux中一般分为两个用户：
+root用户：一个特殊的管理账户，也被称为超级用户，在Windows中相当于administrato管理&amp;gt;员。root已接近完整的系统控制，对系统损害几乎有无限的能力，在平时的生产环境中，除非需要做特定的操作，否则一般情况下不在root用户下对系统进行操作。
+普通用户：         普通用户也叫非特权用户，它对系统操作的权限有限，所以">
+<meta property="og:updated_time" content="2017-03-24T14:56:18.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 基础">
+<meta name="twitter:description" content="Linux中的用户
+在Linux中一般分为两个用户：
+root用户：一个特殊的管理账户，也被称为超级用户，在Windows中相当于administrato管理&amp;gt;员。root已接近完整的系统控制，对系统损害几乎有无限的能力，在平时的生产环境中，除非需要做特定的操作，否则一般情况下不在root用户下对系统进行操作。
+普通用户：         普通用户也叫非特权用户，它对系统操作的权限有限，所以">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/24/Linux/"/>
+
+
+
+
+
+  <title> Linux 基础 | LeeSsangZ </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LeeSsangZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeeSsangZ's SS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux 基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T20:33:43+08:00">
+                2017-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/03/24/Linux/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Linux中的用户"><a href="#Linux中的用户" class="headerlink" title="Linux中的用户"></a>Linux中的用户</h2><blockquote>
+<p>在Linux中一般分为两个用户：</p>
+<p>root用户：<br>一个特殊的管理账户，也被称为超级用户，在Windows中相当于administrato管理&gt;员。root已接近完整的系统控制，对系统损害几乎有无限的能力，在平时的生产环境中，除非需要做特定的操作，否则一般情况下不在root用户下对系统进行操作。</p>
+<p>普通用户：<br>         普通用户也叫非特权用户，它对系统操作的权限有限，所以普通用户的操作对操作系统造成的损害的能力也比较有限。</p>
+<p>用户登录信息查看命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">whoami: 显示当前登录有效用户</div><div class="line">who: 系统当前所有的登录会话</div><div class="line">w: 系统当前所有的登录会话及所做的操作</div></pre></td></tr></table></figure></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="终端"><a href="#终端" class="headerlink" title="终端"></a>终端</h2><blockquote>
+<pre><code>终端：
+     终端分为设备终端，物理终端，虚拟终端，图形终端，串行终端，伪终端。 
+
+设备终端：
+       键盘鼠标显示器。
+
+物理终端：
+       在(/dev/console) 下，控制台console。
+
+虚拟终端：（tty：tele type writers，/dev/tty#   #为[1-6] ）
+       在(/dev/tty）下，tty可以有多个，可以使用Ctrl+Alt+F[1-6] 来进行切换。
+
+图形终端：(/dec/tty7) startx，xwindows
+       在(/dec/tty7)下， 
+       在CentOS6中：启动图形终端为Ctrl+Alt+F7。
+       在CentOS7中：启动图形终端为：在哪个终端启动就为于哪个终端。
+串行终端：
+       在(/dev/ttyS#)下，使用串行接口输出的终端设备。
+
+伪终端：（pty：pseudo-tty  ，/dev/pts/#）
+       在(/dev/pts/#)下,pts,SSH远程连接；使用Xshell或CRT进行远程连接的都称为伪终端。
+
+查看当前的终端设备：
+        [root@localhost ~]# tty
+        /dev/pts/0
+</code></pre></blockquote>
+<h2 id="交互式接口"><a href="#交互式接口" class="headerlink" title="交互式接口"></a>交互式接口</h2><blockquote>
+<p>交互式接口：<br>   在启动终端后，在终端设备附加一个交互式应用程序，其实就是选择桌面或者是黑屏代码模式。</p>
+<pre><code>交互式程序：
+       交互式程序分为两类：GUI和CLI；
+    GUI：Graphic User Interface图形用户界面，又称图形用户接口。
+              Xprotocol，window manager，desktop
+         Desktop：
+              GNOME（c语言编写，图形库gtk）
+              KDE（c++编写，图形库qt）
+              XFCE（c语言编写，图形库gtk+）
+
+    CLI：Command Line Interface命令行界面，又称命令行接口。
+         shell程序：sh，csh，tcsh，ksh，bash，zsh
+</code></pre></blockquote>
+<h2 id="SHELL"><a href="#SHELL" class="headerlink" title="SHELL"></a>SHELL</h2><blockquote>
+<p>  Shell是一种高级程序设计语言，它是Linux系统的用户界面，为提供用户与内核进行交互操作的一种接口，他接受用户输入的命令并把它送入内核去执行，shell也被称为Linux的命令解释器（Command interpreter）。</p>
+</blockquote>
+<h2 id="BASH-SHELL"><a href="#BASH-SHELL" class="headerlink" title="BASH SHELL"></a>BASH SHELL</h2><blockquote>
+<p>GNU Bourne-Again Shell（bash）是GNU计划中重要的工具软件之一，目前也是Linux标准的shell，与sh兼容。<br>       CentOS中默认使用的是bash。</p>
+<p>显示当前使用的shell：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# echo $SHELL</div><div class="line">/bin/bash</div></pre></td></tr></table></figure></p>
+<p>显示当前系统使用的所有shell：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">        [root@localhost ~]# cat /etc/shells</div><div class="line">        /bin/sh</div><div class="line">        /bin/bash</div><div class="line">        /sbin/nologin</div><div class="line">        /usr/bin/sh</div><div class="line">        /usr/bin/bash</div><div class="line">        /usr/sbin/nologin</div><div class="line">        /bin/tcsh</div><div class="line">        /bin/csh</div><div class="line">`</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h2><blockquote>
+<pre><code>[root@localhost ~]#   
+                  #：当前用户为管理员
+[lee@localhost root]$  
+                  $：当前用户为普通用户
+</code></pre><p> 显示提示符格式：</p>
+<pre><code>[lee@localhost root]$ echo $PS1
+[\u@\h \W]\$
+</code></pre><p>PS1=”[\e[31m][\u@\h \W]\$[\e[0m]“<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">\e\033 修改命令符颜色</div><div class="line">\u  当前用户</div><div class="line">\h  主机名简称 </div><div class="line">\H  主机名</div><div class="line">\w  当前工作目录 </div><div class="line">\W  当前工作目录基名</div><div class="line">\t  24小时时间格式 </div><div class="line">\T  12小时时间格式</div><div class="line">\!  命令历史数 </div><div class="line">\#  开机后命令历史数</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h2><blockquote>
+<p>输入命令后回车：<br>         提请shell程序找到键入命令所对应的可执行程序或代码，并由其分析后提交给内核分配资源将其运行起来。  </p>
+<pre><code>在shell中可执行的命令有两类：
+   内部命令，外部命令
+</code></pre><p>内部命令：</p>
+<pre><code>由shell自带的，而且通过某命令形式提供。
+     help：内部命令列表。
+     enable cmd：可以启用。
+     enable -n cmd：禁用内部命令。
+     enable -n：查看所有禁用的内部命令。
+</code></pre><p>外部命令：</p>
+<pre><code>在文件系统路径下有对应的可执行程序文件。
+    查看路径：
+       which -a，which --skip-alias，whereis
+
+
+区别指定的命令是内部的还是外部的：
+     [lee@localhost root]$ type cd
+     cd is a shell builtin   
+     内部命令
+
+     [lee@localhost root]$ type ll
+     ll is aliased to `ls -l --color=auto&apos;
+     外部命令
+在文件系统路径下有对应的可执行程序文件。
+    查看路径：
+       which -a，which --skip-alias，whereis
+
+
+区别指定的命令是内部的还是外部的：
+     [lee@localhost root]$ type cd
+     cd is a shell builtin   
+     内部命令
+
+     [lee@localhost root]$ type ll
+     ll is aliased to `ls -l --color=auto&apos;
+     外部命令
+</code></pre><p>Hash缓存表</p>
+<p>系统初始hash表为空，当外部命令执行时，默认会从PATH路径下寻找该命令，找到后会将这条命令路径记录到hash表中，当再次使用该命令时，shell解释器首先会查看hash表，存在将执行，如果不存在，将会去PATH路径下寻找。利用hash缓存表可大大提高命令的调用速率。</p>
+<pre><code>Hash常见用法：
+    hash：显示hash缓存。
+    hash -l：显示hash缓存，可作为输入使用。
+    hash -p path name：将命令全路径path起别名为name。
+    hash -t name：打印缓存中的name的路径。
+    hash -d name ：清除name的缓存。
+    hash -r ：清除缓存。
+</code></pre></blockquote>
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><blockquote>
+<p>命令别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">显示当前shell进程所有可用的命令别名：</div><div class="line"> [root@localhost ~]# alias</div><div class="line"> alias cp=&apos;cp -i&apos;</div><div class="line"> alias egrep=&apos;egrep --color=auto&apos;</div><div class="line"> alias fgrep=&apos;fgrep --color=auto&apos;</div><div class="line"> alias grep=&apos;grep --color=auto&apos;</div><div class="line"> alias l.=&apos;ls -d .* --color=auto&apos;</div><div class="line"> alias ll=&apos;ls -l --color=auto&apos;</div><div class="line"> alias ls=&apos;ls --color=auto&apos;</div><div class="line"> alias mv=&apos;mv -i&apos;</div><div class="line"> alias rm=&apos;rm -i&apos;</div><div class="line"> alias which=&apos;alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde&apos;</div></pre></td></tr></table></figure></p>
+<p>定义别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">定义别名name，其相当于执行命令VALUE：</div><div class="line">       [root@localhost ~]# alias lqb=&apos;ls -a&apos;</div><div class="line">       [root@localhost ~]# lqb</div><div class="line">		.   anaconda-ks.cfg  .bash_logout   .bashrc  .config  .ssh     .Xauthority</div><div class="line">		..  .bash_history    .bash_profile  .cache   .cshrc   .tcshrc</div></pre></td></tr></table></figure></p>
+<p> 在命令行中定义的别名，仅对当前shell进程有效，如果想永久保存要定义在配置文件中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">仅对当前用户有效：~/.bashrc</div><div class="line"> 对所有用户有效：. /etc/bashrc</div></pre></td></tr></table></figure></p>
+<p>编辑配置给出的新配置不会立即生效</p>
+<p>bash进程重新读取配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">source /path/to/config_file</div><div class="line">./path/to/config_file</div></pre></td></tr></table></figure></p>
+<p>撤销别名：unalias<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; unalias [-a] name [name ...]</div><div class="line">         -a 取消所有别名</div><div class="line"> [root@localhost ~]# unalias lqb</div><div class="line"> [root@localhost ~]# lqb</div><div class="line"> bash: lqb: command not found</div></pre></td></tr></table></figure></p>
+<p>如果别名同原命令同名， 如果要执行原命令， 可使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">“\COMMAND”</div><div class="line">’COMMAND’</div><div class="line">/PATH/COMMAND： 外部命令</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="命令行格式"><a href="#命令行格式" class="headerlink" title="命令行格式"></a>命令行格式</h2><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    COMMAND [OPTIONS...] [ARGUMENTS...]</div><div class="line">选项： 用于启用或关闭命令的某个或某些功能；</div><div class="line">短选项： -c, 例如： -l, -h</div><div class="line">长选项： --word， 例如： --all, --human-readable</div><div class="line">参数： 命令的作用对象， 比如文件名， 用户名等</div></pre></td></tr></table></figure>
+<p>注意：</p>
+<pre><code>1.多选项，以及多参数和命令之间使用空白字符分隔
+2.取消和结束命令执行：
+       Ctrl+c，Ctrl+d
+3.多个命令可以用；符号分开
+4.一个命令可以用\分成多行
+</code></pre></blockquote>
+<h2 id="date：显示日期和时间"><a href="#date：显示日期和时间" class="headerlink" title="date：显示日期和时间"></a>date：显示日期和时间</h2><blockquote>
+<pre><code>Linux的两种时钟：
+  系统时钟： 由Linux内核通过CPU的工作频率进行的
+  硬件时钟： 主板
+ hwclock， clock: 
+      显示硬件时钟
+      -s, --hctosys 以硬件时钟为准， 校正系统时钟
+      -w, --systohc 以系统时钟为准， 校正硬件时钟
+ 时区： /etc/localtime
+ cal： 显示日历
+ cal –y：显示全年日历
+</code></pre></blockquote>
+<h2 id="开机关机"><a href="#开机关机" class="headerlink" title="开机关机"></a>开机关机</h2><blockquote>
+<p>关机：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">halt, poweroff</div></pre></td></tr></table></figure></p>
+<p>重启：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">reboot</div><div class="line">-f: 强制， 不调用shutdown</div><div class="line">-p: 切断电源</div></pre></td></tr></table></figure></p>
+<p>关机或重启:shutdown<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">shutdown [OPTION]... TIME [MESSAGE]</div><div class="line">-r: reboot</div><div class="line">-h: halt</div><div class="line">-c： cancel</div><div class="line">TIME:now: 立刻</div><div class="line">+m: 相对时间表示法， 多久之后； 例如 +3</div><div class="line">hh:mm: 绝对时间表示， 指明具体时间</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="screen命令"><a href="#screen命令" class="headerlink" title="screen命令"></a>screen命令</h2><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">创建新screen会话：</div><div class="line">  screen –S [SESSION]</div><div class="line">加入screen会话：</div><div class="line">  screen –x [SESSION]</div><div class="line">离线某个会话： </div><div class="line">  screen –d [SESSION]</div><div class="line">恢复某screen会话：</div><div class="line">  screen -r [SESSION]</div><div class="line">退出并关闭screen会话 ：</div><div class="line">  exit</div><div class="line">剥离当前screen会话：</div><div class="line">  Ctrl+a,d</div><div class="line">显示所有已经打开的screen会话：</div><div class="line">  screen -l</div></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h2><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">功能： 显示字符</div><div class="line">语法： echo [-neE][字符串]</div><div class="line">说明： echo会将输入的字符串送往标准输出。 输出的字符串间以空白字符隔开, 并在最后加上换行号</div></pre></td></tr></table></figure>
+<p>选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&gt;-E （ 默认） 不支持 \ 解释功能</div><div class="line">-n 不自动换行</div><div class="line">-e 启用 \ 字符的解释功能</div><div class="line">  显示变量：</div><div class="line">  echo &quot;$VAR_NAME“ 变量会替换， 弱引用</div><div class="line">  echo &apos;$VAR_NAME‘ 变量不会替换， 强引用</div><div class="line">  启用命令选项-e， 若字符串中出现以下字符， 则特别加以处理， 而不会将它当成一般文字输出</div><div class="line">\a 发出警告声</div><div class="line">\b 退格键</div><div class="line">\c 最后不加上换行符号</div><div class="line">\n 换行且光标移至行首</div><div class="line">\r 回车， 即光标移至行首， 但不换行</div><div class="line">\t 插入tab</div><div class="line">\\ 插入\字符</div><div class="line">\0nnn 插入nnn（ 八进制） 所代表的ASCII字符</div><div class="line">echo -e &apos;\033[43;31;5mmagedu\033[0m&apos;</div><div class="line">\xHH插入HH（ 十六进制） 所代表的ASCII字</div></pre></td></tr></table></figure></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/14/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
+               alt="LeeSsangZ" />
+          <p class="site-author-name" itemprop="name">LeeSsangZ</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/your-user-name" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux中的用户"><span class="nav-number">1.</span> <span class="nav-text">Linux中的用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终端"><span class="nav-number">2.</span> <span class="nav-text">终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互式接口"><span class="nav-number">3.</span> <span class="nav-text">交互式接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SHELL"><span class="nav-number">4.</span> <span class="nav-text">SHELL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BASH-SHELL"><span class="nav-number">5.</span> <span class="nav-text">BASH SHELL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令提示符"><span class="nav-number">6.</span> <span class="nav-text">命令提示符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行命令"><span class="nav-number">7.</span> <span class="nav-text">执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#别名"><span class="nav-number">8.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行格式"><span class="nav-number">9.</span> <span class="nav-text">命令行格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#date：显示日期和时间"><span class="nav-number">10.</span> <span class="nav-text">date：显示日期和时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机关机"><span class="nav-number">11.</span> <span class="nav-text">开机关机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen命令"><span class="nav-number">12.</span> <span class="nav-text">screen命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#echo命令"><span class="nav-number">13.</span> <span class="nav-text">echo命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.8 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeSsangZ</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "23a5925f955a4d1e919ddd321bb17921",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
