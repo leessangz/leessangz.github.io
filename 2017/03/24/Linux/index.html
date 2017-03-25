@@ -111,7 +111,7 @@ root用户：一个特殊的管理账户，也被称为超级用户，在Windows
 在Linux中一般分为两个用户：
 root用户：一个特殊的管理账户，也被称为超级用户，在Windows中相当于administrato管理&amp;gt;员。root已接近完整的系统控制，对系统损害几乎有无限的能力，在平时的生产环境中，除非需要做特定的操作，否则一般情况下不在root用户下对系统进行操作。
 普通用户：         普通用户也叫非特权用户，它对系统操作的权限有限，所以">
-<meta property="og:updated_time" content="2017-03-25T05:22:46.502Z">
+<meta property="og:updated_time" content="2017-03-25T05:25:24.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 基础">
 <meta name="twitter:description" content="Linux中的用户
@@ -545,11 +545,11 @@ root用户：一个特殊的管理账户，也被称为超级用户，在Windows
 </code></pre></blockquote>
 <h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><blockquote>
 <p>命令别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">显示当前shell进程所有可用的命令别名：</div><div class="line"> [root@localhost ~]# alias</div><div class="line"> alias cp=&apos;cp -i&apos;</div><div class="line"> alias egrep=&apos;egrep --color=auto&apos;</div><div class="line"> alias fgrep=&apos;fgrep --color=auto&apos;</div><div class="line"> alias grep=&apos;grep --color=auto&apos;</div><div class="line"> alias l.=&apos;ls -d .* --color=auto&apos;</div><div class="line"> alias ll=&apos;ls -l --color=auto&apos;</div><div class="line"> alias ls=&apos;ls --color=auto&apos;</div><div class="line"> alias mv=&apos;mv -i&apos;</div><div class="line"> alias rm=&apos;rm -i&apos;</div><div class="line"> alias which=&apos;alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde&apos;</div></pre></td></tr></table></figure></p>
-<p>定义别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">定义别名name，其相当于执行命令VALUE：</div><div class="line">       [root@localhost ~]# alias lqb=&apos;ls -a&apos;</div><div class="line">       [root@localhost ~]# lqb</div><div class="line">		.   anaconda-ks.cfg  .bash_logout   .bashrc  .config  .ssh     .Xauthority</div><div class="line">		..  .bash_history    .bash_profile  .cache   .cshrc   .tcshrc</div></pre></td></tr></table></figure></p>
+<p>定义别名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">定义别名name，其相当于执行命令VALUE：</div><div class="line">[root@localhost ~]# alias lqb=&apos;ls -a&apos;</div><div class="line">[root@localhost ~]# lqb</div><div class="line">.   anaconda-ks.cfg  .bash_logout   .bashrc  .config  .ssh     .Xauthority</div><div class="line">..  .bash_history    .bash_profile  .cache   .cshrc   .tcshrc</div></pre></td></tr></table></figure></p>
 <p> 在命令行中定义的别名，仅对当前shell进程有效，如果想永久保存要定义在配置文件中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">仅对当前用户有效：~/.bashrc</div><div class="line"> 对所有用户有效：. /etc/bashrc</div></pre></td></tr></table></figure></p>
 <p>编辑配置给出的新配置不会立即生效</p>
 <p>bash进程重新读取配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">source /path/to/config_file</div><div class="line">./path/to/config_file</div></pre></td></tr></table></figure></p>
-<p>撤销别名：unalias<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; unalias [-a] name [name ...]</div><div class="line">         -a 取消所有别名</div><div class="line"> [root@localhost ~]# unalias lqb</div><div class="line"> [root@localhost ~]# lqb</div><div class="line"> bash: lqb: command not found</div></pre></td></tr></table></figure></p>
+<p>撤销别名：unalias<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> unalias [-a] name [name ...]</div><div class="line">        -a 取消所有别名</div><div class="line">[root@localhost ~]# unalias lqb</div><div class="line">[root@localhost ~]# lqb</div><div class="line">bash: lqb: command not found</div></pre></td></tr></table></figure></p>
 <p>如果别名同原命令同名， 如果要执行原命令， 可使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">“\COMMAND”</div><div class="line">’COMMAND’</div><div class="line">/PATH/COMMAND： 外部命令</div></pre></td></tr></table></figure></p>
 </blockquote>
 <h2 id="命令行格式"><a href="#命令行格式" class="headerlink" title="命令行格式"></a>命令行格式</h2><blockquote>
@@ -738,7 +738,7 @@ root用户：一个特殊的管理账户，也被称为超级用户，在Windows
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
