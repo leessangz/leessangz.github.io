@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[bash 快捷键]]></title>
+      <url>%2F2017%2F03%2F25%2Fbash-kuaijie%2F</url>
+      <content type="text"><![CDATA[bash快捷键Ctrl + l 清屏， 相当于clear命令 Ctrl + o 执行当前命令， 并重新显示本命令 Ctrl + s 阻止屏幕输出， 锁定 Ctrl + q 允许屏幕输出 Ctrl + c 终止命令 Ctrl + z 挂起命令 Ctrl + a 光标移到命令行首， 相当于Home Ctrl + e 光标移到命令行尾， 相当于End Ctrl + f 光标向右移动一个字符 Ctrl + b 光标向左移动一个字符 Alt + f 光标向右移动一个单词尾 Alt + b 光标向左移动一个单词首 Ctrl + xx 光标在命令行首和光标之间移动 Ctrl + u 从光标处删除至命令行首 Ctrl + k 从光标处删除至命令行尾 Ctrl + w 从光标处向左删除至单词首 Alt + d 从光标处向右删除至单词尾 Ctrl + d 删除光标处的一个字符 Ctrl + h 删除光标前的一个字符 Ctrl + y 将删除的字符粘贴至光标后 Alt + c 从光标处开始向右更改为首字母大写的单词 Alt + u 从光标处开始向右更改为全部大写的单词 Alt + l 从光标处更改为全部小写的单词 Ctrl + t 交换光标处和之前的字符位置 Alt + t 交换光标处和之前的单词位置 Alt + N 提示输入指定字符后， 重复显示该字符N次 注意： Alt组合快捷键经常和其它软件冲突]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[命令行扩展]]></title>
       <url>%2F2017%2F03%2F25%2Fcommand-kuozhan%2F</url>
       <content type="text"><![CDATA[命令行扩展$()或$ 把一个命令的输出打印给另一个命令的参数 $ echo &quot;This system&apos;s name is $(hostname) &quot; This system&apos;s name is server1.example.com $echo &quot;i am `whoami` &quot; i am root 括号扩展： { } 打印重复字符串的简化形式12[root@pxe57 ~]# echo file&#123;1,3,5&#125;file1 file3 file5 12[root@pxe57 ~]# echo &#123;1..10&#125;1 2 3 4 5 6 7 8 9 10 12[root@pxe57 ~]# echo &#123;a..z&#125;a b c d e f g h i j k l m n o p q r s t u v w x y z 12[root@pxe57 ~]# echo &#123;000..20..2&#125;000 002 004 006 008 010 012 014 016 018 020 命令补全 bash根据PATH环境变量定义的路径，自左而右在每个路径搜寻以给定命令 名命名的文件， 第一次找到的命令即为要执行的命令. 用户给定的字符串只有一条惟一对应的命令， 直接补全否则， 再次Tab会给出列表 路径补全 把用户给出的字符串当做路径开头，并在其指定上级目录下搜索以指定的字符串开头的文件名 如果惟一： 则直接补全 否则： 再次Tab给出列表 TAB快捷键 command 2Tab 所有命令行补全 string2Tab 以string开头命令 /2Tab 显示所有根目录下一级目录， 包括隐藏目录 ./2Tab 当前目录下子目录， 包括隐藏目录 *2Tab 当前目录下子目录， 不包括隐藏目录 ~2Tab 所有用户列表 $2Tab 所有变量 @2Tab /etc/hosts记录 （ centos7不支持） =2Tab 相当于ls –A]]></content>
