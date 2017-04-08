@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Linux,正则表达式," />
 
 
 
@@ -99,12 +99,31 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="LeeSsangZ">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+<meta name="description" content="grep命令及正则表达式以下转自微信公众号：magedu-Linux
+grep基本概念
+grep：global search regular expression and print out the line
+作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。
+模式：由正则表达式字符及文本字符所编写的过滤条件
+正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grep和正则表达式">
+<meta property="og:url" content="http://yoursite.com/2017/04/06/grep-and-zhengze/index.html">
 <meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="grep命令及正则表达式以下转自微信公众号：magedu-Linux
+grep基本概念
+grep：global search regular expression and print out the line
+作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。
+模式：由正则表达式字符及文本字符所编写的过滤条件
+正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而">
+<meta property="og:updated_time" content="2017-04-06T05:40:15.540Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeeSsangZ">
+<meta name="twitter:title" content="grep和正则表达式">
+<meta name="twitter:description" content="grep命令及正则表达式以下转自微信公众号：magedu-Linux
+grep基本概念
+grep：global search regular expression and print out the line
+作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。
+模式：由正则表达式字符及文本字符所编写的过滤条件
+正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而">
 
 
 
@@ -132,13 +151,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/06/grep-and-zhengze/"/>
 
 
 
 
 
-  <title> 归档 | LeeSsangZ </title>
+  <title> grep和正则表达式 | LeeSsangZ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -163,7 +182,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,403 +320,302 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 11 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/06/grep-and-zhengze/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                grep和正则表达式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-06T13:23:46+08:00">
+                2017-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
+                    <span itemprop="name">正则表达式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/04/06/grep-and-zhengze/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <h1 id="grep命令及正则表达式"><a href="#grep命令及正则表达式" class="headerlink" title="grep命令及正则表达式"></a>grep命令及正则表达式</h1><p>以下转自微信公众号：magedu-Linux</p>
+<h1 id="grep基本概念"><a href="#grep基本概念" class="headerlink" title="grep基本概念"></a>grep基本概念</h1><blockquote>
+<p>grep：global search regular expression and print out the line</p>
+<p>作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。</p>
+<p>模式：由正则表达式字符及文本字符所编写的过滤条件</p>
+<p>正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而表示控制或通配的功能</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>比较记忆：</p>
+<p>基本正则表达式：BRE</p>
+<p>扩展正则表达式：ERE</p>
+</blockquote>
+<pre><code>grep -E = egrep
+</code></pre><h2 id="grep语法"><a href="#grep语法" class="headerlink" title="grep语法"></a>grep语法</h2><blockquote>
+<p>grep [OPTIONS] PATTERN [FILE…]</p>
+</blockquote>
+<p>OPTIONS：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">--color=auto：对匹配到的文本着色后高亮显示；</div><div class="line"></div><div class="line">-i：ignorecase，忽略字符的大小写；</div><div class="line"></div><div class="line">-o：仅显示匹配到的字符串本身；</div><div class="line"></div><div class="line">-v, --invert-match：显示不能被模式匹配到的行；</div><div class="line"></div><div class="line">-E：支持使用扩展的正则表达式元字符；</div><div class="line"></div><div class="line">-q, --quiet, --silent：静默模式，即不输出任何信息；</div><div class="line"></div><div class="line">-A #：after, 后#行</div><div class="line"></div><div class="line">-B #：before，前#行</div><div class="line">            </div><div class="line">-C #：context，前后各#行</div></pre></td></tr></table></figure></p>
+<h1 id="基本正则表达式原字符"><a href="#基本正则表达式原字符" class="headerlink" title="基本正则表达式原字符"></a>基本正则表达式原字符</h1><p>字符匹配：</p>
+<pre><code>. ：匹配任意单个字符；
+    []：匹配指定范围内的任意单个字符；
+    [^]：匹配指定范围外的任意单个字符；
+    [:digit:]、[:lower:]、[:upper:]、[:alpha:]、[:alnum:]、[:punct:]、[:space:]
+</code></pre><p>匹配次数：</p>
+<pre><code>  用在要指定其出现的次数的字符的后面，用于限制其前面字符出现的次数；默认工作于贪婪模式；
+
+*：匹配其前面的字符任意次；0,1,多次；
+        例如：grep &quot;x\+y&quot;
+                abxy
+                aby
+                xxxxxy
+                yab
+.*：匹配任意长度的任意字符
+\?：匹配其前面的字符0次或1次；即其前面的字符是可有可无的；
+\+：匹配其前面的字符1次或多次；即其面的字符要出现至少1次；
+\{m\}：匹配其前面的字符m次；
+\{m,n\}：匹配其前面的字符至少m次，至多n次；
+\{0,n\}：至多n次
+\{m,\}：至少m次
+</code></pre><p>位置锚定：</p>
+<p>^：行首锚定；用于模式的最左侧；</p>
+<p>$：行尾锚定；用于模式的最右侧；</p>
+<p>^PATTERN$：用于PATTERN来匹配整行；</p>
+<p>^$：空白行；</p>
+<p>^[[:space:]]*$：空行或包含空白字符的行；</p>
+<p>\&lt; 或 \b：词首锚定，用于单词模式的左侧；</p>
+<p>> 或 \b：词尾锚定，用于单词模式的右侧；</p>
+<p>\<pattern\>：匹配完整单词；</pattern\></p>
+<p>单词：非特殊字符组成的连续字符（字符串）都称为单词；</p>
+<p>分组及引用</p>
+<p>()：将一个或多个字符捆绑在一起，当作一个整体进行处理；</p>
+<pre><code>\(xy\)*ab
+</code></pre><p>Note：分组括号中的模式匹配 到的内容会被正则表达式引擎自动记录于内部的变量中，这些变量为：</p>
+<p>\1：模式从左侧起，第一个左括号以及与之匹配的右括号之间的模式所匹配到的字符；</p>
+<p>\2：模式从左侧起，第二个左括号以及与之匹配的右括号之间的模式所匹配到的字符；</p>
+<p>\3<br>      …</p>
+<pre><code>He loves his lover.
+He likes his lover.
+She likes her liker.
+She loves her liker.
+
+~]# grep  &quot;\(l..e\).*\1&quot;  lovers.txt
+</code></pre><p>后向引用：引用前面的分组括号中的模式所匹配到的字符；</p>
+<h1 id="扩展正则表达式的元字符"><a href="#扩展正则表达式的元字符" class="headerlink" title="扩展正则表达式的元字符"></a>扩展正则表达式的元字符</h1><p>字符匹配：</p>
+<pre><code>.：任意单个字符
+[]：指定范围内的任意单个字符
+[^]：指定范围外的任意单个字符
+次数匹配：
+*：任意次，0,1或多次；
+?：0次或1次，其前的字符是可有可无的；
++：其前字符至少1次；
+{m}：其前的字符m次；
+{m,n}：至少m次，至多n次; 
+        {0,n}
+        {m,}
+</code></pre><p>位置锚定：</p>
+<pre><code>^：行首锚定；
+$：行尾锚定；
+\&lt;, \b：词首锚定；
+\&gt;, \b：词尾锚定；
+</code></pre><p>分组及引用：</p>
+<pre><code>()：分组；括号内的模式匹配到的字符会被记录于正则表达式引擎的内部变量中；
+后向引用：\1, \2, ...
+
+    或：
+</code></pre><p>a|b：a或者b；<br>C|cat：C或cat<br>(c|C)at：cat或Cat</p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/正则表达式/" rel="tag"># 正则表达式</a>
+          
         </div>
       
+
+      
+        
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/06/zhengzebiaodashi/" rel="next" title="常用正则表达式集合">
+                <i class="fa fa-chevron-left"></i> 常用正则表达式集合
+              </a>
+            
+          </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          <span class="post-nav-divider"></span>
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/06/linux-COMMAND/" itemprop="url">
-              
-                <span itemprop="name">linux COMMAND</span>
-              
-            </a>
-        
-      </h1>
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/06/linux-COMMAND/" rel="prev" title="linux COMMAND">
+                linux COMMAND <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-06T14:04:13+08:00"
-              content="2017-04-06" >
-          04-06
-        </time>
-      </div>
-
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/06/grep-and-zhengze/" itemprop="url">
-              
-                <span itemprop="name">grep和正则表达式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-06T13:23:46+08:00"
-              content="2017-04-06" >
-          04-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/06/zhengzebiaodashi/" itemprop="url">
-              
-                <span itemprop="name">常用正则表达式集合</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-06T12:38:35+08:00"
-              content="2017-04-06" >
-          04-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/28/filesystem/" itemprop="url">
-              
-                <span itemprop="name">Linux Filesystem</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-28T21:40:59+08:00"
-              content="2017-03-28" >
-          03-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/25/get-help/" itemprop="url">
-              
-                <span itemprop="name">获取帮助</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-25T19:19:23+08:00"
-              content="2017-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/25/bash-kuaijie/" itemprop="url">
-              
-                <span itemprop="name">bash 快捷键</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-25T18:34:15+08:00"
-              content="2017-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/25/command-kuozhan/" itemprop="url">
-              
-                <span itemprop="name">命令行扩展</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-25T15:28:19+08:00"
-              content="2017-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/25/date/" itemprop="url">
-              
-                <span itemprop="name">date 命令</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-25T15:01:50+08:00"
-              content="2017-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/25/echo/" itemprop="url">
-              
-                <span itemprop="name">echo 命令</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-25T12:05:32+08:00"
-              content="2017-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/24/Linux/" itemprop="url">
-              
-                <span itemprop="name">Linux 基础</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-24T20:33:43+08:00"
-              content="2017-03-24" >
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="extend next" rel="next" href="/archives/2017/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
+    </div>
+  </div>
 
           
           </div>
@@ -705,6 +623,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
 
         </div>
         
@@ -724,8 +648,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
@@ -834,6 +767,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grep命令及正则表达式"><span class="nav-number">1.</span> <span class="nav-text">grep命令及正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grep基本概念"><span class="nav-number">2.</span> <span class="nav-text">grep基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#grep语法"><span class="nav-number">2.1.</span> <span class="nav-text">grep语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本正则表达式原字符"><span class="nav-number">3.</span> <span class="nav-text">基本正则表达式原字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展正则表达式的元字符"><span class="nav-number">4.</span> <span class="nav-text">扩展正则表达式的元字符</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -946,11 +895,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
