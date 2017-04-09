@@ -1,0 +1,1103 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux基础命令,每天一个linux命令,转载," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="每天一个linux命令–mv文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。
+
+
+mv命令是move的缩写，可以用来移动文件或者将文件改名（move (rename) files），是Linux系统下常用的命令，经常用来备份文件或者目录。
+
+1．命令格式：mv [选项] 源文件或目录 目标文件或目录
+2．命令功能：视mv命令中第二个参数类型的不同（是目标文件还是目标目录），mv命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每天一个linux命令--mv">
+<meta property="og:url" content="http://yoursite.com/2017/04/14/every-day-linux-command7-mv/index.html">
+<meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="每天一个linux命令–mv文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。
+
+
+mv命令是move的缩写，可以用来移动文件或者将文件改名（move (rename) files），是Linux系统下常用的命令，经常用来备份文件或者目录。
+
+1．命令格式：mv [选项] 源文件或目录 目标文件或目录
+2．命令功能：视mv命令中第二个参数类型的不同（是目标文件还是目标目录），mv命令">
+<meta property="og:updated_time" content="2017-04-09T04:56:57.579Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每天一个linux命令--mv">
+<meta name="twitter:description" content="每天一个linux命令–mv文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。
+
+
+mv命令是move的缩写，可以用来移动文件或者将文件改名（move (rename) files），是Linux系统下常用的命令，经常用来备份文件或者目录。
+
+1．命令格式：mv [选项] 源文件或目录 目标文件或目录
+2．命令功能：视mv命令中第二个参数类型的不同（是目标文件还是目标目录），mv命令">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/14/every-day-linux-command7-mv/"/>
+
+
+
+
+
+  <title> 每天一个linux命令--mv | LeeSsangZ </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LeeSsangZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeeSsangZ's SS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/14/every-day-linux-command7-mv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                每天一个linux命令--mv
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-14T12:20:15+08:00">
+                2017-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/每天一个linux命令/" itemprop="url" rel="index">
+                    <span itemprop="name">每天一个linux命令</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/04/14/every-day-linux-command7-mv/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="每天一个linux命令–mv"><a href="#每天一个linux命令–mv" class="headerlink" title="每天一个linux命令–mv"></a>每天一个linux命令–mv</h1><p>文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。</p>
+<hr>
+<blockquote>
+<p><strong>mv</strong>命令是move的缩写，可以用来移动文件或者将文件改名（move (rename) files），是Linux系统下常用的命令，经常用来备份文件或者目录。</p>
+</blockquote>
+<h5 id="1．命令格式："><a href="#1．命令格式：" class="headerlink" title="1．命令格式："></a>1．命令格式：</h5><pre><code>mv [选项] 源文件或目录 目标文件或目录
+</code></pre><h5 id="2．命令功能："><a href="#2．命令功能：" class="headerlink" title="2．命令功能："></a>2．命令功能：</h5><pre><code>视mv命令中第二个参数类型的不同（是目标文件还是目标目录），mv命令将文件重命名或
+将其移至一个新的目录中。当第二个参数类型是文件时，mv命令完成文件重命名，此时，
+源文件只能有一个（也可以是源目录名），它将所给的源文件或目录重命名为给定的目标
+文件名。当第二个参数是已存在的目录名称时，源文件或目录参数可以有多个，mv命令将
+各参数指定的源文件均移至目标目录中。在跨文件系统移动文件时，mv先拷贝，再将原有
+文件删除，而链至该文件的链接也将丢失。
+</code></pre><a id="more"></a>
+<h5 id="3．命令参数："><a href="#3．命令参数：" class="headerlink" title="3．命令参数："></a>3．命令参数：</h5><pre><code>-b ：若需覆盖文件，则覆盖前先行备份。 
+
+-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；
+
+-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！
+
+-u ：若目标文件已经存在，且 source 比较新，才会更新(update)
+
+-t ： --target-directory=DIRECTORY move all SOURCE arguments into DIRECTORY，
+     即指定mv的目标目录，该选项适用于移动多个源文件到一个目录的情k况，此时目标目录在前，源文件在后。
+</code></pre><h5 id="4．命令实例："><a href="#4．命令实例：" class="headerlink" title="4．命令实例："></a>4．命令实例：</h5><p><strong>实例一：文件改名</strong></p>
+<pre><code>命令：
+
+mv test.log test1.txt
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">总计 20drwxr-xr-x 6 root root 4096 10-27 01:58 scf</div><div class="line"></div><div class="line">drwxrwxrwx 2 root root 4096 10-25 17:46 test3</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-25 17:56 test4</div><div class="line"></div><div class="line">drwxr-xr-x 3 root root 4096 10-25 17:56 test5</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   16 10-28 06:04 test.log</div><div class="line"></div><div class="line">[root@localhost test]# mv test.log test1.txt</div><div class="line"></div><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">总计 20drwxr-xr-x 6 root root 4096 10-27 01:58 scf</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   16 10-28 06:04 test1.txt</div><div class="line"></div><div class="line">drwxrwxrwx 2 root root 4096 10-25 17:46 test3</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-25 17:56 test4</div><div class="line"></div><div class="line">drwxr-xr-x 3 root root 4096 10-25 17:56 test5</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>将文件test.log重命名为test1.txt
+</code></pre><p><strong>实例二：移动文件</strong></p>
+<pre><code>命令：
+
+mv test1.txt test3
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">总计 20drwxr-xr-x 6 root root 4096 10-27 01:58 scf</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">drwxrwxrwx 2 root root 4096 10-25 17:46 test3</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-25 17:56 test4</div><div class="line"></div><div class="line">drwxr-xr-x 3 root root 4096 10-25 17:56 test5</div><div class="line"></div><div class="line">[root@localhost test]# mv test1.txt test3</div><div class="line"></div><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">总计 16drwxr-xr-x 6 root root 4096 10-27 01:58 scf</div><div class="line"></div><div class="line">drwxrwxrwx 2 root root 4096 10-28 06:09 test3</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-25 17:56 test4</div><div class="line"></div><div class="line">drwxr-xr-x 3 root root 4096 10-25 17:56 test5</div><div class="line"></div><div class="line">[root@localhost test]# cd test3</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">总计 4</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">[root@localhost test3]#</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>将test1.txt文件移到目录test3中
+</code></pre><p><strong>实例三：将文件log1.txt,log2.txt,log3.txt移动到目录test3中。</strong> </p>
+<pre><code>命令：
+
+mv log1.txt log2.txt log3.txt test3
+
+mv -t /opt/soft/test/test4/ log1.txt log2.txt     log3.txt 
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">总计 28</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root    8 10-28 06:15 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   12 10-28 06:15 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   13 10-28 06:16 log3.txt</div><div class="line"></div><div class="line">drwxrwxrwx 2 root root 4096 10-28 06:09 test3</div><div class="line"></div><div class="line">[root@localhost test]# mv log1.txt log2.txt log3.txt test3</div><div class="line"></div><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">总计 16drwxrwxrwx 2 root root 4096 10-28 06:18 test3</div><div class="line"></div><div class="line">[root@localhost test]# cd test3/</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">总计 16</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root  8 10-28 06:15 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 12 10-28 06:15 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log3.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">[root@localhost test3]#</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">总计 20</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root    8 10-28 06:15 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   12 10-28 06:15 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   13 10-28 06:16 log3.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:21 logs</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">[root@localhost test3]# mv -t /opt/soft/test/test4/ log1.txt log2.txt 	log3.txt </div><div class="line"></div><div class="line">[root@localhost test3]# cd ..</div><div class="line"></div><div class="line">[root@localhost test]# cd test4/</div><div class="line"></div><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">总计 12</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root  8 10-28 06:15 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 12 10-28 06:15 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log3.txt</div><div class="line"></div><div class="line">[root@localhost test4]#</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>mv log1.txt log2.txt log3.txt test3 命令将log1.txt ，log2.txt， log3.txt
+三个文件移到 test3目录中去，mv -t /opt/soft/test/test4/ log1.txt log2.txt log3.txt 
+命令又将三个文件移动到test4目录中去
+</code></pre><p><strong>实例四：将文件file1改名为file2，如果file2已经存在，则询问是否覆盖</strong></p>
+<pre><code>命令：
+
+mv -i log1.txt log2.txt
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">总计 12</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root  8 10-28 06:15 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 12 10-28 06:15 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log3.txt</div><div class="line"></div><div class="line">[root@localhost test4]# cat log1.txt </div><div class="line"></div><div class="line">odfdfs</div><div class="line"></div><div class="line">[root@localhost test4]# cat log2.txt </div><div class="line"></div><div class="line">ererwerwer</div><div class="line"></div><div class="line">[root@localhost test4]# mv -i log1.txt log2.txt </div><div class="line"></div><div class="line">mv：是否覆盖“log2.txt”? y</div><div class="line"></div><div class="line">[root@localhost test4]# cat log2.txt </div><div class="line"></div><div class="line">odfdfs</div><div class="line"></div><div class="line">[root@localhost test4]#</div></pre></td></tr></table></figure></p>
+<p><strong>实例五：将文件file1改名为file2，即使file2存在，也是直接覆盖掉。</strong></p>
+<pre><code>命令：
+
+mv -f log3.txt log2.txt
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">总计 8</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root  8 10-28 06:15 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log3.txt</div><div class="line"></div><div class="line">[root@localhost test4]# cat log2.txt </div><div class="line"></div><div class="line">odfdfs</div><div class="line"></div><div class="line">[root@localhost test4]# cat log3</div><div class="line"></div><div class="line">cat: log3: 没有那个文件或目录</div><div class="line"></div><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">总计 8</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root  8 10-28 06:15 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log3.txt</div><div class="line"></div><div class="line">[root@localhost test4]# cat log2.txt </div><div class="line"></div><div class="line">odfdfs</div><div class="line"></div><div class="line">[root@localhost test4]# cat log3.txt </div><div class="line"></div><div class="line">dfosdfsdfdss</div><div class="line"></div><div class="line">[root@localhost test4]# mv -f log3.txt log2.txt </div><div class="line"></div><div class="line">[root@localhost test4]# cat log2.txt </div><div class="line"></div><div class="line">dfosdfsdfdss</div><div class="line"></div><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">总计 4</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">[root@localhost test4]#</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>log3.txt的内容直接覆盖了log2.txt内容，-f
+   这是个危险的选项，使用的时候一定要保持头脑清晰，一般情况下最好不用加上它。
+</code></pre><p><strong>实例六：目录的移动</strong></p>
+<pre><code>命令：
+
+mv dir1 dir2 
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">[root@localhost test4]# cd ..</div><div class="line"></div><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">drwxr-xr-x 6 root root 4096 10-27 01:58 scf</div><div class="line"></div><div class="line">drwxrwxrwx 3 root root 4096 10-28 06:24 test3</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:48 test4</div><div class="line"></div><div class="line">drwxr-xr-x 3 root root 4096 10-25 17:56 test5</div><div class="line"></div><div class="line">[root@localhost test]# cd test3</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:21 logs</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">[root@localhost test3]# cd ..</div><div class="line"></div><div class="line">[root@localhost test]# mv test4 test3</div><div class="line"></div><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">drwxr-xr-x 6 root root 4096 10-27 01:58 scf</div><div class="line"></div><div class="line">drwxrwxrwx 4 root root 4096 10-28 06:54 test3</div><div class="line"></div><div class="line">drwxr-xr-x 3 root root 4096 10-25 17:56 test5</div><div class="line"></div><div class="line">[root@localhost test]# cd test3/</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:21 logs</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:48 test4</div><div class="line"></div><div class="line">[root@localhost test3]#</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>如果目录dir2不存在，将目录dir1改名为dir2；否则，将dir1移动到dir2中。
+</code></pre><p><strong>实例7：移动当前文件夹下的所有文件到上一级目录</strong></p>
+<pre><code>命令：
+
+mv * ../
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 25 10-28 07:02 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root 13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">[root@localhost test4]# mv * ../</div><div class="line"></div><div class="line">[root@localhost test4]# ll</div><div class="line"></div><div class="line">[root@localhost test4]# cd ..</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   25 10-28 07:02 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:21 logs</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 07:02 test4</div></pre></td></tr></table></figure></p>
+<p><strong>实例八：把当前目录的一个子目录里的文件移动到另一个子目录里</strong></p>
+<pre><code>命令：
+
+mv test3/*.txt test5
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">[root@localhost test]# ll</div><div class="line"></div><div class="line">drwxr-xr-x 6 root root 4096 10-27 01:58 scf</div><div class="line"></div><div class="line">drwxrwxrwx 4 root root 4096 10-28 07:02 test3</div><div class="line"></div><div class="line">drwxr-xr-x 3 root root 4096 10-25 17:56 test5</div><div class="line"></div><div class="line">[root@localhost test]# cd test3</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   25 10-28 07:02 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:21 logs</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 07:02 test4</div><div class="line"></div><div class="line">[root@localhost test3]# cd ..</div><div class="line"></div><div class="line">[root@localhost test]# mv test3/*.txt test5</div><div class="line"></div><div class="line">[root@localhost test]# cd test5</div><div class="line"></div><div class="line">[root@localhost test5]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   25 10-28 07:02 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-25 17:56 test5-1</div><div class="line"></div><div class="line">[root@localhost test5]# 	cd ..</div><div class="line"></div><div class="line">[root@localhost test]# cd test3/</div><div class="line"></div><div class="line">[root@localhost test3]# ll</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 06:21 logs</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-28 07:02 test4</div><div class="line"></div><div class="line">[root@localhost test3]#</div></pre></td></tr></table></figure></p>
+<p><strong>实例九：文件被覆盖前做简单备份，前面加参数-b</strong></p>
+<pre><code>命令：
+
+mv log1.txt -b log2.txt
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">[root@localhost test5]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   25 10-28 07:02 log1.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   13 10-28 06:16 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-25 17:56 test5-1</div><div class="line"></div><div class="line">[root@localhost test5]# mv log1.txt -b log2.txt</div><div class="line"></div><div class="line">mv：是否覆盖“log2.txt”? y</div><div class="line"></div><div class="line">[root@localhost test5]# ll</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   25 10-28 07:02 log2.txt</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   13 10-28 06:16 log2.txt~</div><div class="line"></div><div class="line">-rw-r--r-- 1 root root   29 10-28 06:05 test1.txt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 10-25 17:56 test5-1</div><div class="line"></div><div class="line">[root@localhost test5]#</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>-b 不接受参数，mv会去读取环境变量VERSION_CONTROL来作为备份策略。
+
+--backup该选项指定如果目标文件存在时的动作，共有四种备份策略：
+
+1.CONTROL=none或off : 不备份。
+
+2.CONTROL=numbered或t：数字编号的备份
+
+3.CONTROL=existing或nil：如果存在以数字编号的备份，则继续编号备份m+1...n：
+
+执行mv操作前已存在以数字编号的文件log2.txt.~1~，那么再次执行将产生log2.txt~2~，
+以次类推。如果之前没有以数字编号的文件，则使用下面讲到的简单备份。
+
+4.CONTROL=simple或never：使用简单备份：在被覆盖前进行了简单备份，简单备份只能
+  有一份，再次被覆盖时，简单备份也会被覆盖。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux基础命令/" rel="tag"># Linux基础命令</a>
+          
+            <a href="/tags/每天一个linux命令/" rel="tag"># 每天一个linux命令</a>
+          
+            <a href="/tags/转载/" rel="tag"># 转载</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/13/every-day-linux-command6-rmdir/" rel="next" title="每天一个linux命令--rmdir">
+                <i class="fa fa-chevron-left"></i> 每天一个linux命令--rmdir
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/15/every-day-linux-command8-cp/" rel="prev" title="每天一个linux命令--cp">
+                每天一个linux命令--cp <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
+               alt="LeeSsangZ" />
+          <p class="site-author-name" itemprop="name">LeeSsangZ</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/your-user-name" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#每天一个linux命令–mv"><span class="nav-number">1.</span> <span class="nav-text">每天一个linux命令–mv</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1．命令格式："><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">1．命令格式：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2．命令功能："><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">2．命令功能：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3．命令参数："><span class="nav-number">1.0.0.0.3.</span> <span class="nav-text">3．命令参数：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4．命令实例："><span class="nav-number">1.0.0.0.4.</span> <span class="nav-text">4．命令实例：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.8 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeSsangZ</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "23a5925f955a4d1e919ddd321bb17921",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

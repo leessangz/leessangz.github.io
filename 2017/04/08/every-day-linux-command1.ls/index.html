@@ -1,0 +1,1067 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux基础命令,每天一个linux命令,转载," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="每天一个linux命令–ls文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。
+
+
+ls命令是linux下最常用的命令。ls命令就是list的缩写缺省下ls用来打印出当前目录的清单,如果ls指定其他目录,那么就会显示指定目录里的文件及文件夹清单。 通过ls 命令不仅可以查看linux文件夹包含的文件而且可以查看文件权限(包括目录、文件夹、文件权限),查看目录信息等等。ls 命令在日常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每天一个linux命令--ls">
+<meta property="og:url" content="http://yoursite.com/2017/04/08/every-day-linux-command1.ls/index.html">
+<meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="每天一个linux命令–ls文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。
+
+
+ls命令是linux下最常用的命令。ls命令就是list的缩写缺省下ls用来打印出当前目录的清单,如果ls指定其他目录,那么就会显示指定目录里的文件及文件夹清单。 通过ls 命令不仅可以查看linux文件夹包含的文件而且可以查看文件权限(包括目录、文件夹、文件权限),查看目录信息等等。ls 命令在日常">
+<meta property="og:updated_time" content="2017-04-08T05:49:38.460Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每天一个linux命令--ls">
+<meta name="twitter:description" content="每天一个linux命令–ls文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。
+
+
+ls命令是linux下最常用的命令。ls命令就是list的缩写缺省下ls用来打印出当前目录的清单,如果ls指定其他目录,那么就会显示指定目录里的文件及文件夹清单。 通过ls 命令不仅可以查看linux文件夹包含的文件而且可以查看文件权限(包括目录、文件夹、文件权限),查看目录信息等等。ls 命令在日常">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/08/every-day-linux-command1.ls/"/>
+
+
+
+
+
+  <title> 每天一个linux命令--ls | LeeSsangZ </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LeeSsangZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeeSsangZ's SS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/08/every-day-linux-command1.ls/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                每天一个linux命令--ls
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-08T12:52:57+08:00">
+                2017-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/每天一个linux命令/" itemprop="url" rel="index">
+                    <span itemprop="name">每天一个linux命令</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/04/08/every-day-linux-command1.ls/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="每天一个linux命令–ls"><a href="#每天一个linux命令–ls" class="headerlink" title="每天一个linux命令–ls"></a>每天一个linux命令–ls</h1><p>文章转载自博客园，作者peida。本文仅作为自用参考，请勿转载。</p>
+<hr>
+<blockquote>
+<p><strong>ls</strong>命令是linux下最常用的命令。ls命令就是list的缩写缺省下ls用来打印出当前目录的清单,如果ls指定其他目录,那么就会显示指定目录里的文件及文件夹清单。 通过ls 命令不仅可以查看linux文件夹包含的文件而且可以查看文件权限(包括目录、文件夹、文件权限),查看目录信息等等。ls 命令在日常的linux操作中用的很多!</p>
+</blockquote>
+<h5 id="1-命令格式："><a href="#1-命令格式：" class="headerlink" title="1. 命令格式："></a>1. 命令格式：</h5><pre><code>ls [选项] [目录名]
+</code></pre><h5 id="2-命令功能："><a href="#2-命令功能：" class="headerlink" title="2. 命令功能："></a>2. 命令功能：</h5><pre><code>列出目标目录中所有的子目录和文件。
+</code></pre><a id="more"></a>
+<h5 id="3-常用参数："><a href="#3-常用参数：" class="headerlink" title="3. 常用参数："></a>3. 常用参数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">-a –all 列出目录下的所有文件，包括以 . 开头的隐含文件</div><div class="line">    </div><div class="line">-A 同-a，但不列出“.”(表示当前目录)和“..”(表示当前目录的父目录)。</div><div class="line">    </div><div class="line">-c  配合 -lt：根据 ctime 排序及显示 ctime (文件状态最后更改的时间)</div><div class="line">    配合 -l：显示 ctime 但根据名称排序否则：根据 ctime 排序</div><div class="line">    </div><div class="line">-C 每栏由上至下列出项目</div><div class="line">    </div><div class="line">–color[=WHEN] 控制是否使用色彩分辨文件。WHEN 可以是&apos;never&apos;&apos;always&apos;或&apos;auto&apos;其中之一</div><div class="line">    </div><div class="line">-d –directory 将目录象文件一样显示，而不是显示其下的文件。</div><div class="line">    </div><div class="line">-D –dired 产生适合 Emacs 的 dired 模式使用的结果</div><div class="line">   </div><div class="line">-f 对输出的文件不进行排序，-aU 选项生效，-lst 选项失效</div><div class="line">    </div><div class="line">-g 类似 -l,但不列出所有者</div><div class="line">    </div><div class="line">-G –no-group 不列出任何有关组的信息</div><div class="line">    </div><div class="line">-h –human-readable 以容易理解的格式列出文件大小 (例如 1K 234M 2G)</div><div class="line">   </div><div class="line">–si 类似 -h,但文件大小取 1000 的次方而不是 1024</div><div class="line">    </div><div class="line">-H –dereference-command-line 使用命令列中的符号链接指示的真正目的地</div><div class="line">    </div><div class="line">–indicator-style=方式 指定在每个项目名称后加上指示符号</div><div class="line">    &lt;方式&gt;：none (默认)，classify (-F)，file-type (-p)</div><div class="line">    </div><div class="line">-i –inode 印出每个文件的 inode 号</div><div class="line">    </div><div class="line">-I –ignore=样式 不印出任何符合 shell 万用字符&lt;样式&gt;的项目</div><div class="line">    </div><div class="line">-k 即 –block-size=1K,以 k 字节的形式表示文件的大小。</div><div class="line">    </div><div class="line">-l 除了文件名之外，还将文件的权限、所有者、文件大小等信息详细列出来。</div><div class="line">    </div><div class="line">-L –dereference 当显示符号链接的文件信息时，显示符号链接所指示的对象而并非符号</div><div class="line">     链接本身的信息</div><div class="line">    </div><div class="line">-m 所有项目以逗号分隔，并填满整行行宽</div><div class="line">    </div><div class="line">-o 类似 -l,显示文件的除组信息外的详细信息。   </div><div class="line">    </div><div class="line">-r –reverse 依相反次序排列</div><div class="line">    </div><div class="line">-R –recursive 同时列出所有子目录层</div><div class="line">    </div><div class="line">-s –size 以块大小为单位列出所有文件的大小</div><div class="line">    </div><div class="line">-S 根据文件大小排序</div><div class="line">    </div><div class="line">–sort=WORD 以下是可选用的 WORD 和它们代表的相应选项：</div><div class="line">    </div><div class="line">    extension -X status -c</div><div class="line">        </div><div class="line">    none -U time -t</div><div class="line">        </div><div class="line">    size -S atime -u</div><div class="line">        </div><div class="line">    time -t access -u</div><div class="line">        </div><div class="line">    version -v use -u</div><div class="line">    </div><div class="line">-t 以文件修改时间排序</div><div class="line">    </div><div class="line">-u 配合 -lt:显示访问时间而且依访问时间排序</div><div class="line">    </div><div class="line">    配合 -l:显示访问时间但根据名称排序</div><div class="line">    </div><div class="line">    否则：根据访问时间排序</div><div class="line">    </div><div class="line">-U 不进行排序;依文件系统原有的次序列出项目</div><div class="line">    </div><div class="line">-v 根据版本进行排序</div><div class="line">    </div><div class="line">-w –width=COLS 自行指定屏幕宽度而不使用目前的数值</div><div class="line">    </div><div class="line">-x 逐行列出项目而不是逐栏列出</div><div class="line">    </div><div class="line">-X 根据扩展名排序</div><div class="line">    </div><div class="line">-1 每行只列出一个文件</div><div class="line">    </div><div class="line">–help 显示此帮助信息并离开</div><div class="line">    </div><div class="line">–version 显示版本信息并离开</div></pre></td></tr></table></figure>
+<h5 id="4-常用范例："><a href="#4-常用范例：" class="headerlink" title="4. 常用范例："></a>4. 常用范例：</h5><p><strong>例一：列出/home/peidachang文件夹下的所有文件和目录的详细资料</strong></p>
+<pre><code>命令：ls -l -R /home/peidachang
+</code></pre><p>在使用 ls 命令时要注意命令的格式：在命令提示符后，首先是命令的关键字，接下来是命令参数，在命令参数之前要有一短横线“-”，所有的命令参数都有特定的作用，自己可以根据需要选用一个或者多个参数，在命令参数的后面是命令的操作对象。在以上这条命令“ ls -l -R /home/peidachang”中，“ls” 是命令关键字，“-l -R”是参数，“ /home/peidachang”是命令的操作对象。在这条命令中，使用到了两个参数，分别为“l”和“R”，当然，你也可以把他们放在一起使用，如下所示：</p>
+<pre><code>命令：ls -lR /home/peidachang
+</code></pre><p>这种形式和上面的命令形式执行的结果是完全一样的。另外，如果命令的操作对象位于当前目录中，可以直接对操作对象进行操作;如果不在当前目录则需要给出操作对象的完整路径，例如上面的例子中，我的当前文件夹是peidachang文件夹，我想对home文件夹下的peidachang文件进行操作，我可以直接输入 ls -lR peidachang，也可以用 ls -lR /home/peidachang。 </p>
+<p><strong>例二：列出当前目录中所有以“t”开头的目录的详细内容，可以使用如下命令：</strong></p>
+<pre><code>命令：ls -l t*   
+</code></pre><p>可以查看当前目录下文件名以“t”开头的所有文件的信息。其实，在命令格式中，方括号内的内容都是可以省略的，对于命令ls而言，如果省略命令参数和操作对象，直接输入“ ls ”，则将会列出当前工作目录的内容清单。</p>
+<p><strong>例三：只列出文件下的子目录</strong></p>
+<pre><code>命令：ls -F /opt/soft |grep /$  
+</code></pre><p>列出 /opt/soft 文件下面的子目录</p>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost opt]# ls -F /opt/soft |grep /$</div><div class="line"></div><div class="line">jdk1.6.0_16/</div><div class="line"></div><div class="line">subversion-1.6.1/</div><div class="line"></div><div class="line">tomcat6.0.32/</div></pre></td></tr></table></figure></p>
+<pre><code>命令：ls -l /opt/soft | grep &quot;^d&quot;
+</code></pre><p>列出 /opt/soft 文件下面的子目录详细情况</p>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost opt]#  ls -l /opt/soft | grep &quot;^d&quot;</div><div class="line"></div><div class="line">drwxr-xr-x 10 root root      4096 09-17 18:17 jdk1.6.0_16</div><div class="line"></div><div class="line">drwxr-xr-x 16 1016 1016      4096 10-11 03:25 subversion-1.6.1</div><div class="line"></div><div class="line">drwxr-xr-x  9 root root      4096 2011-11-01 tomcat6.0.32</div></pre></td></tr></table></figure></p>
+<p><strong>例四：列出目前工作目录下所有名称是s 开头的档案，愈新的排愈后面，可以使用如下命令：</strong></p>
+<pre><code>命令：ls -ltr s*
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">[root@localhost opt]# ls -ltr s*</div><div class="line"></div><div class="line">src:</div><div class="line"></div><div class="line">总计 0</div><div class="line"></div><div class="line">script:</div><div class="line"></div><div class="line">总计 0</div><div class="line"></div><div class="line">soft:</div><div class="line"></div><div class="line">总计 350644</div><div class="line"></div><div class="line">drwxr-xr-x  9 root root      4096 2011-11-01 tomcat6.0.32</div><div class="line"></div><div class="line">-rwxr-xr-x  1 root root  81871260 09-17 18:15 jdk-6u16-linux-x64.bin</div><div class="line"></div><div class="line">drwxr-xr-x 10 root root      4096 09-17 18:17 jdk1.6.0_16</div><div class="line"></div><div class="line">-rw-r--r--  1 root root 205831281 09-17 18:33 apache-tomcat-6.0.32.tar.gz</div><div class="line"></div><div class="line">-rw-r--r--  1 root root   5457684 09-21 00:23 tomcat6.0.32.tar.gz</div><div class="line"></div><div class="line">-rw-r--r--  1 root root   4726179 10-10 11:08 subversion-deps-1.6.1.tar.gz</div><div class="line"></div><div class="line">-rw-r--r--  1 root root   7501026 10-10 11:08 subversion-1.6.1.tar.gz</div><div class="line"></div><div class="line">drwxr-xr-x 16 1016 1016      4096 10-11 03:25 subversion-1.6.1</div></pre></td></tr></table></figure></p>
+<p><strong>例五：列出目前工作目录下所有档案及目录;目录于名称后加”/“, 可执行档于名称后加”*” </strong></p>
+<pre><code>命令：ls -AF
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost opt]# ls -AF</div><div class="line"></div><div class="line">log/  script/  soft/  src/  svndata/  web/</div></pre></td></tr></table></figure></p>
+<p><strong>例六：计算当前目录下的文件数和目录数</strong></p>
+<pre><code>命令：
+
+ls -l * |grep &quot;^-&quot;|wc -l ---文件个数  
+
+ls -l * |grep &quot;^d&quot;|wc -l    ---目录个数
+</code></pre><p><strong>例七: 在ls中列出文件的绝对路径</strong></p>
+<pre><code>命令：ls | sed &quot;s:^:`pwd`/:&quot;
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@localhost opt]# ls | sed &quot;s:^:`pwd`/:&quot; </div><div class="line"></div><div class="line">/opt/log</div><div class="line"></div><div class="line">/opt/script</div><div class="line"></div><div class="line">/opt/soft</div><div class="line"></div><div class="line">/opt/src</div><div class="line"></div><div class="line">/opt/svndata</div><div class="line"></div><div class="line">/opt/web</div></pre></td></tr></table></figure></p>
+<p><strong>例九：列出当前目录下的所有文件（包括隐藏文件）的绝对路径， 对目录不做递归</strong></p>
+<pre><code>命令：find $PWD -maxdepth 1 | xargs ls -ld
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@localhost opt]# find $PWD -maxdepth 1 | xargs ls -ld</div><div class="line"></div><div class="line">drwxr-xr-x 8 root root 4096 10-11 03:43 /opt</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 2012-03-08 /opt/log</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 2012-03-08 /opt/script</div><div class="line"></div><div class="line">drwxr-xr-x 5 root root 4096 10-11 03:21 /opt/soft</div><div class="line"></div><div class="line">drwxr-xr-x 2 root root 4096 2012-03-08 /opt/src</div><div class="line"></div><div class="line">drwxr-xr-x 4 root root 4096 10-11 05:22 /opt/svndata</div><div class="line"></div><div class="line">drwxr-xr-x 4 root root 4096 10-09 00:45 /opt/web</div></pre></td></tr></table></figure></p>
+<p><strong>例十：递归列出当前目录下的所有文件（包括隐藏文件）的绝对路径</strong></p>
+<pre><code>命令： find $PWD | xargs ls -ld 
+</code></pre><p><strong>例十一：指定文件时间输出格式</strong></p>
+<pre><code>命令：
+
+ ls -tl --time-style=full-iso
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost soft]# ls -tl --time-style=full-iso </div><div class="line"></div><div class="line">总计 350644</div><div class="line"></div><div class="line">drwxr-xr-x 16 1016 1016 4096 2012-10-11 03:25:58.000000000 +0800 subversion-1.6.1</div></pre></td></tr></table></figure></p>
+<pre><code>命令：
+    ls -ctl --time-style=long-iso
+</code></pre><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost soft]# ls -ctl --time-style=long-iso</div><div class="line"></div><div class="line">总计 350644</div><div class="line"></div><div class="line">drwxr-xr-x 16 1016 1016      4096 2012-10-11 03:25 subversion-1.6.1</div></pre></td></tr></table></figure></p>
+<p><strong>扩展：</strong></p>
+<ol>
+<li><p>显示彩色目录列表</p>
+<pre><code>打开/etc/bashrc, 加入如下一行:
+
+alias ls=&quot;ls --color&quot;
+
+下次启动bash时就可以像在Slackware里那样显示彩色的目录列表了, 其中颜色的含义如下:
+
+1. 蓝色--&gt;目录
+
+2. 绿色--&gt;可执行文件
+
+3. 红色--&gt;压缩文件
+
+4. 浅蓝色--&gt;链接文件
+
+5. 灰色--&gt;其他文件
+</code></pre></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux基础命令/" rel="tag"># Linux基础命令</a>
+          
+            <a href="/tags/每天一个linux命令/" rel="tag"># 每天一个linux命令</a>
+          
+            <a href="/tags/转载/" rel="tag"># 转载</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/06/linux-COMMAND/" rel="next" title="linux COMMAND">
+                <i class="fa fa-chevron-left"></i> linux COMMAND
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/09/every-day-linux-command2.cd/" rel="prev" title="每天一个linux命令--cd">
+                每天一个linux命令--cd <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
+               alt="LeeSsangZ" />
+          <p class="site-author-name" itemprop="name">LeeSsangZ</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/your-user-name" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#每天一个linux命令–ls"><span class="nav-number">1.</span> <span class="nav-text">每天一个linux命令–ls</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-命令格式："><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">1. 命令格式：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-命令功能："><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">2. 命令功能：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-常用参数："><span class="nav-number">1.0.0.0.3.</span> <span class="nav-text">3. 常用参数：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-常用范例："><span class="nav-number">1.0.0.0.4.</span> <span class="nav-text">4. 常用范例：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.8 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeSsangZ</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "23a5925f955a4d1e919ddd321bb17921",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
