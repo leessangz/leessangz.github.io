@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,文件系统," />
+  <meta name="keywords" content="shell脚本," />
 
 
 
@@ -99,16 +99,25 @@
 
 
 
-<meta name="description" content="什么是Filesystem？Filesystem就是分区或磁盘上的所有文件的逻辑集合。它不仅包含着文件中的数据而且还有文件系统的结构，所有Linux用户和程序看到的软连接及文件保护信息等都存储在其中。">
+<meta name="description" content="Linux运维脚本编写规范1.脚本名以.sh结尾，名称尽量见名知意，比如，ClearLog.sh、 Clear_Log.sh、clearlog.sh、SerRestart.sh、Ser_Restart.sh;
+2.尽量使用UTF-8编码，注释及输出尽量使用英文。
+3.一般情况下都赋予执行权限，但一些关于变量的配置文件不用加执行权限。
+4.脚本执行的时候可以使用bash执行，或者使用bash -x执">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux Filesystem">
-<meta property="og:url" content="http://yoursite.com/2017/03/28/filesystem/index.html">
+<meta property="og:title" content="Linux运维脚本编写规范">
+<meta property="og:url" content="http://yoursite.com/2017/04/14/shell-guifan/index.html">
 <meta property="og:site_name" content="LeeSsangZ">
-<meta property="og:description" content="什么是Filesystem？Filesystem就是分区或磁盘上的所有文件的逻辑集合。它不仅包含着文件中的数据而且还有文件系统的结构，所有Linux用户和程序看到的软连接及文件保护信息等都存储在其中。">
-<meta property="og:updated_time" content="2017-03-28T13:46:24.810Z">
+<meta property="og:description" content="Linux运维脚本编写规范1.脚本名以.sh结尾，名称尽量见名知意，比如，ClearLog.sh、 Clear_Log.sh、clearlog.sh、SerRestart.sh、Ser_Restart.sh;
+2.尽量使用UTF-8编码，注释及输出尽量使用英文。
+3.一般情况下都赋予执行权限，但一些关于变量的配置文件不用加执行权限。
+4.脚本执行的时候可以使用bash执行，或者使用bash -x执">
+<meta property="og:updated_time" content="2017-04-14T13:43:04.735Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux Filesystem">
-<meta name="twitter:description" content="什么是Filesystem？Filesystem就是分区或磁盘上的所有文件的逻辑集合。它不仅包含着文件中的数据而且还有文件系统的结构，所有Linux用户和程序看到的软连接及文件保护信息等都存储在其中。">
+<meta name="twitter:title" content="Linux运维脚本编写规范">
+<meta name="twitter:description" content="Linux运维脚本编写规范1.脚本名以.sh结尾，名称尽量见名知意，比如，ClearLog.sh、 Clear_Log.sh、clearlog.sh、SerRestart.sh、Ser_Restart.sh;
+2.尽量使用UTF-8编码，注释及输出尽量使用英文。
+3.一般情况下都赋予执行权限，但一些关于变量的配置文件不用加执行权限。
+4.脚本执行的时候可以使用bash执行，或者使用bash -x执">
 
 
 
@@ -136,13 +145,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/28/filesystem/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/14/shell-guifan/"/>
 
 
 
 
 
-  <title> Linux Filesystem | LeeSsangZ </title>
+  <title> Linux运维脚本编写规范 | LeeSsangZ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -315,7 +324,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/28/filesystem/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/14/shell-guifan/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LeeSsangZ">
@@ -336,7 +345,7 @@
             
             
               
-                Linux Filesystem
+                Linux运维脚本编写规范
               
             
           </h1>
@@ -351,8 +360,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T21:40:59+08:00">
-                2017-03-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-14T21:32:32+08:00">
+                2017-04-14
               </time>
             
 
@@ -374,8 +383,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-系统/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux 系统</span>
+                  <a href="/categories/shell/" itemprop="url" rel="index">
+                    <span itemprop="name">shell</span>
                   </a>
                 </span>
 
@@ -392,7 +401,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/28/filesystem/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/04/14/shell-guifan/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -419,293 +428,50 @@
       
 
       
-        <h4 id="什么是Filesystem？"><a href="#什么是Filesystem？" class="headerlink" title="什么是Filesystem？"></a>什么是Filesystem？</h4><p>Filesystem就是分区或磁盘上的所有文件的逻辑集合。<br>它不仅包含着文件中的数据而且还有文件系统的结构，所有Linux用户和程序看到的软连接及文件保护信息等都存储在其中。</p>
+        <h1 id="Linux运维脚本编写规范"><a href="#Linux运维脚本编写规范" class="headerlink" title="Linux运维脚本编写规范"></a>Linux运维脚本编写规范</h1><p>1.脚本名以.sh结尾，名称尽量见名知意，比如，ClearLog.sh、 Clear_Log.sh、clearlog.sh、SerRestart.sh、Ser_Restart.sh;</p>
+<p>2.尽量使用UTF-8编码，注释及输出尽量使用英文。</p>
+<p>3.一般情况下都赋予执行权限，但一些关于变量的配置文件不用加执行权限。</p>
+<p>4.脚本执行的时候可以使用bash执行，或者使用bash -x执行，可以直观的显示具体的执行过程。</p>
 <a id="more"></a>
-<p>文件系统有多种类型：</p>
-<blockquote>
-<p>ext2：早期linux中常用的文件系统。</p>
-<p>ext3：ext2的升级版，带日志功能。</p>
-<p>RAMFS：内存文件系统，速度快。</p>
-<p>iso9660：光盘或光盘镜像。</p>
-<p>NFS：网络文件系统，当初由SUN发明，除妖用于远程文件共享;</p>
-<p>MS-DOS：MS-DOS文件系统。</p>
-<p>FAT：Windows XP 操作系统采用的文件系统。</p>
-<p>NTFS：Windows NT/XP 操作系统采用的文件系统。</p>
-</blockquote>
-<h4 id="目录与分区"><a href="#目录与分区" class="headerlink" title="目录与分区"></a>目录与分区</h4><p>文件系统位于磁盘分区中，一个硬盘又可以有多个分区，也可以只有一个分区，一个分区只能包含一个文件系统。</p>
-<p><strong>Linux的文件结构是单个的树状结构，根目录是”/“，其他目录都要位于根目录下。</strong></p>
-<p>以下是/目录下的结构：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/</div><div class="line">├── bin</div><div class="line">├── boot</div><div class="line">├── dev</div><div class="line">├── etc</div><div class="line">├── home</div><div class="line">├── lib</div><div class="line">├── lib64</div><div class="line">├── lost+found</div><div class="line">├── media</div><div class="line">├── misc</div><div class="line">├── mnt</div><div class="line">├── net</div><div class="line">├── opt</div><div class="line">├── proc</div><div class="line">├── root</div><div class="line">├── sbin</div><div class="line">├── selinux</div><div class="line">├── srv</div><div class="line">├── sys</div><div class="line">├── tmp</div><div class="line">├── usr</div><div class="line">└── var</div></pre></td></tr></table></figure>
-<p><strong>具体说明</strong>：</p>
-<hr>
-<table>
-<thead>
-<tr>
-<th>目录</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/</td>
-<td>根目录，只能包含目录，不能包含具体文件</td>
-</tr>
-<tr>
-<td>/bin</td>
-<td>存放可执行文件，很多命令就对应/bin目录下的某个程序，如：ls、cp、mkdir，/bin目录下对所有用户有效</td>
-</tr>
-<tr>
-<td>/boot</td>
-<td>存放与内核有关的文件</td>
-</tr>
-<tr>
-<td>/dev</td>
-<td>device 设备文件</td>
-</tr>
-<tr>
-<td>/etc</td>
-<td>存放各种系统包括应用的配置文件</td>
-</tr>
-<tr>
-<td>/home</td>
-<td>每个用户的家目录，而且是每个用户默认的工作目录</td>
-</tr>
-<tr>
-<td>/lib</td>
-<td>程序包括系统所以来的一些共享库文件及内核所依赖的模块文件</td>
-</tr>
-<tr>
-<td>/lib64</td>
-<td>系统程序所依赖的库文件通常以.so结尾</td>
-</tr>
-<tr>
-<td>lost+found</td>
-<td>垃圾回收站</td>
-</tr>
-<tr>
-<td>/media</td>
-<td>光盘或者U盘挂载点，媒体介质挂载点</td>
-</tr>
-<tr>
-<td>/misc</td>
-<td>杂项，存放不好归类的文件</td>
-</tr>
-<tr>
-<td>/mnt</td>
-<td>临时文件挂载点</td>
-</tr>
-<tr>
-<td>/net</td>
-<td>网络配置文件</td>
-</tr>
-<tr>
-<td>/opt</td>
-<td>第三方应用的安装位置如：nginx，tomcat，Apache</td>
-</tr>
-<tr>
-<td>/proc</td>
-<td>伪文件系统，记录系统硬件的一些运行信息</td>
-</tr>
-<tr>
-<td>/sbin</td>
-<td>存放管理类命令</td>
-</tr>
-<tr>
-<td>/selinux</td>
-<td>存放与linux相关的文件或记录</td>
-</tr>
-<tr>
-<td>/srv</td>
-<td>系统运行产生的一些文件</td>
-</tr>
-<tr>
-<td>/sys</td>
-<td>伪文件系统，记录系统硬件的一些运行信息</td>
-</tr>
-<tr>
-<td>/tmp</td>
-<td>杂项，临时文件以及应用产生的临时文件</td>
-</tr>
-<tr>
-<td>/usr</td>
-<td>二级层级存储用户的只读数据； 包含(多)用户主要的公共文件以及应用程序</td>
-</tr>
-<tr>
-<td>/var</td>
-<td>日志存放以及应用产生的一些文件或者临时文件</td>
-</tr>
-</tbody>
-</table>
-<p><strong>/usr与/var目录下常用的目录：</strong></p>
-<table>
-<thead>
-<tr>
-<th>目录</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>/usr/bin</td>
-<td>非必要的命令二进制文件(在单用户模式中不需要用到的)；用于所有用户</td>
-</tr>
-<tr>
-<td>/usr/include</td>
-<td>标准的包含文件</td>
-</tr>
-<tr>
-<td>/usr/lib</td>
-<td>备用格式库(可选的)</td>
-</tr>
-<tr>
-<td>/usr/local</td>
-<td>三级层次 用于本地数据，具体到该主机上的。通常会有下一个子目录, 比如, bin/, lib/, share/.</td>
-</tr>
-<tr>
-<td>/usr/local/sbin</td>
-<td>非必要系统的二进制文件，比如用于不同网络服务的守护进程</td>
-</tr>
-<tr>
-<td>/usr/share</td>
-<td>架构无关的 (共享) 数据</td>
-</tr>
-<tr>
-<td>/usr/src</td>
-<td>源代码，比如内核源文件以及与它相关的头文件</td>
-</tr>
-<tr>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr>
-<td>/var/cache</td>
-<td>应用程序缓存数据， 这些数据是由耗时的I/O(输入/输出)的或者是运算本地生成的结果。这些应用程序是可以重新生成或者恢复数据的。当没有数据丢失的时候，可以删除缓存文件</td>
-</tr>
-<tr>
-<td>/var/lib</td>
-<td>状态信息。这些信息随着程序的运行而不停地改变，比如，数据库，软件包系统的元数据等等</td>
-</tr>
-<tr>
-<td>/var/lock</td>
-<td>锁文件。这些文件用于跟踪正在使用的资源</td>
-</tr>
-<tr>
-<td>/var/log</td>
-<td>日志文件。包含各种日志。</td>
-</tr>
-<tr>
-<td>/var/mail</td>
-<td>内含用户邮箱的相关文件</td>
-</tr>
-<tr>
-<td>/var/opt</td>
-<td>来自附加包的各种数据都会存储在其中</td>
-</tr>
-<tr>
-<td>/var/spool</td>
-<td>该spool主要用于存放将要被处理的任务，比如打印队列以及邮件外发队列</td>
-</tr>
-<tr>
-<td>/var/mail</td>
-<td>过时的位置，用于放置用户邮箱文件</td>
-</tr>
-<tr>
-<td>/var/tmp</td>
-<td>存放重启后保留的临时文件</td>
-</tr>
-</tbody>
-</table>
-<h4 id="tree命令："><a href="#tree命令：" class="headerlink" title="tree命令："></a>tree命令：</h4><p>用来查看目录结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tree -L 1 -d /</div><div class="line">-L 指定层数</div><div class="line">-d 只查看目录</div></pre></td></tr></table></figure></p>
-<h4 id="常用文件管理命令："><a href="#常用文件管理命令：" class="headerlink" title="常用文件管理命令："></a>常用文件管理命令：</h4><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>cat filename</td>
-<td>查看文件内容。</td>
-</tr>
-<tr>
-<td>cd dirname</td>
-<td>改变所在目录。</td>
-</tr>
-<tr>
-<td>cp file1 file2</td>
-<td>复制文件或目录。</td>
-</tr>
-<tr>
-<td>file filename</td>
-<td>查看文件类型(binary, text, etc)。</td>
-</tr>
-<tr>
-<td>find filename dir</td>
-<td>搜索文件或目录。</td>
-</tr>
-<tr>
-<td>head filename</td>
-<td>显示文件的开头，与tail命令相对。</td>
-</tr>
-<tr>
-<td>less filename</td>
-<td>查看文件的全部内容，可以分页显示，比more命令要强大。</td>
-</tr>
-<tr>
-<td>ls dirname</td>
-<td>遍历目录下的文件或目录。</td>
-</tr>
-<tr>
-<td>mkdir dirname</td>
-<td>创建目录。</td>
-</tr>
-<tr>
-<td>more filename</td>
-<td>查看文件的全部内容，可以分页显示。</td>
-</tr>
-<tr>
-<td>mv file1 file2</td>
-<td>移动文件或重命名。</td>
-</tr>
-<tr>
-<td>pwd</td>
-<td>显示用户当前所在目录。</td>
-</tr>
-<tr>
-<td>rm filename</td>
-<td>删除文件。</td>
-</tr>
-<tr>
-<td>rmdir dirname</td>
-<td>删除目录。</td>
-</tr>
-<tr>
-<td>tail filename</td>
-<td>显示文件的结尾，与head命令相对。</td>
-</tr>
-<tr>
-<td>touch filename</td>
-<td>文件不存在时创建一个空文件，存在时修改文件时间戳。</td>
-</tr>
-<tr>
-<td>whereis filename</td>
-<td>查看文件所在位置。</td>
-</tr>
-<tr>
-<td>which filename</td>
-<td>如果文件在环境变量PATH中有定义，那么显示文件位置。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="Linux的文件类型："><a href="#Linux的文件类型：" class="headerlink" title="Linux的文件类型："></a>Linux的文件类型：</h4><blockquote>
-<p>- 普通文件</p>
-<p>d directory 目录文件</p>
-<p>b 块设备 block<br>c 字符设备 character</p>
-<p>l 符号链接文件</p>
-<p>p 管道文件pipe 进程间通信可能会管道</p>
-<p>s 套接字文件 socket 或多或少有点像sockets(套接字)，提供一个进程间的通信机制，而不用网络套接字协议。</p>
-</blockquote>
+<p>5.脚本首行使用#!/bin/bash,没有空格，不带任何选项。</p>
+<p>6.第二行为空格，或者是添加一行注释。</p>
+<p>7.第三行开始注释内容：文件名、功能描述、作者、最后修改日期、版本号、以及一些说明、还加上邮箱等联系方式、如果可以，需要加上版权声明。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">脚本示例</div><div class="line">    #!/bin/bash  #调用语言</div><div class="line">	#</div><div class="line">	# Filename: test.sh</div><div class="line">	# Description: this is Description</div><div class="line">	# Author： leessangz</div><div class="line">	# Email: leessangz@gmail.com</div><div class="line">	# Revision: 0.1</div><div class="line">	# Date: 2017-07-01</div><div class="line">	# Note: test</div><div class="line">	#</div></pre></td></tr></table></figure></p>
+<p>8.注释内容之后空一行开始定义shell脚本中的变量。</p>
+<p>9.脚本内的变量定义，尽量使用大写，或者每个单词的首字母大写的驼峰原则，或者使用下划线连接的方式，变量名要见名知意，避免a，b，c，类似的定义，变量定义前后不要用空格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">脚本示例</div><div class="line">   YUM_CMD=&quot;/usr/bin/yum&quot;</div><div class="line">   YUMCMD=&quot;/usr/bin/yum&quot;</div><div class="line">   Yum_Cmd=&quot;/usr/bin/yum&quot;</div></pre></td></tr></table></figure></p>
+<pre><code>如果是整形，需要使用declare -i来声明。
+如果是数组，则需要使用declare -a来声明。
+如果是只读变量，则需要使用declare -r来声明。
+变量值尽量使用双引号引起来，如果要使用强引用，如变量值中包含$符号，则使用&apos;&apos;单引号引起来。
+  ShiLi=&apos;shili$shili&apos;
+如果要将命令的执行结果赋值给变量，则使用反引号，或者$()
+  ScriptDir=$(cd $(dirname $0) &amp;&amp; pwd)
+  ScriptDir=`pwd`
+</code></pre><ol>
+<li>变量的引用使用以下方法：<br> ${ShiLi}<br> $ShiLi<br> 推荐使用第一种，如：tar zcf ${ShiLi}.tar.gz /apps/data/</li>
+</ol>
+<p>11.单引号和双引号混合使用的场景：<br>      echo ‘Welcome to “my school”‘</p>
+<p>12.在某些特殊的环境下，shell脚本里引用的命令，有可能是自己定义的bin路径，在执行的时候会报出command not found，<br>     解决的方式是在执行的时候命令跟全路径，或者在脚本的开始，先设置一下PATH变量<br>      如： export PATH=”/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/apps/bin/“</p>
+<p>13.建议在脚本执行的开始重读下/etc/profile<br>     或者是自己定义的关于环境变量的配置文件，推荐使用source，<br>     如：   source /etc/profile<br>            source /opt/sh/appenv.sh</p>
+<p>14.使用here document；<br>    如果脚本在执行的时候需要大段输出提示信息，可以使用以下方式：<br>     cat &lt;&lt; EOF<br>     This scripts used for XXX<br>      Usage:$0 [option]<br>     Pls be careful.<br>     Enjoy Yourself.<br>     EOF</p>
+<pre><code> 如果只是单行提示信息，可以使用echo的方式添加颜色：
+echo &quot;Welcome to use my script&quot;
+</code></pre><p>15.如果需要在脚本里生成配置文件的模板，也可以使用here document的方式，示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">示例脚本：</div><div class="line">    cat&gt;&gt;/etc/rsyncd.conf&lt;&lt;EOF</div><div class="line">    log file = /usr/local/logs/rsyncd.log</div><div class="line">	transfer logging = yes</div><div class="line">	log format = %t %a %m %f %b</div><div class="line">	syslog facility = local3</div><div class="line">	timeout = 300</div><div class="line">	[data1]</div><div class="line">	path=/home/username</div><div class="line">	list=yes</div><div class="line">	ignore errors</div><div class="line">	auth users = data1user</div><div class="line">	secrets file=/etc/rsyncd/rsyncd.secrets</div><div class="line">	comment = some description about this moudle</div><div class="line">	exclude = test1/ test2/</div><div class="line">	EOF</div></pre></td></tr></table></figure></p>
+<p>16.如果需要创建历史文件，可以使用以下方法：<br>     mktemp -d /tmp/file$$</p>
+<p>17.条件测试时尽量使用[[]],而不用[]或者test，因为[[]]功能会更强大。<br>    [[ -d /tmp/logs ]]<br>    不在使用[ “x$NAME” == “x” ]这种方式；</p>
+<p>18.算数运算使用(())或者是中括号，但是记得括号里面的变量不要在加$<br>    ((12+i))<br>    而非((12+$i))</p>
+<p>19.使用高级变量的方法，比如使用<br>    ${ShiLi:?”Error Message”}确保关键变量已经定义<br>    ${ShiLi:=”S1”} 或者设置默认值<br>    否则：<br>    rm -rf ${ShiLi}/* 后果不堪设想</p>
+<p>20.可以使用&amp;&amp; ||来替代简单的if-then-else-fi语句。</p>
+<p>21.尽量给每条语句或者代码段的执行给一个执行结果状态，如果某条命令执行失败，则exit N.尽可能使用$?来检查前面一条命令的执行状态。</p>
+<p>22.流程控制语句尽量使用一下方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">for I in &#123;1..10&#125;;do</div><div class="line">    ...</div><div class="line">done</div><div class="line"></div><div class="line">while true;do</div><div class="line">    ...</div><div class="line">done</div><div class="line"></div><div class="line">if [];then</div><div class="line">  ...</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>23.如果命令过长，可以分成多行来写，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">./configure \</div><div class="line">--prefix=/usr \</div><div class="line">--sbin-path=/usr/sbin/nginx \</div><div class="line">--conf-path=/etc/nginx/nginx.conf \</div><div class="line">--error-log-path=/var/log/nginx/error.log \</div><div class="line">--http-log-path=/var/log/nginx/access.log \</div><div class="line">--pid-path=/var/run/nginx/nginx.pid  \</div><div class="line">--lock-path=/var/lock/nginx.lock \</div></pre></td></tr></table></figure></p>
+<p>24.shell脚本并不要求强制缩进，但是要养成缩进的好习惯，可以使用两个空格，建议使用tab键。如：<br>      if [];then<br>          …24.<br>      fi</p>
+<p>25.尽可能多的注释信息。</p>
+<p>26.想要获取当前脚本所在目录，可以使用<br>    ScriptDir=$(cd $(dirname $0) &amp;&amp; pwd)</p>
+<p>27.尽可能使用函数的功能，将不同的功能定义为函数，直接引用函数；</p>
+<p>28.如果自定义环境变量，可以专门写到一个文件中，避免在/etc/profile中添加；</p>
+<p>29.禁止使用SUID和SGID以及ACL用户访问控制列表的功能，如果需要较高权限，可以使用sudo。</p>
+<p>30.关键的操作须有日志输出，专门记录操作的成功或者失败以及执行的时间点。</p>
+<p>31.脚本内可能包含敏感信息，比如服务器密码或者数据库密码，如果公开之前请先确认敏感信息是否已经被删除。</p>
 
       
     </div>
@@ -735,9 +501,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
-            <a href="/tags/文件系统/" rel="tag"># 文件系统</a>
+            <a href="/tags/shell脚本/" rel="tag"># shell脚本</a>
           
         </div>
       
@@ -750,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/25/get-help/" rel="next" title="获取帮助">
-                <i class="fa fa-chevron-left"></i> 获取帮助
+              <a href="/2017/04/14/every-day-linux-command7-mv/" rel="next" title="每天一个linux命令--mv">
+                <i class="fa fa-chevron-left"></i> 每天一个linux命令--mv
               </a>
             
           </div>
@@ -760,8 +524,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/06/zhengzebiaodashi/" rel="prev" title="常用正则表达式集合">
-                常用正则表达式集合 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/15/every-day-linux-command8-cp/" rel="prev" title="每天一个linux命令--cp">
+                每天一个linux命令--cp <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -963,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是Filesystem？"><span class="nav-number">1.</span> <span class="nav-text">什么是Filesystem？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目录与分区"><span class="nav-number">2.</span> <span class="nav-text">目录与分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tree命令："><span class="nav-number">3.</span> <span class="nav-text">tree命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用文件管理命令："><span class="nav-number">4.</span> <span class="nav-text">常用文件管理命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux的文件类型："><span class="nav-number">5.</span> <span class="nav-text">Linux的文件类型：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux运维脚本编写规范"><span class="nav-number">1.</span> <span class="nav-text">Linux运维脚本编写规范</span></a></li></ol></div>
             
 
           </div>
