@@ -336,7 +336,7 @@
               
                 
                 <a class="post-title-link" href="/2017/05/13/bianchenghanshu2/" itemprop="url">
-                  变成函数（二）
+                  编程函数（二）
                 </a>
               
             
@@ -411,8 +411,7 @@
 
       
         
-          
-            <h2 id="函数返回值："><a href="#函数返回值：" class="headerlink" title="函数返回值："></a>函数返回值：</h2><pre><code>函数的执行结果返回值：
+          <h2 id="函数返回值："><a href="#函数返回值：" class="headerlink" title="函数返回值："></a>函数返回值：</h2><pre><code>函数的执行结果返回值：
         显示使用echo或print命令输出；
         函数体中调用的命令的执行结果；
 函数的退出状态码：
@@ -422,18 +421,14 @@
      传递参数给函数：
         在函数体当中，可以使用$1 $2 ...引用传递给函数的参数
         在调用函数时，在函数名后面以空白符分隔给定参数列表即可，例如testfunc arg1 arg2 arg3
-</code></pre><p><strong>示例</strong>：添加十个用户，<br>          添加用户的功能使用函数实现，用户名作为参数传输给函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"># 5 user exists</div><div class="line">adduser()&#123;</div><div class="line">	if id $1 &amp;&gt; /dev/null;then</div><div class="line">			return 5</div><div class="line">	else</div><div class="line">			useradd $1</div><div class="line">			retval=$?</div><div class="line">			return $retval</div><div class="line">	fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">for i in &#123;1..10&#125;;do</div><div class="line">	adduser $&#123;1&#125;$&#123;i&#125;</div><div class="line">	retval=$?</div><div class="line">	 if [ $retval -eq 0 ];then</div><div class="line">	 		echo &quot;Add user $&#123;1&#125;$&#123;i&#125; finished&quot;</div><div class="line">	 elif [ $retval -eq 5];then</div><div class="line">	 		echo &quot;user $&#123;1&#125;$&#123;i&#125; exists&quot;</div><div class="line">	 else</div><div class="line">	 		echo &quot;Unkown Error&quot;</div><div class="line">	 fi</div><div class="line">done</div></pre></td></tr></table></figure></p>
-<h2 id="变量作用域："><a href="#变量作用域：" class="headerlink" title="变量作用域："></a>变量作用域：</h2><pre><code>局部变量：作用范围是函数的生命周期；在函数结束时被自动销毁
-         定义局部变量的方法：local VARIABLE=VALUE
-本地变量：作用域是运行脚本的shell进程的生命周期；因此，其作用范围为当前shell脚本程序文件
-</code></pre><p><strong>示例</strong></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#！/bin/bash</div><div class="line">#</div><div class="line">name=tom</div><div class="line">setname&#123;</div><div class="line">		local name=jerry</div><div class="line">		echo &quot;Function:$name&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">setname</div><div class="line">echo &quot;shell:$name&quot;</div></pre></td></tr></table></figure>
-<h2 id="函数递归："><a href="#函数递归：" class="headerlink" title="函数递归："></a>函数递归：</h2><pre><code>函数直接或间接调用自身
-</code></pre><h2 id="阶乘"><a href="#阶乘" class="headerlink" title="阶乘"></a>阶乘</h2><p><strong>示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">fact()&#123;</div><div class="line">        if [ $1 -eq 0 -o $1 -eq 1 ];then</div><div class="line">  			echo 1</div><div class="line">        else</div><div class="line">  			echo $[ $1*$(fact $[$1-1])]</div><div class="line">        fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">fact $1</div></pre></td></tr></table></figure>
-<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><p><strong>示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"> fab() &#123;</div><div class="line"> 		if [ $1 -eq 1 ];then</div><div class="line"> 				echo 1</div><div class="line"> 		elif [ $2 -eq 2 ];then</div><div class="line"> 				echo 1</div><div class="line"> 		else </div><div class="line"> 			 	echo $[$(fab $[$1-1])+$(fab $[$1-2])]</div><div class="line"> 		fi</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> for i in $&#123;seq 1 $1&#125;;do</div><div class="line"> 		fab $i</div><div class="line"> done</div></pre></td></tr></table></figure>
-          
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/13/bianchenghanshu2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -498,7 +493,7 @@
               
                 
                 <a class="post-title-link" href="/2017/05/12/bianchenghanshu/" itemprop="url">
-                  变成函数（一）
+                  编程函数（一）
                 </a>
               
             
@@ -573,8 +568,7 @@
 
       
         
-          
-            <h1 id="编程函数"><a href="#编程函数" class="headerlink" title="编程函数"></a>编程函数</h1><h2 id="case-语句"><a href="#case-语句" class="headerlink" title="case 语句"></a>case 语句</h2><p><strong>多分支if语句</strong></p>
+          <h1 id="编程函数"><a href="#编程函数" class="headerlink" title="编程函数"></a>编程函数</h1><h2 id="case-语句"><a href="#case-语句" class="headerlink" title="case 语句"></a>case 语句</h2><p><strong>多分支if语句</strong></p>
 <pre><code>if CONDITION1；then
     分支1
 elif CONDITION2 ；then
@@ -583,107 +577,14 @@ else CONDITION ；then
     分支n
 
 fi
-</code></pre><p><strong>示例1：显示一个菜单给用户</strong></p>
-<pre><code>cpu）display cpu information
-disk）display disk information
-quit）quit
-*）
-</code></pre><p>要求：</p>
-<pre><code>提示用户给出自己的选择
-正确的选择则给出相应的信息；否则提示重新选择正确的选项
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">cat&lt;&lt;EOF</div><div class="line">cpu）display cpu information</div><div class="line">disk）display disk information</div><div class="line">quit）quit</div><div class="line">===============================</div><div class="line">EOF</div><div class="line"></div><div class="line">read -p &quot;请输入你的选项&quot; option</div><div class="line"></div><div class="line">while [&quot;$option&quot; != &quot;cpu&quot; -a &quot;$option&quot; != &quot;disk&quot; -a &quot;$option&quot; != &quot;quit&quot;]</div><div class="line">        echo &quot;请输入：cpu、disk、quit&quot;</div><div class="line">	    read -p &quot;请重新输入一次选项：&quot; option</div><div class="line">done</div><div class="line"></div><div class="line">if [ &quot;$option&quot; == &quot;cpu&quot; ];then</div><div class="line">	    lscpu</div><div class="line">elif [ &quot;$option&quot; == &quot;disk&quot; ];then</div><div class="line">		fdisk -l /dev/[hs]d[a-z]</div><div class="line">else</div><div class="line">	    echo &quot;quit&quot;</div><div class="line">	    exit 0</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p><strong>case语句的语法格式：</strong></p>
-<pre><code>case $VARAIBLE in
-PART1)
-   分支1
-   ;;
-PART2)
-      分支2
-      ;;
-*)
-     分支n
-     ;;
-esac
-</code></pre><p><strong>case示例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">case $option in</div><div class="line">cpu)</div><div class="line">      lscpu</div><div class="line">      ;;</div><div class="line">disk)</div><div class="line">      fdisk -l /dev/[hs]d[a-z]</div><div class="line">;;</div><div class="line">*)</div><div class="line">      echo &quot;quit&quot;</div><div class="line">      exit 0 </div><div class="line">      ;;</div><div class="line">case</div></pre></td></tr></table></figure></p>
-<pre><code>case支持glob风格的通配符
-*任意长度的任意赐福
-？任意单个字符
-[]范围内任意单个字符
-a|b或
-</code></pre><p><strong>示例：写一个服务框架脚本</strong></p>
-<pre><code>此脚本可接收start、stop、restart、status、四个参数之一
-如果参数非此四者，则提示使用帮助后退出
-satrt，则创建lockfile，并显示启动；
-stop，则删除lockfile，并显示停止；
-restart，则先删除此文件再创建此文件，此后显示重启完成，
-status，如果lockfile存在，则显示running，否则显示为stoping
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#chkconfig: - 50 50</div><div class="line">#description：test service script</div><div class="line">prog=$&#123;basename $0&#125;</div><div class="line">lockfile=/var/lock/subsys/$prog</div><div class="line"></div><div class="line">case $1 in</div><div class="line">start)</div><div class="line">     if [ -f $lockfile ];then</div><div class="line">     		   echo &quot;$prog is running yet&quot;</div><div class="line">     else</div><div class="line">             touch $lockfile</div><div class="line">             [ $? -eq 0 ] &amp;&amp; echo &quot;start $prog finshed&quot;</div><div class="line">     fi</div><div class="line">     ;;</div><div class="line">stop)</div><div class="line">		if [ -f $lockfile ];then</div><div class="line">				rm -f $lockfile</div><div class="line">				[ $? -eq 0 ] &amp;&amp; echo &quot;stop $prog finshed&quot;</div><div class="line">esle</div><div class="line">		touch -f $lockfile</div><div class="line">		echo &quot;start $prog finshed&quot;</div><div class="line">fi</div><div class="line">;;</div><div class="line">statu)</div><div class="line">		if [ -f $locakfile ];then</div><div class="line">				echo &quot;$prog is running&quot;</div><div class="line">			else</div><div class="line">				echo &quot;$prog is stopped&quot;</div><div class="line">		fi</div><div class="line">		;;</div><div class="line">*)</div><div class="line">		echo &quot;usage :$prog &#123;start|stop|restart|status&#125;&quot;</div><div class="line">		exit 1</div><div class="line">		;;</div><div class="line">esac</div></pre></td></tr></table></figure>
-<h2 id="函数：function"><a href="#函数：function" class="headerlink" title="函数：function"></a>函数：function</h2><p>   过程式编程：代码重用<br>      模块化编程<br>      结构化编程</p>
-<p>   把一段独立功能的代码当做一个整体并为之去一个名字；命名的代码段，此即为函数；<br>   注意：定义函数的代码段不会自动执行，在调用时执行；所谓调用函数，在代码中给定函数名即可；<br>         函数名出现的任意位置，在代码执行时，都会被自动替换为函数代码；</p>
-<p>   语法一：<br>     function f_name {<br>               函数体<br>     }</p>
-<p>   语法二：<br>     f_name() {<br>             函数体<br>     }</p>
-<pre><code>函数的生命周期：每次被调用时创建，返回时终止；
-    其状态返回结果为函数体中运行的最后一条命令的状态结果
-    自定义状态返回值，需要使用return
-        return [0-255]
-          0:成功
-          1-255：失败
-</code></pre><p><strong>示例1：给定一个用户名，取得用户的ID号和默认shell</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">username=$1</div><div class="line">userinfo() &#123;</div><div class="line">		if id &quot;$username&quot; &amp;&gt; /dev/null ;then</div><div class="line">		    grep &quot;^$\&gt;&quot; | cut -d: -f3,7</div><div class="line">	        else</div><div class="line">		  	echo &quot;No such user&quot;</div><div class="line">		fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">userinfo</div></pre></td></tr></table></figure></p>
-<p><strong>示例2：服务脚本框架</strong></p>
-<pre><code>#!/bin/bash
-#chkconfig: - 50 50
-#description：test service script
-prog=${basename $0}
-lockfile=/var/lock/subsys/$prog
-
-start(){
-   if [ -f $lockfile ];then
-              echo &quot;$prog is running yet&quot;
-   else
-           touch $lockfile
-           [ $? -eq 0 ] &amp;&amp; echo &quot;start $prog finshed&quot;
-   fi
-}
-
-stop() {
-      if [ -f $lockfile ];then
-              rm -f $lockfile
-              [ $? -eq 0 ] &amp;&amp; echo &quot;stop $prog finshed&quot;
-    esle
-            touch -f $lockfile
-            echo &quot;start $prog finshed&quot;
-    fi
-}
-
-statu() {
-      if [ -f $locakfile ];then
-              echo &quot;$prog is running&quot;
-          else
-              echo &quot;$prog is stopped&quot;
-      fi
-}
-
-usage() {
-      echo &quot;Usage:$prog {start|stop|restart|status}&quot;
-}
-
-case $1 in
-start)
-       start
-       ;;
-stop)
-      stop
-      ;;
-status)
-      status
-      ;;
-*)
-      usage
-      exit
-      ;;
-esac
 </code></pre>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/12/bianchenghanshu/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -823,25 +724,21 @@ esac
 
       
         
-          
-            <p>grub.conf格式</p>
-<p>生成时间是安装系统的时间</p>
-<p>default=0<br>timeout=3<br>password –md5 密码   进入单用户时需要输入口令，保护所有内核版本系统  grub-md5-crypt生成md5加密密码<br>         –encrypted                                              grub-crypt生成sha512加密密码<br>title  leessangzs OS<br>    root （hd0,0）根目录的路径，但是操作系统启动一开始是找boot的，所以此处写boot的路径hd表示硬盘，0表示第一个硬盘，0表示第一个分区<br>    kernel /vmlinuz<br>    initrd /initramfs<br>    password 密码 进入此系统时需要的输入口令，只对当前内核版本有效</p>
-<p>实验：删除grub.conf，恢复</p>
-<pre><code>进入命令行界面写两行 kernel行和initrd行
+          <h1 id="grub-conf格式"><a href="#grub-conf格式" class="headerlink" title="grub.conf格式"></a>grub.conf格式</h1><pre><code>生成时间是安装系统的时间
 
-kernel /vmlinuz root=/dev/sda
-initrd /initrams 
-</code></pre><p>实验：删除grub，恢复<br>    救援模式<br>    切根<br>    grub-install /dev/sda<br>    sync<br>    vim grub.conf<br>    default=0<br>    timeout=3<br>    title leessangz OS<br>       kernel /vmlinuz root=/dev/sda<br>       initrd /initramfs</p>
-<p>实验：删除boot，恢复</p>
-<p>boot里有<br>vmlinuz<br>initramfs.img<br>grub.conf<br>选用：rpm -ivh /mnt/cdrom/Packages/Kernel.XXXrpm</p>
-<p>解决vmlinuz<br>   救援模式去安装盘里拷一份vmlinuz放到boot下</p>
-<p>解决initramfs.img<br>   mkinitrd /boot/initrdramfs.img <code>uname -r</code></p>
-<p>   sync同步一下</p>
-<p>解决grub文件夹<br>   grub-install /dev/sda</p>
-<p>解决grub.conf<br>   vim grub.conf<br>   default=0<br>    timeout=3<br>    title leessangz OS<br>       kernel /vmlinuz root=/dev/sdax<br>       initrd /initramfs</p>
 
-          
+default=0
+timeout=3
+password --md5 密码   进入单用户时需要输入口令，保护所有内核版本系统grub-md5-crypt生成md5加密密码  
+         --encrypted                                            grub-crypt生成sha512加密密码
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/11/grub-conf/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
