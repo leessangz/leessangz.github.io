@@ -1,0 +1,1040 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,系统安全," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="OPENSSL常见用法输入openssl后面随意跟一个错误选项即可调出选项列表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OPENSSL">
+<meta property="og:url" content="http://yoursite.com/2017/05/30/OPENSSL/index.html">
+<meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="OPENSSL常见用法输入openssl后面随意跟一个错误选项即可调出选项列表">
+<meta property="og:updated_time" content="2017-05-29T20:00:16.314Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OPENSSL">
+<meta name="twitter:description" content="OPENSSL常见用法输入openssl后面随意跟一个错误选项即可调出选项列表">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/30/OPENSSL/"/>
+
+
+
+
+
+  <title> OPENSSL | LeeSsangZ </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LeeSsangZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeeSsangZ's SS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/OPENSSL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                OPENSSL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-30T03:56:46+08:00">
+                2017-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/05/30/OPENSSL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="OPENSSL常见用法"><a href="#OPENSSL常见用法" class="headerlink" title="OPENSSL常见用法"></a>OPENSSL常见用法</h1><p>输入openssl后面随意跟一个错误选项即可调出选项列表</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">[root@station51 ~]# openssl -</div><div class="line">openssl:Error: &apos;-&apos; is an invalid command.</div><div class="line"></div><div class="line">#标准命令</div><div class="line">Standard commands</div><div class="line">asn1parse         ca（常用）                ciphers           cms               </div><div class="line">crl               crl2pkcs7         dgst              dh                </div><div class="line">dhparam           dsa               dsaparam          ec                </div><div class="line">ecparam           enc（常用）        engine            errstr            </div><div class="line">gendh             gendsa（常用）     genpkey           genrsa            </div><div class="line">nseq              ocsp              passwd            pkcs12            </div><div class="line">pkcs7             pkcs8             pkey              pkeyparam         </div><div class="line">pkeyutl           prime             rand              req（常用）               </div><div class="line">rsa               rsautl            s_client          s_server          </div><div class="line">s_time            sess_id           smime             speed             </div><div class="line">spkac             ts                verify            version           </div><div class="line">x509              </div><div class="line"></div><div class="line">#消息摘要类命令</div><div class="line">Message Digest commands (see the `dgst&apos; command for more details)</div><div class="line">md2               md4               md5               rmd160            </div><div class="line">sha               sha1              </div><div class="line"></div><div class="line">#加解密命令</div><div class="line">Cipher commands (see the `enc&apos; command for more details)</div><div class="line">aes-128-cbc       aes-128-ecb       aes-192-cbc       aes-192-ecb       </div><div class="line">aes-256-cbc       aes-256-ecb       base64            bf                </div><div class="line">bf-cbc            bf-cfb            bf-ecb            bf-ofb            </div><div class="line">camellia-128-cbc  camellia-128-ecb  camellia-192-cbc  camellia-192-ecb  </div><div class="line">camellia-256-cbc  camellia-256-ecb  cast              cast-cbc          </div><div class="line">cast5-cbc         cast5-cfb         cast5-ecb         cast5-ofb         </div><div class="line">des               des-cbc           des-cfb           des-ecb           </div><div class="line">des-ede           des-ede-cbc       des-ede-cfb       des-ede-ofb       </div><div class="line">des-ede3          des-ede3-cbc      des-ede3-cfb      des-ede3-ofb      </div><div class="line">des-ofb           des3              desx              idea              </div><div class="line">idea-cbc          idea-cfb          idea-ecb          idea-ofb          </div><div class="line">rc2               rc2-40-cbc        rc2-64-cbc        rc2-cbc           </div><div class="line">rc2-cfb           rc2-ecb           rc2-ofb           rc4               </div><div class="line">rc4-40            seed              seed-cbc          seed-cfb          </div><div class="line">seed-ecb          seed-ofb          zlib</div></pre></td></tr></table></figure>
+<p>对称加密：</p>
+<pre><code>工具：openssl  enc,  gpg
+支持的算法：3des, aes, blowfish, towfish
+</code></pre><p>加密：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#以/etc/fstab文件举例</div><div class="line"></div><div class="line">[root@station51 ~]# cd /etc</div><div class="line">[root@station51 etc]# openssl enc -e -des3 -a -salt -in fstab -out fstab.ciphertext</div><div class="line">enter des-ede3-cbc encryption password:</div><div class="line">Verifying - enter des-ede3-cbc encryption password:        </div><div class="line">[root@station51 etc]# cat fstab.ciphertext </div><div class="line">U2FsdGVkX1/C0Rj1Zt+/RbCihTNFSlIW/JQ0fds493+tVA1E972inpvhi7/Oi50v</div><div class="line">9vjYfse07fyZgBf2hQALx57j+Bl/8gZoQofs8tTj2uMYqpAiePeDYzKAoXFG+XSf</div><div class="line">7bkDnlw3akbD6FGnbF0UblcD90Dz6+OSDQ01/xkIJZFfymwvW0YesKBWzK38dbp7</div><div class="line">IW3Hi8LRSs17ND4UHhLP24TQfbEDqure21Zuo3GqOnHa5IhKOtfm1vYePd5fHN/o</div><div class="line">miYvjpayk8tsLdBTO8pL/Z5Fi07DR9FywhxQ7pdpKQD3wiMm79pIqBm2ZktuQ2cw</div><div class="line">uK4BwSv0wqeAQiBgAWSAUSijcQ+mC4lh9SI8GwYxyyDRHH06J2mzqnyN7vXesaj6</div><div class="line">R3gqbwIK9wDQmXE+j/kahMlzP80WIPvPlJdpJMMPMriv7dW55b3AvZ4AJ+D1jmSF</div><div class="line">NxctZ+sng18h4nd/f2Ko3bHMdSnDEQzwmUfYKiIEygUlwg8c8HRySp7Q30gDyzy+</div><div class="line">k5Q5kjOgSRZEvvCutIxDTwPiZ0Ssapw1Y3UMAc7TdlOuzZxU/3JSU7R31r6jAc4w</div><div class="line">LQTLzflfEe1bGH5FLkWUg+9B8jZozHp/7EmnMgxi888r3z3JF+qO8K8XdkQSrN2p</div><div class="line">xbjkdYPCmwhun19XViHMeyFctItbqL8KGzOyGSBbhzq+uE4Qeruu+ogf8EQRzcyG</div><div class="line">utfE+Rzcvc71WKk2uinIcMG6DsUmKtmvd5gJtVBVhWq4s2JVJ8t/CbHS+8ZUs35a</div><div class="line">F7eNfUnSae1P2jN/Cad8FwtRClCGTIxGR+g9un76wbscFYR3OLO51w==</div><div class="line">[root@station51 etc]#</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>openssl enc -e -des3 -a -salt -in fstab -out fstab.ciphertext
+openssl enc -d -des3 -a -salt -in fstab.ciphertext -out fstab
+-e encrypt加密   &lt;--&gt;   -d decrypt解密
+-des3 使用des3加密算法
+-a 基于文本格式输出加密后文件内容
+-salt 在加密过程中添加一段随机数
+-in 对哪个文件加密
+-out 加密后的文件输出到哪里
+</code></pre><p>单向加密：</p>
+<pre><code>工具：openssl dgst, md5sum, sha1sum, sha224sum, ...
+支持算法：md2、md4、md5、rmd160、sha、sha1
+</code></pre><p>加密：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@station51 etc]# openssl dgst -md5 /etc/fstab</div><div class="line">MD5(/etc/fstab)= ec48e5270ea9c035c72aa1519432af8c</div><div class="line">[root@station51 etc]# md5sum /etc/fstab</div><div class="line">ec48e5270ea9c035c72aa1519432af8c  /etc/fstab</div><div class="line">···································································</div><div class="line">[root@station51 etc]# openssl dgst -sha1 /etc/fstab</div><div class="line">SHA1(/etc/fstab)= 43133334e56e2a58245cd0a9e5174f6bebe325a1</div><div class="line">[root@station51 etc]# sha1sum /etc/fstab</div><div class="line">43133334e56e2a58245cd0a9e5174f6bebe325a1  /etc/fstab</div></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<pre><code>dgst命令：
+    ~]# openssl  dgst  -md5  /PATH/TO/SOMEFILE
+</code></pre><p>生成用户密码：</p>
+<pre><code>工具：passwd, openssl  passwd
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@station51 etc]# openssl passwd -1 -salt 123456 hello</div><div class="line">$1$123456$HQ125.2GLsY4GcwH9Mm1P/</div><div class="line">[root@station51 etc]# openssl passwd -1 -salt 123456 hello</div><div class="line">$1$123456$HQ125.2GLsY4GcwH9Mm1P/</div><div class="line">[root@station51 etc]# openssl passwd -1 -salt 123456 helloworld</div><div class="line">$1$123456$jBay/ZlxBUiEX3gCH5Pba.</div><div class="line">[root@station51 etc]# openssl passwd -1 -salt 12345678 hello</div><div class="line">$1$12345678$SWwdAXyU/e6YSg8pQlz4D/</div><div class="line">[root@station51 etc]#</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<pre><code>语法格式：openssl  passwd  -1  -salt  SALT  文件
+salt自己指定，salt相同字符串相同，多次加密后生成密码相同
+salt自己指定，salt相同字符串不相同，加密后生成密码不同
+salt自己指定，salt不同字符串相同，多次加密后生成密码不同
+</code></pre><p>生成随机数：</p>
+<pre><code>工具：openssl  rand 类型 字符串长度
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@station51 etc]# openssl rand -hex 4</div><div class="line">2f1e3fb3</div><div class="line">[root@station51 etc]# openssl rand -base64 4</div><div class="line">HLmG0w==</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<pre><code>语法格式：openssl  rand 类型 字符串长度
+</code></pre><p>结合：生成用户密码+生成随机数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@station51 etc]# openssl passwd -1 -salt $(openssl rand -hex 4) hello</div><div class="line">$1$874b43cc$yVoAMU.vR5/KJS5VXNDxG.</div></pre></td></tr></table></figure></p>
+<p>公钥加密：</p>
+<pre><code>加密解密：
+    算法：RSA，ELGamal
+    工具：openssl  rsautl, gpg
+数字签名：
+    算法：RSA， DSA， ELGamal
+    工具：
+密钥交换：
+    算法：DH
+</code></pre><p>生成私钥：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@station51 /]# openssl genrsa -out mykey.key 1024</div><div class="line">Generating RSA private key, 1024 bit long modulus</div><div class="line">........++++++</div><div class="line">........++++++</div><div class="line">........++++++</div><div class="line">e is 65537 (0x10001)</div><div class="line">[root@station51 /]# cat mykey.key </div><div class="line">-----BEGIN RSA PRIVATE KEY-----</div><div class="line">MIICXQIBAAKBgQDB2PBAFQGSVrHFnWBn1iAbwdZRRSIK9usxh3Tq0czeWraJCcqT</div><div class="line">YpHL9+I6U//fMUaNb57t/JphnnAsJ29ToTPtrf4y5y9xsbZpo7vnSSeBw1cUVsd0</div><div class="line">KIxnk9KT1dFW5X3lwo3DkNmgLIWGOB2R/nl5LYC4bnvHI7l+JIsU/8OHiwIDAQAB</div><div class="line">AoGAbWU5SGDSbzx/vK8w7ciYfDGq+lhSeu+YEW6JW8+kl0OISdP9v6lb8EjnIdWv</div><div class="line">y8xqLX11qobotPiOA00J9Z8+xwElSrvCK24HKdK85uWjU7RZhbGO2IzmAQFjYhhk</div><div class="line">cy2PK2J+9DQxbJ6pBofL1/bX6k/QRfFt8avZi1IMo9jM/dkCQQD7goyrng5gRuYs</div><div class="line">FsR66zScQSY/o5+upE5msRFQ6DWNXdlZ/xxOF6Pp/b9WVnbse13I9quSMlsJUocr</div><div class="line">WMOyEcC/AkEAxU7cFVcECEMOa/MCBUTFbUNybudY4jaT2OldSCeoPBjCoc+4O1jf</div><div class="line">lSTEZ7s3Q78uNvu7/TbX+soIwhYHevFgNQJBAIY0IQ+qJQ2mh0dbVrgoLUh7Uwd+</div><div class="line">LcSok9UkApNjdL/cJhBpmhbpcmN3LNPLC2YgZejIBsDZ8c3Fpa6xjKrF4k0CQQCd</div><div class="line">VG6Fzab3d5DuXw2Daf0LTTbYXD0x1Fc8JYkuWgD6OrwoDtxW5l0SLgk2tcAxkyak</div><div class="line">zUJvfOXnomYtbSd1zzbpAkBmGmzPrntM5O11x1dwMYg4XzHQoxdNaNmuJaq/jBVq</div><div class="line">0vy+wvkDn88goH7Wq99kcrUYz1zo7UcL8GA6aOjK1Y9Y</div><div class="line">-----END RSA PRIVATE KEY-----</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<pre><code>生成私钥： ~]# openssl  genrsa  -out  mykey.key  1024
+提出公钥： ~]#  openssl  rsa  -in  mykey.key  -pubout
+</code></pre><p>提取公钥：</p>
+<pre><code>只输出公钥不输入私钥
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[root@station51 /]# openssl  rsa  -in  mykey.key  -pubout</div><div class="line">writing RSA key</div><div class="line">-----BEGIN PUBLIC KEY-----</div><div class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDB2PBAFQGSVrHFnWBn1iAbwdZR</div><div class="line">RSIK9usxh3Tq0czeWraJCcqTYpHL9+I6U//fMUaNb57t/JphnnAsJ29ToTPtrf4y</div><div class="line">5y9xsbZpo7vnSSeBw1cUVsd0KIxnk9KT1dFW5X3lwo3DkNmgLIWGOB2R/nl5LYC4</div><div class="line">bnvHI7l+JIsU/8OHiwIDAQAB</div><div class="line">-----END PUBLIC KEY-----</div><div class="line">[root@station51 /]# cat mykey.key </div><div class="line">-----BEGIN RSA PRIVATE KEY-----</div><div class="line">MIICXQIBAAKBgQDB2PBAFQGSVrHFnWBn1iAbwdZRRSIK9usxh3Tq0czeWraJCcqT</div><div class="line">YpHL9+I6U//fMUaNb57t/JphnnAsJ29ToTPtrf4y5y9xsbZpo7vnSSeBw1cUVsd0</div><div class="line">KIxnk9KT1dFW5X3lwo3DkNmgLIWGOB2R/nl5LYC4bnvHI7l+JIsU/8OHiwIDAQAB</div><div class="line">AoGAbWU5SGDSbzx/vK8w7ciYfDGq+lhSeu+YEW6JW8+kl0OISdP9v6lb8EjnIdWv</div><div class="line">y8xqLX11qobotPiOA00J9Z8+xwElSrvCK24HKdK85uWjU7RZhbGO2IzmAQFjYhhk</div><div class="line">cy2PK2J+9DQxbJ6pBofL1/bX6k/QRfFt8avZi1IMo9jM/dkCQQD7goyrng5gRuYs</div><div class="line">FsR66zScQSY/o5+upE5msRFQ6DWNXdlZ/xxOF6Pp/b9WVnbse13I9quSMlsJUocr</div><div class="line">WMOyEcC/AkEAxU7cFVcECEMOa/MCBUTFbUNybudY4jaT2OldSCeoPBjCoc+4O1jf</div><div class="line">lSTEZ7s3Q78uNvu7/TbX+soIwhYHevFgNQJBAIY0IQ+qJQ2mh0dbVrgoLUh7Uwd+</div><div class="line">LcSok9UkApNjdL/cJhBpmhbpcmN3LNPLC2YgZejIBsDZ8c3Fpa6xjKrF4k0CQQCd</div><div class="line">VG6Fzab3d5DuXw2Daf0LTTbYXD0x1Fc8JYkuWgD6OrwoDtxW5l0SLgk2tcAxkyak</div><div class="line">zUJvfOXnomYtbSd1zzbpAkBmGmzPrntM5O11x1dwMYg4XzHQoxdNaNmuJaq/jBVq</div><div class="line">0vy+wvkDn88goH7Wq99kcrUYz1zo7UcL8GA6aOjK1Y9Y</div><div class="line">-----END RSA PRIVATE KEY-----</div></pre></td></tr></table></figure>
+<p>为了避免私钥被其他用户窃取，建议加密时顺便修改文件权限：</p>
+<pre><code>~]#(umask 077;  openssl  genrsa  -out  test.key  1024)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@station51 /]# (umask 077;  openssl  genrsa  -out  test.key  1024)</div><div class="line">Generating RSA private key, 1024 bit long modulus</div><div class="line">...................++++++</div><div class="line">.................................................++++++</div><div class="line">e is 65537 (0x10001)</div><div class="line">[root@station51 /]# ll</div><div class="line">-rw-r--r--    1 root root   887 May 29 16:07 mykey.key</div><div class="line">-rw-------    1 root root   887 May 29 16:13 test.key</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/系统安全/" rel="tag"># 系统安全</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/ssl-ssh/" rel="next" title="SSL与SSH">
+                <i class="fa fa-chevron-left"></i> SSL与SSH
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/30/openssl-CA/" rel="prev" title="openssl--CA">
+                openssl--CA <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
+               alt="LeeSsangZ" />
+          <p class="site-author-name" itemprop="name">LeeSsangZ</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/your-user-name" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OPENSSL常见用法"><span class="nav-number">1.</span> <span class="nav-text">OPENSSL常见用法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.8 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeSsangZ</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "23a5925f955a4d1e919ddd321bb17921",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

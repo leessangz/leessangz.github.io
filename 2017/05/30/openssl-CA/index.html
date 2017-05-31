@@ -1,0 +1,1035 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,系统安全," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="openssl–CA证书CA的配置文件是/etc/pki/tls目录下的openssl.cnf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openssl--CA">
+<meta property="og:url" content="http://yoursite.com/2017/05/30/openssl-CA/index.html">
+<meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="openssl–CA证书CA的配置文件是/etc/pki/tls目录下的openssl.cnf">
+<meta property="og:updated_time" content="2017-05-29T20:05:10.429Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openssl--CA">
+<meta name="twitter:description" content="openssl–CA证书CA的配置文件是/etc/pki/tls目录下的openssl.cnf">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/30/openssl-CA/"/>
+
+
+
+
+
+  <title> openssl--CA | LeeSsangZ </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LeeSsangZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeeSsangZ's SS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/openssl-CA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                openssl--CA
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-30T04:01:42+08:00">
+                2017-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/05/30/openssl-CA/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="openssl–CA证书"><a href="#openssl–CA证书" class="headerlink" title="openssl–CA证书"></a>openssl–CA证书</h1><p>CA的配置文件是/etc/pki/tls目录下的openssl.cnf</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">####################################################################</div><div class="line">[ ca ]</div><div class="line">default_ca      = CA_default            # The default ca section</div><div class="line">#默认CA将从CA_default这一段中加载配置</div><div class="line">####################################################################</div><div class="line">[ CA_default ]</div><div class="line"></div><div class="line">dir             = /etc/pki/CA           # 把那个目录当做为CA的工作路径</div><div class="line">certs           = $dir/certs            # 已经签署过的证书存放路径</div><div class="line">crl_dir         = $dir/crl              # 吊销列表存放路径</div><div class="line">database        = $dir/index.txt        # 索引文件数据库</div><div class="line">#unique_subject = no                    # Set to &apos;no&apos; to allow creation of</div><div class="line">                                        # several ctificates with same subject.</div><div class="line">new_certs_dir   = $dir/newcerts         # 默认存放新证书的路径</div><div class="line"></div><div class="line">certificate     = $dir/cacert.pem       # The CA certificate</div><div class="line">serial          = $dir/serial           # 签署过证书的序列号</div><div class="line">crlnumber       = $dir/crlnumber        # the current crl number</div><div class="line">                                        # must be commented out to leave a V1 CRL</div><div class="line">crl             = $dir/crl.pem          # The current CRL</div><div class="line">private_key     = $dir/private/cakey.pem# The private key</div><div class="line">RANDFILE        = $dir/private/.rand    # private random number file</div><div class="line"></div><div class="line">x509_extensions = usr_cert              # The extentions to add to the cert</div><div class="line"></div><div class="line"># Comment out the following two lines for the &quot;traditional&quot;</div><div class="line"># (and highly broken) format.</div><div class="line">name_opt        = ca_default            # Subject Name options</div><div class="line">cert_opt        = ca_default            # Certificate field options</div><div class="line"></div><div class="line"># Extension copying option: use with caution.</div><div class="line"># copy_extensions = copy</div><div class="line"></div><div class="line"># Extensions to add to a CRL. Note: Netscape communicator chokes on V2 CRLs</div><div class="line"># so this is commented out by default to leave a V1 CRL.</div><div class="line"># crlnumber must also be commented out to leave a V1 CRL.</div><div class="line"># crl_extensions        = crl_ext</div><div class="line"></div><div class="line">default_days    = 365                   # how long to certify for</div><div class="line">default_crl_days= 30                    # how long before next CRL</div><div class="line">default_md      = sha256                # use SHA-256 by default</div><div class="line">preserve        = no                    # keep passed DN ordering</div><div class="line"></div><div class="line"># A few difference way of specifying how similar the request should look</div><div class="line"># For type CA, the listed attributes must be the same, and the optional</div><div class="line"># and supplied fields are just that :-)</div><div class="line">policy          = policy_match</div><div class="line"></div><div class="line"># For the CA policy</div><div class="line">[ policy_match ]</div><div class="line">countryName             = match</div><div class="line">stateOrProvinceName     = match</div><div class="line">organizationName        = match</div><div class="line">organizationalUnitName  = optional</div><div class="line">commonName              = supplied</div><div class="line">emailAddress            = optional</div><div class="line"></div><div class="line"># For the &apos;anything&apos; policy</div><div class="line"># At this point in time, you must list all acceptable &apos;object&apos;</div><div class="line"># types.</div><div class="line">[ policy_anything ]</div><div class="line">countryName             = 国家</div><div class="line">stateOrProvinceName     = 省</div><div class="line">localityName            = 市</div><div class="line">organizationName        = 公司</div><div class="line">organizationalUnitName  = 部门</div><div class="line">commonName              = 持有证书的人名，或者拥有证书的主机名</div><div class="line">emailAddress            = 邮件地址</div></pre></td></tr></table></figure>
+<p>构建私有CA：</p>
+<pre><code>一、首先创建私钥：
+    在/etc/pki/CA/private目录下创建私钥确保权限600：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@station51 private]# (umask 0077;openssl genrsa -out cakey.pem 2048)</div><div class="line">Generating RSA private key, 2048 bit long modulus</div><div class="line">.....................................+++</div><div class="line">....................+++</div><div class="line">e is 65537 (0x10001)</div><div class="line">[root@station51 private]# ll</div><div class="line">total 4</div><div class="line">-rw------- 1 root root 1675 May 29 17:08 cakey.pem</div></pre></td></tr></table></figure>
+<pre><code>二、生成自签证书：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">[root@station51 private]# openssl req -new -x509 -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem -days 3655</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter &apos;.&apos;, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [XX]:CN    </div><div class="line">State or Province Name (full name) []:Beijing</div><div class="line">Locality Name (eg, city) [Default City]:Beijing</div><div class="line">Organization Name (eg, company) [Default Company Ltd]:test</div><div class="line">Organizational Unit Name (eg, section) []:Ops</div><div class="line">Common Name (eg, your name or your server&apos;s hostname) []:ca.testserver </div><div class="line">Email Address []:test@test.com</div><div class="line">[root@station51 private]# cd ..</div><div class="line">[root@station51 CA]# ll</div><div class="line">total 20</div><div class="line">-rw-r--r--  1 root root 1399 May 29 17:16 cacert.pem</div><div class="line">drwxr-xr-x. 2 root root 4096 Jun 29  2015 certs</div><div class="line">drwxr-xr-x. 2 root root 4096 Jun 29  2015 crl</div><div class="line">drwxr-xr-x. 2 root root 4096 Jun 29  2015 newcerts</div><div class="line">drwx------. 2 root root 4096 May 29 17:08 private</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<pre><code>openssl req -new -x509 -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cecert.pem -days 3655
+-new：生成新证书签署请求；
+-x509：生成自签格式证书，专用于创建私有CA时；
+-key：生成请求时用到的私有文件路径；
+-out：生成的请求文件路径；如果自签操作将直接生成签署过的证书；
+-days：证书的有效时长，单位是day；
+
+三、为CA提供所需的目录及文件（这步操作在CentOS6中需要手动创建，CentOS7中自动生成）；
+~]# mkdir  -pv  /etc/pki/CA/{certs,crl,newcerts}
+~]# touch  /etc/pki/CA/{serial,index.txt}
+~]# echo  01 &gt; /etc/pki/CA/serial
+</code></pre><p>以上步骤完成后私有CA就已经完成了。</p>
+<p><strong>实验：</strong></p>
+<pre><code>要用到证书进行安全通信的服务器，需要向CA请求签署证书：
+</code></pre><p>一、安装所需要的软件包</p>
+<pre><code>yum -y install httpd mod_ssl
+</code></pre><p>二、生成自签证书</p>
+<p>步骤：</p>
+<pre><code>touch /etc/pki/CA/index.txt
+echo 01 &gt; /etc/pki/CA/serial
+cd /etc/pki/CA
+(umask 0077;openssl genrsa -out /etc/pki/CA/private/cakey.pem 1024)
+cd /etc/pki/CA/private
+openssl req -new -x509 -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# yum -y install httpd mod_ssl</div><div class="line">Loaded plugins: fastestmirror, refresh-packagekit, security</div><div class="line">Repository &apos;centos&apos; is missing name in configuration, using id</div><div class="line">Repository &apos;epel&apos; is missing name in configuration, using id</div><div class="line">Setting up Install Process</div><div class="line">Loading mirror speeds from cached hostfile</div><div class="line">centos                                                           | 4.0 kB     00:00     </div><div class="line">epel                                                             | 4.3 kB     00:00     </div><div class="line">Package httpd-2.2.15-53.el6.centos.x86_64 already installed and latest version</div><div class="line">Resolving Dependencies</div><div class="line">--&gt; Running transaction check</div><div class="line">---&gt; Package mod_ssl.x86_64 1:2.2.15-53.el6.centos will be installed</div><div class="line">--&gt; Finished Dependency Resolution</div><div class="line"></div><div class="line">Dependencies Resolved</div><div class="line"></div><div class="line">========================================================================================</div><div class="line"> Package          Arch            Version                         Repository       Size</div><div class="line">========================================================================================</div><div class="line">Installing:</div><div class="line"> mod_ssl          x86_64          1:2.2.15-53.el6.centos          centos           97 k</div><div class="line"></div><div class="line">Transaction Summary</div><div class="line">========================================================================================</div><div class="line">Install       1 Package(s)</div><div class="line"></div><div class="line">Total download size: 97 k</div><div class="line">Installed size: 187 k</div><div class="line">Downloading Packages:</div><div class="line">mod_ssl-2.2.15-53.el6.centos.x86_64.rpm                          |  97 kB     00:00     </div><div class="line">Running rpm_check_debug</div><div class="line">Running Transaction Test</div><div class="line">Transaction Test Succeeded</div><div class="line">Running Transaction</div><div class="line">  Installing : 1:mod_ssl-2.2.15-53.el6.centos.x86_64                                1/1 </div><div class="line">  Verifying  : 1:mod_ssl-2.2.15-53.el6.centos.x86_64                                1/1 </div><div class="line"></div><div class="line">Installed:</div><div class="line">  mod_ssl.x86_64 1:2.2.15-53.el6.centos                                                 </div><div class="line"></div><div class="line">Complete!</div><div class="line">[root@localhost ~]# touch /etc/pki/CA/index.txt</div><div class="line">[root@localhost ~]# echo 01 &gt; /etc/pki/CA/serial</div><div class="line">[root@localhost ~]# cd /etc/pki/CA</div><div class="line">[root@localhost CA]# (umask 0077;openssl genrsa -out /etc/pki/CA/private/cakey.pem 1024)</div><div class="line">Generating RSA private key, 1024 bit long modulus</div><div class="line">...........++++++</div><div class="line">.++++++</div><div class="line">e is 65537 (0x10001)</div><div class="line">[root@localhost CA]# cd /etc/pki/CA/private</div><div class="line">[root@localhost private]# openssl req -new -x509 -key /etc/pki/CA/private/cakey.pem -out /etc/pki/CA/cacert.pem</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter &apos;.&apos;, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [XX]:CN</div><div class="line">State or Province Name (full name) []:BJ</div><div class="line">Locality Name (eg, city) [Default City]:BJ</div><div class="line">Organization Name (eg, company) [Default Company Ltd]:www.test.com</div><div class="line">Organizational Unit Name (eg, section) []:www.test.com</div><div class="line">Common Name (eg, your name or your server&apos;s hostname) []:www.test.com</div><div class="line">Email Address []:</div><div class="line">[root@localhost private]#</div></pre></td></tr></table></figure>
+<p>三、生成证书请求</p>
+<pre><code>步骤：
+    mkdir /web/ssl -pv
+    cd /web/ssl
+    (umask 0077; openssl genrsa -out http.key 1024)
+    openssl req -new -key http.key -out httpd.csr
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mkdir /web/ssl</div><div class="line">mkdir: cannot create directory `/web/ssl&apos;: No such file or directory</div><div class="line">[root@localhost ~]# mkdir /web/ssl -pv</div><div class="line">mkdir: created directory `/web&apos;</div><div class="line">mkdir: created directory `/web/ssl&apos;</div><div class="line">[root@localhost ~]# cd /web/ssl/</div><div class="line">[root@localhost ssl]# (umask 0077;openssl genrsa -out http.key 1024)</div><div class="line">Generating RSA private key, 1024 bit long modulus</div><div class="line">.................................................................++++++</div><div class="line">......++++++</div><div class="line">e is 65537 (0x10001)</div><div class="line">[root@localhost ssl]# openssl req -new -key http.key -out httpd.csr</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter &apos;.&apos;, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [XX]:CN</div><div class="line">State or Province Name (full name) []:BJ</div><div class="line">Locality Name (eg, city) [Default City]:BJ</div><div class="line">Organization Name (eg, company) [Default Company Ltd]:www.test.com</div><div class="line">Organizational Unit Name (eg, section) []:www.test.com</div><div class="line">Common Name (eg, your name or your server&apos;s hostname) []:www.test.com</div><div class="line">Email Address []:</div><div class="line"></div><div class="line">Please enter the following &apos;extra&apos; attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:</div><div class="line">An optional company name []:</div><div class="line">[root@localhost ssl]#</div></pre></td></tr></table></figure>
+<p>四、签名请求文件</p>
+<pre><code>步骤：openssl ca -in /web/ssl/httpd.csr -out /etc/pki/CA/newcerts/httpd.crt
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">Using configuration from /etc/pki/tls/openssl.cnf</div><div class="line">Check that the request matches the signature</div><div class="line">Signature ok</div><div class="line">Certificate Details:</div><div class="line">        Serial Number: 1 (0x1)</div><div class="line">        Validity</div><div class="line">            Not Before: May 29 19:14:32 2017 GMT</div><div class="line">            Not After : May 29 19:14:32 2018 GMT</div><div class="line">        Subject:</div><div class="line">            countryName               = CN</div><div class="line">            stateOrProvinceName       = BJ</div><div class="line">            organizationName          = www.test.com</div><div class="line">            organizationalUnitName    = www.test.com</div><div class="line">            commonName                = www.test.com</div><div class="line">        X509v3 extensions:</div><div class="line">            X509v3 Basic Constraints: </div><div class="line">                CA:FALSE</div><div class="line">            Netscape Comment: </div><div class="line">                OpenSSL Generated Certificate</div><div class="line">            X509v3 Subject Key Identifier: </div><div class="line">                3C:45:24:8C:7A:9C:DC:07:EF:91:37:88:55:E8:BF:0C:5C:53:F1:7F</div><div class="line">            X509v3 Authority Key Identifier: </div><div class="line">                keyid:3A:6A:75:4F:6D:E9:F1:F6:48:81:64:BD:FD:B8:4E:BA:30:6E:3A:75</div><div class="line"></div><div class="line">Certificate is to be certified until May 29 19:14:32 2018 GMT (365 days)</div><div class="line">Sign the certificate? [y/n]:y</div><div class="line"></div><div class="line"></div><div class="line">1 out of 1 certificate requests certified, commit? [y/n]y</div><div class="line">Write out database with 1 new entries</div><div class="line">Data Base Updated</div></pre></td></tr></table></figure>
+<p>五、配置 ssl.conf,实现 https</p>
+<pre><code>修改配置文件vim /etc/httpd/conf.d/ssl.conf
+    SSLCertificateFile /etc/pki/CA/newcerts/httpd.crt
+    SSLCertificateKeyFile /web/ssl/http.key
+    DocumentRoot &quot;/var/www/html&quot;
+    ServerName www.test.com:443
+
+systemctl restart httpd
+ss -ntl | grep 443
+</code></pre><p>六、添加证书到本地PC即可</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/系统安全/" rel="tag"># 系统安全</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/OPENSSL/" rel="next" title="OPENSSL">
+                <i class="fa fa-chevron-left"></i> OPENSSL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
+               alt="LeeSsangZ" />
+          <p class="site-author-name" itemprop="name">LeeSsangZ</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/your-user-name" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#openssl–CA证书"><span class="nav-number">1.</span> <span class="nav-text">openssl–CA证书</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.8 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeSsangZ</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "23a5925f955a4d1e919ddd321bb17921",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
