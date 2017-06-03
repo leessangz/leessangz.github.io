@@ -1,0 +1,1057 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="实验,DNS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="DNS操作一、配置一个正向解析区（输入域名解析出IP）1.在主配置文件中（/etc/named.conf）或主配置文件辅助配置文件（/etc/named.rfc1912.zones）中实现；
+格式：
+    zone  &amp;quot;ZONE_NAME&amp;quot;  IN  {
+                    type  {master|slave|hint|forward};">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置DNS解析练习">
+<meta property="og:url" content="http://yoursite.com/2017/06/01/dnstest/index.html">
+<meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="DNS操作一、配置一个正向解析区（输入域名解析出IP）1.在主配置文件中（/etc/named.conf）或主配置文件辅助配置文件（/etc/named.rfc1912.zones）中实现；
+格式：
+    zone  &amp;quot;ZONE_NAME&amp;quot;  IN  {
+                    type  {master|slave|hint|forward};">
+<meta property="og:updated_time" content="2017-06-03T01:21:28.394Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置DNS解析练习">
+<meta name="twitter:description" content="DNS操作一、配置一个正向解析区（输入域名解析出IP）1.在主配置文件中（/etc/named.conf）或主配置文件辅助配置文件（/etc/named.rfc1912.zones）中实现；
+格式：
+    zone  &amp;quot;ZONE_NAME&amp;quot;  IN  {
+                    type  {master|slave|hint|forward};">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/01/dnstest/"/>
+
+
+
+
+
+  <title> 配置DNS解析练习 | LeeSsangZ </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LeeSsangZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeeSsangZ's SS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/dnstest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                配置DNS解析练习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T09:04:03+08:00">
+                2017-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实验/" itemprop="url" rel="index">
+                    <span itemprop="name">实验</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/06/01/dnstest/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="DNS操作"><a href="#DNS操作" class="headerlink" title="DNS操作"></a>DNS操作</h1><h2 id="一、配置一个正向解析区（输入域名解析出IP）"><a href="#一、配置一个正向解析区（输入域名解析出IP）" class="headerlink" title="一、配置一个正向解析区（输入域名解析出IP）"></a>一、配置一个正向解析区（输入域名解析出IP）</h2><p><strong>1.在主配置文件中（/etc/named.conf）或主配置文件辅助配置文件（/etc/named.rfc1912.zones）中实现；</strong></p>
+<pre><code>格式：
+    zone  &quot;ZONE_NAME&quot;  IN  {
+                    type  {master|slave|hint|forward};
+                    file  &quot;ZONE_NAME.zone&quot;; 
+                };
+</code></pre><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#末尾添加一个区域</div><div class="line">#并把文件指向lee.com.zone</div><div class="line"></div><div class="line">zone &quot;lee.com&quot;  IN &#123;</div><div class="line">	type master;</div><div class="line">	file &quot;lee.com.zone&quot;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><strong>2.创建区域文件</strong></p>
+<pre><code>在/var/named目录下创建lee.com.zone文件
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# cat lee.com.zone </div><div class="line">$TTL 3600</div><div class="line">lee.com.		IN	SOA	lee.com.		admin.lee.com. (</div><div class="line">			2017053001</div><div class="line">			1H</div><div class="line">			5M</div><div class="line">			1W</div><div class="line">			6H )</div><div class="line"></div><div class="line">			IN	NS	dns1.lee.com.</div><div class="line">dns1.lee.com.	IN	A	172.16.250.14</div><div class="line">www.lee.com.	IN	A	172.16.250.14</div><div class="line">web			IN	CNAME	www</div></pre></td></tr></table></figure>
+<p><strong>3.修改bind配置文件</strong></p>
+<pre><code>在/etc目录下的named.conf文件
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">options &#123;</div><div class="line">        listen-on port 53 &#123; 172.16.250.14; &#125;;	#花括号内改为本机IP,括号前后必须加空格</div><div class="line">        directory       &quot;/var/named&quot;;</div><div class="line">        dump-file       &quot;/var/named/data/cache_dump.db&quot;;</div><div class="line">        statistics-file &quot;/var/named/data/named_stats.txt&quot;;</div><div class="line">        memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;</div><div class="line">        allow-query     &#123; any; &#125;;				#花括号内改为any，允许所有人来查询</div><div class="line">        recursion yes;</div><div class="line"></div><div class="line">        dnssec-enable no;						#不做安全性校验</div><div class="line">        dnssec-validation no;					#不做安全性校验</div></pre></td></tr></table></figure>
+<p><strong>4.检查配置文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# named-checkconf</div><div class="line">[root@localhost named]#</div></pre></td></tr></table></figure></p>
+<p><strong>5.检查区域配置文件语法错误</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# named-checkzone lee.com. /var/named/lee.com.zone </div><div class="line">zone lee.com/IN: loaded serial 2017053001</div><div class="line">OK</div><div class="line">#只能检查语法错误，不能检查逻辑错误</div></pre></td></tr></table></figure></p>
+<p><strong>6.权限及属组修改</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# chgrp  named  /var/named/lee.com.zone</div><div class="line">[root@localhost named]# chmod  o=  /var/named/lee.com.zone</div><div class="line">[root@localhost named]# ll</div><div class="line">total 36</div><div class="line">drwxrwx--- 2 named named 4096 May 23 13:18 data</div><div class="line">drwxrwx--- 2 named named 4096 May 24  2017 dynamic</div><div class="line">-rw-r----- 1 root  named  202 May 24 13:28 lee.com.zone</div><div class="line">-rw-r----- 1 root  named 3171 Jan 11  2016 named.ca</div><div class="line">-rw-r----- 1 root  named  152 Dec 15  2009 named.empty</div><div class="line">-rw-r----- 1 root  named  152 Jun 21  2007 named.localhost</div><div class="line">-rw-r----- 1 root  named  168 Dec 15  2009 named.loopback</div><div class="line">drwxrwx--- 2 named named 4096 May 11  2016 slaves</div></pre></td></tr></table></figure></p>
+<p><strong>7.启动服务重新加载（生产实际只重载不重启）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# service named start</div><div class="line">Starting named:                                            [  OK  ]</div><div class="line">[root@localhost named]# rndc  reload</div><div class="line">server reload successful</div><div class="line">[root@localhost named]#</div></pre></td></tr></table></figure></p>
+<p><strong>8.测试</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# host -t A www.lee.com</div><div class="line">www.lee.com has address 172.16.250.14</div><div class="line"></div><div class="line"></div><div class="line">[root@localhost named]# host -t SOA lee.com</div><div class="line">lee.com has SOA record lee.com. admin.lee.com. 2017053001 3600 300 604800 21600</div></pre></td></tr></table></figure></p>
+<h2 id="二、配置一个反向解析区-输入ip解析出域名"><a href="#二、配置一个反向解析区-输入ip解析出域名" class="headerlink" title="二、配置一个反向解析区(输入ip解析出域名)"></a>二、配置一个反向解析区(输入ip解析出域名)</h2><p><strong>1.在主配置文件中（/etc/named.conf）或主配置文件辅助配置文件（/etc/named.rfc1912.zones）中实现；</strong></p>
+<pre><code>格式：
+    zone  &quot;ZONE_NAME&quot;  IN  {
+                    type  {master|slave|hint|forward};
+                    file  &quot;ZONE_NAME.zone&quot;; 
+                };
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#末尾添加一个区域</div><div class="line">#并把文件指向172.16.zone</div><div class="line">#反向区域名是倒过来写的网络IP+.in-addr.arpa</div><div class="line"></div><div class="line">zone &quot;16.172.in-addr.arpa&quot; IN &#123;</div><div class="line">	type master;</div><div class="line">	file &quot;172.16.zone&quot;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><strong>2.创建区域文件</strong></p>
+<pre><code>在/var/named目录下创建172.16.zone文件
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# cat 172.16.zone </div><div class="line">$TTL 1200</div><div class="line">@	IN	SOA	@	nsadmin.lee.com. (</div><div class="line">		2017060101</div><div class="line">		3H</div><div class="line">		20M</div><div class="line">		1W</div><div class="line">		1D )</div><div class="line">@		IN	NS	dns1.lee.com.</div><div class="line">98.254.16.172.in-addr.arpa. 		IN	PTR	dns1.lee.com.</div><div class="line">98.254.16.172.in-addr.arpa.		IN	PTR	www.lee.com.</div></pre></td></tr></table></figure>
+<p><strong>3.修改bind配置文件</strong></p>
+<pre><code>因为做正向解析区域时已经对配置文件做了修改，所以以后的操作不用再对配置文件进行配置。
+</code></pre><p><strong>4.检查配置文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# named-checkconf</div><div class="line">[root@localhost named]#</div></pre></td></tr></table></figure></p>
+<p><strong>5.检查区域配置文件语法错误</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# named-checkzone 16.172.in-addr.arpa /var/named/172.16.zone</div><div class="line">zone 16.172.in-addr.arpa/IN: loaded serial 2017060101</div><div class="line">OK</div><div class="line">[root@localhost named]# </div><div class="line">#只能检查语法错误，不能检查逻辑错误</div></pre></td></tr></table></figure></p>
+<p><strong>6.权限及属组修改</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# chgrp named /var/named/172.16.zone </div><div class="line">[root@localhost named]# chmod o= /var/named/172.16.zone </div><div class="line">[root@localhost named]# ll</div><div class="line">total 24</div><div class="line">-rw-r----- 1 root  named  199 Jun  1 11:18 172.16.zone</div><div class="line">drwxrwx--- 2 named named   47 May 29 16:34 data</div><div class="line">drwxrwx--- 2 named named   58 Jun  1 11:08 dynamic</div><div class="line">-rw-r--r-- 1 root  root   277 May 23 17:19 lyz.zone</div><div class="line">-rw-r----- 1 root  named 2076 Jan 28  2013 named.ca</div><div class="line">-rw-r----- 1 root  named  152 Dec 15  2009 named.empty</div><div class="line">-rw-r----- 1 root  named  152 Jun 21  2007 named.localhost</div><div class="line">-rw-r----- 1 root  named  168 Dec 15  2009 named.loopback</div><div class="line">drwxrwx--- 2 named named    6 Nov 12  2016 slaves</div></pre></td></tr></table></figure></p>
+<p><strong>7.重新加载服务</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# rndc  reload</div><div class="line">server reload successful</div><div class="line">[root@localhost named]#</div></pre></td></tr></table></figure></p>
+<p><strong>8.测试</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# dig -x 172.16.254.98 @172.16.254.98</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.9.4-RedHat-9.9.4-37.el7 &lt;&lt;&gt;&gt; -x 172.16.254.98 @172.16.254.98</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 9854</div><div class="line">;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; OPT PSEUDOSECTION:</div><div class="line">; EDNS: version: 0, flags:; udp: 4096</div><div class="line">;; QUESTION SECTION:</div><div class="line">;98.254.16.172.in-addr.arpa.	IN	PTR</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">98.254.16.172.in-addr.arpa. 1200 IN	PTR	www.lee.com.</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">16.172.in-addr.arpa.	1200	IN	NS	dns1.lee.com.</div><div class="line"></div><div class="line">;; Query time: 1 msec</div><div class="line">;; SERVER: 172.16.254.98#53(172.16.254.98)</div><div class="line">;; WHEN: Thu Jun 01 11:28:20 CST 2017</div><div class="line">;; MSG SIZE  rcvd: 99</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# dig -t axfr 16.172.in-addr.arpa @172.16.254.98</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.9.4-RedHat-9.9.4-37.el7 &lt;&lt;&gt;&gt; -t axfr 16.172.in-addr.arpa @172.16.254.98</div><div class="line">;; global options: +cmd</div><div class="line">16.172.in-addr.arpa.	1200	IN	SOA	16.172.in-addr.arpa. nsadmin.lee.com. 2017060101 10800 1200 604800 86400</div><div class="line">16.172.in-addr.arpa.	1200	IN	NS	dns1.lee.com.</div><div class="line">67.0.16.172.in-addr.arpa. 1200	IN	PTR	dns1.lee.com.</div><div class="line">98.254.16.172.in-addr.arpa. 1200 IN	PTR	www.lee.com.</div><div class="line">16.172.in-addr.arpa.	1200	IN	SOA	16.172.in-addr.arpa. nsadmin.lee.com. 2017060101 10800 1200 604800 86400</div><div class="line">;; Query time: 2 msec</div><div class="line">;; SERVER: 172.16.254.98#53(172.16.254.98)</div><div class="line">;; WHEN: Thu Jun 01 11:30:41 CST 2017</div><div class="line">;; XFR size: 5 records (messages 1, bytes 187)</div></pre></td></tr></table></figure>
+<h2 id="三、配置主从域名解析服务器"><a href="#三、配置主从域名解析服务器" class="headerlink" title="三、配置主从域名解析服务器"></a>三、配置主从域名解析服务器</h2><h3 id="主从正向解析"><a href="#主从正向解析" class="headerlink" title="主从正向解析"></a>主从正向解析</h3><p><strong>1.在从服务器上配置/etc/named.rfc1912.zones文件。在最后添加一个域</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">zone &quot;lee.com&quot;  IN &#123;</div><div class="line">	type slave;		#类型选择从服务器</div><div class="line">	file &quot;slaves/lee.com.zone&quot;;	#文件指向/var/named/slaves/的lee.com.zone从服务器上这个文件不用手动创建，</div><div class="line">	masters &#123; 172.16.250.14;&#125;;	#指明主服务器的IP</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><strong>2.检查配置文件是否有错</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# named-checkconf </div><div class="line">[root@localhost slaves]#</div></pre></td></tr></table></figure>
+<p><strong>3.与时间服务器同步时间，主从服务器都需要做</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# ntpdate 172.16.0.1</div><div class="line">  1 Jun 14:12:14 ntpdate[2712]: step time server 172.16.0.1 offset 527048.206825 sec</div></pre></td></tr></table></figure>
+<p><strong>4.在从服务器上重载服务</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# rndc reload</div><div class="line">server reload successful</div></pre></td></tr></table></figure></p>
+<p><strong>5.查看一下日志文件/var/log/messages</strong></p>
+<pre><code>显示文件已经传输成功
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# tail /var/log/messages</div><div class="line">Jun  1 14:12:40 localhost named[2257]: using default UDP/IPv6 port range: [1024, 65535]</div><div class="line">Jun  1 14:12:40 localhost named[2257]: sizing zone task pool based on 7 zones</div><div class="line">Jun  1 14:12:40 localhost named[2257]: Warning: &apos;empty-zones-enable/disable-empty-zone&apos; not set: disabling RFC 1918 empty zones</div><div class="line">Jun  1 14:12:40 localhost named[2257]: reloading configuration succeeded</div><div class="line">Jun  1 14:12:40 localhost named[2257]: reloading zones succeeded</div><div class="line">Jun  1 14:12:40 localhost named[2257]: zone lee.com/IN: Transfer started.</div><div class="line">Jun  1 14:12:40 localhost named[2257]: transfer of &apos;lee.com/IN&apos; from 172.16.250.14#53: connected using 172.16.250.196#33700</div><div class="line">Jun  1 14:12:40 localhost named[2257]: zone lee.com/IN: transferred serial 2017053001</div><div class="line">Jun  1 14:12:40 localhost named[2257]: transfer of &apos;lee.com/IN&apos; from 172.16.250.14#53: Transfer completed: 1 messages, 6 records, 176 bytes, 0.003 secs (58666 bytes/sec)</div><div class="line">Jun  1 14:12:40 localhost named[2257]: zone lee.com/IN: sending notifies (serial 2017053001)</div></pre></td></tr></table></figure>
+<pre><code>此时在/var/named/slaves目录下就有了从主服务器同步过来的区域配置文件lee.com.zone
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# cd ~</div><div class="line">[root@localhost ~]# cd /var/named/slaves/</div><div class="line">[root@localhost slaves]# ll</div><div class="line">total 4</div><div class="line">-rw-r--r-- 1 named named 337 Jun  1 14:12 lee.com.zone</div><div class="line">[root@localhost slaves]#</div></pre></td></tr></table></figure>
+<p><strong>6.测试</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# dig -t A www.lee.com @172.16.250.196</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.47.rc1.el6 &lt;&lt;&gt;&gt; -t A www.lee.com @172.16.250.196</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 56624</div><div class="line">;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;www.lee.com.			IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">www.lee.com.		3600	IN	A	172.16.250.14</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">lee.com.		3600	IN	NS	dns1.lee.com.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line">dns1.lee.com.		3600	IN	A	172.16.250.14</div><div class="line"></div><div class="line">;; Query time: 2 msec</div><div class="line">;; SERVER: 172.16.250.196#53(172.16.250.196)</div><div class="line">;; WHEN: Thu Jun  1 14:42:03 2017</div><div class="line">;; MSG SIZE  rcvd: 80</div><div class="line"></div><div class="line">[root@localhost slaves]#</div></pre></td></tr></table></figure></p>
+<h3 id="主从反向解析"><a href="#主从反向解析" class="headerlink" title="主从反向解析"></a>主从反向解析</h3><p><strong>1.在从服务器上配置/etc/named.rfc1912.zones文件。在最后添加一个域</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">zone &quot;16.172.in-addr.arpa&quot; &#123;</div><div class="line">	type slave; #选择从服务器类型</div><div class="line">	file &quot;slaves/lee.com.backzone&quot;;	#文件指向/var/named/slaves/的lee.com.zone从服务器上这个文件不用手动创建，</div><div class="line">	masters	&#123; 172.16.250.14; &#125;;		#指明主服务器的IP</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><strong>2.检查配置文件是否有错</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# named-checkconf </div><div class="line">[root@localhost slaves]#</div></pre></td></tr></table></figure>
+<p><strong>3.与时间服务器同步时间，主从服务器都需要做</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# ntpdate 172.16.0.1</div><div class="line">  1 Jun 14:12:14 ntpdate[2712]: step time server 172.16.0.1 offset 527048.206825 sec</div></pre></td></tr></table></figure>
+<p><strong>4.在从服务器上重载服务</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# rndc reload</div><div class="line">server reload successful</div></pre></td></tr></table></figure></p>
+<p><strong>5.查看一下日志文件/var/log/messages</strong></p>
+<pre><code>显示文件已经传输成功
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# tail /var/log/messages</div><div class="line">Jun  1 15:01:11 localhost named[2257]: using default UDP/IPv6 port range: [1024, 65535]</div><div class="line">Jun  1 15:01:11 localhost named[2257]: sizing zone task pool based on 8 zones</div><div class="line">Jun  1 15:01:11 localhost named[2257]: Warning: &apos;empty-zones-enable/disable-empty-zone&apos; not set: disabling RFC 1918 empty zones</div><div class="line">Jun  1 15:01:11 localhost named[2257]: reloading configuration succeeded</div><div class="line">Jun  1 15:01:11 localhost named[2257]: reloading zones succeeded</div><div class="line">Jun  1 15:01:11 localhost named[2257]: zone 16.172.in-addr.arpa/IN: Transfer started.</div><div class="line">Jun  1 15:01:11 localhost named[2257]: transfer of &apos;16.172.in-addr.arpa/IN&apos; from 172.16.250.14#53: connected using 172.16.250.196#42173</div><div class="line">Jun  1 15:01:11 localhost named[2257]: zone 16.172.in-addr.arpa/IN: transferred serial 2017060101</div><div class="line">Jun  1 15:01:11 localhost named[2257]: transfer of &apos;16.172.in-addr.arpa/IN&apos; from 172.16.250.14#53: Transfer completed: 1 messages, 5 records, 182 bytes, 0.001 secs (182000 bytes/sec)</div><div class="line">Jun  1 15:01:11 localhost named[2257]: zone 16.172.in-addr.arpa/IN: sending notifies (serial 2017060101)</div></pre></td></tr></table></figure>
+<pre><code>此时在/var/named/slaves目录下就有了从主服务器同步过来的区域配置文件lee.com.backzone
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# cd ~</div><div class="line">[root@localhost ~]# cd /var/named/slaves/</div><div class="line">[root@localhost slaves]# ll</div><div class="line">total 8</div><div class="line">-rw-r--r-- 1 named named 363 Jun  1 15:01 lee.com.backzone</div><div class="line">-rw-r--r-- 1 named named 358 Jun  1 14:41 lee.com.zone</div></pre></td></tr></table></figure>
+<p><strong>6.测试</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# dig -t A 16.172.in-addr.arpa @172.16.250.196</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.47.rc1.el6 &lt;&lt;&gt;&gt; -t A 16.172.in-addr.arpa @172.16.250.196</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 59949</div><div class="line">;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;16.172.in-addr.arpa.		IN	A</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">16.172.in-addr.arpa.	1200	IN	SOA	16.172.in-addr.arpa. nsadmin.lee.com. 2017060101 10800 1200 604800 86400</div><div class="line"></div><div class="line">;; Query time: 0 msec</div><div class="line">;; SERVER: 172.16.250.196#53(172.16.250.196)</div><div class="line">;; WHEN: Thu Jun  1 15:06:08 2017</div><div class="line">;; MSG SIZE  rcvd: 88</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# dig -x 172.16.250.14 @172.16.250.196</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.47.rc1.el6 &lt;&lt;&gt;&gt; -x 172.16.250.14 @172.16.250.196</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 1037</div><div class="line">;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;14.250.16.172.in-addr.arpa.	IN	PTR</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">14.250.16.172.in-addr.arpa. 1200 IN	PTR	www.lee.com.</div><div class="line">14.250.16.172.in-addr.arpa. 1200 IN	PTR	dns1.lee.com.</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">16.172.in-addr.arpa.	1200	IN	NS	dns1.lee.com.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line">dns1.lee.com.		3600	IN	A	172.16.250.14</div><div class="line"></div><div class="line">;; Query time: 3 msec</div><div class="line">;; SERVER: 172.16.250.196#53(172.16.250.196)</div><div class="line">;; WHEN: Thu Jun  1 15:07:32 2017</div><div class="line">;; MSG SIZE  rcvd: 118</div></pre></td></tr></table></figure>
+<h2 id="四、配置子域域名解析"><a href="#四、配置子域域名解析" class="headerlink" title="四、配置子域域名解析"></a>四、配置子域域名解析</h2><p><strong>1.在主服务器上添加子域信息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# cat /var/named/lee.com.zone </div><div class="line">$TTL 3600</div><div class="line">lee.com.		IN	SOA	lee.com.		admin.lee.com. (</div><div class="line">			2017053002</div><div class="line">			1H</div><div class="line">			5M</div><div class="line">			1W</div><div class="line">			6H )</div><div class="line"></div><div class="line">			IN	NS	dns1.lee.com.</div><div class="line">dns1.lee.com.	IN	A	172.16.250.14</div><div class="line">www.lee.com.	IN	A	172.16.250.14</div><div class="line">web			IN	CNAME	www</div><div class="line"></div><div class="line">ops.lee.com		IN		NS	dns1.ops.lee.com</div><div class="line">dev.lee.com		IN		NS	dns1.dev.lee.com.</div><div class="line"></div><div class="line">dns1.ops	IN		A	172.16.250.196</div><div class="line">dns1.dev	IN		A	172.16.254.98</div></pre></td></tr></table></figure></p>
+<p><strong>2.在子域服务器上添加子域</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zone &quot;ops.lee.com&quot; &#123;</div><div class="line">	type master;</div><div class="line">	file &quot;ops.lee.com.zone&quot;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>3.创建域配置文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$TTL 3600</div><div class="line">@       IN      SOA     ops.lee.com     nsadmin.ops.lee.com (</div><div class="line">                2717060101</div><div class="line">                1H</div><div class="line">                5M</div><div class="line">                3D</div><div class="line">                2H )</div><div class="line"></div><div class="line">@       IN      NS      dns1.ops.lee.com.</div><div class="line">dns1    IN      A       172.16.250.196</div><div class="line">www     IN      A       172.16.250.196</div><div class="line">~</div></pre></td></tr></table></figure></p>
+<p><strong>4.测试</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[root@localhost slaves]# dig -t A dns1.ops.lee.com @172.16.250.14</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.47.rc1.el6 &lt;&lt;&gt;&gt; -t A dns1.ops.lee.com @172.16.250.14</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 9662</div><div class="line">;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;dns1.ops.lee.com.		IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">dns1.ops.lee.com.	3600	IN	A	172.16.250.196</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">lee.com.		3600	IN	NS	dns1.lee.com.</div><div class="line"></div><div class="line">;; ADDITIONAL SECTION:</div><div class="line">dns1.lee.com.		3600	IN	A	172.16.250.14</div><div class="line"></div><div class="line">;; Query time: 2 msec</div><div class="line">;; SERVER: 172.16.250.14#53(172.16.250.14)</div><div class="line">;; WHEN: Thu Jun  1 15:34:43 2017</div><div class="line">;; MSG SIZE  rcvd: 85</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">[root@localhost named]# dig -t A dns1.ops.lee.com @172.16.250.196</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.47.rc1.el6 &lt;&lt;&gt;&gt; -t A dns1.ops.lee.com @172.16.250.196</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 63239</div><div class="line">;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;dns1.ops.lee.com.		IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">dns1.ops.lee.com.	3600	IN	A	172.16.250.196</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">ops.lee.com.		3600	IN	NS	dns1.ops.lee.com.</div><div class="line"></div><div class="line">;; Query time: 2 msec</div><div class="line">;; SERVER: 172.16.250.196#53(172.16.250.196)</div><div class="line">;; WHEN: Thu Jun  1 15:33:49 2017</div><div class="line">;; MSG SIZE  rcvd: 64</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/实验/" rel="tag"># 实验</a>
+          
+            <a href="/tags/DNS/" rel="tag"># DNS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/openssl-CA/" rel="next" title="openssl--CA">
+                <i class="fa fa-chevron-left"></i> openssl--CA
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
+               alt="LeeSsangZ" />
+          <p class="site-author-name" itemprop="name">LeeSsangZ</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/your-user-name" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS操作"><span class="nav-number">1.</span> <span class="nav-text">DNS操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、配置一个正向解析区（输入域名解析出IP）"><span class="nav-number">1.1.</span> <span class="nav-text">一、配置一个正向解析区（输入域名解析出IP）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、配置一个反向解析区-输入ip解析出域名"><span class="nav-number">1.2.</span> <span class="nav-text">二、配置一个反向解析区(输入ip解析出域名)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、配置主从域名解析服务器"><span class="nav-number">1.3.</span> <span class="nav-text">三、配置主从域名解析服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主从正向解析"><span class="nav-number">1.3.1.</span> <span class="nav-text">主从正向解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从反向解析"><span class="nav-number">1.3.2.</span> <span class="nav-text">主从反向解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、配置子域域名解析"><span class="nav-number">1.4.</span> <span class="nav-text">四、配置子域域名解析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.8 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeSsangZ</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "23a5925f955a4d1e919ddd321bb17921",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
