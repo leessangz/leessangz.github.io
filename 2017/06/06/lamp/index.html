@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,Linux基础命令," />
+  <meta name="keywords" content="实验,httpd,mariadb,php," />
 
 
 
@@ -99,31 +99,36 @@
 
 
 
-<meta name="description" content="ECHONAME    名称
-echo - display a line of text    echo - 在屏幕上显示一段文字
-
-SYNOPSIS    概要
-echo [SHORT-OPTION]... [STRING]...  echo [短选项]... [字符串]
-echo LONG-OPTION                    echo 长选项">
+<meta name="description" content="配置LAMP–fastcgi模式因为CentOS6上PHP-5.3.2默认不支持fpm机制，并且httpd-2.2默认不支持fcgi协议，所以此模式只在CentOS7上实验，CentOS6.想实现需要编译安装。
+一、结构图
+用三台虚拟机来模拟服务器：
+172.16.2.10--http服务器
+172.16.2.20--php-fpm服务器
+172.16.2.30--mariadb服务器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="echo 命令">
-<meta property="og:url" content="http://yoursite.com/2017/03/25/echo/index.html">
+<meta property="og:title" content="lamp">
+<meta property="og:url" content="http://yoursite.com/2017/06/06/lamp/index.html">
 <meta property="og:site_name" content="LeeSsangZ">
-<meta property="og:description" content="ECHONAME    名称
-echo - display a line of text    echo - 在屏幕上显示一段文字
-
-SYNOPSIS    概要
-echo [SHORT-OPTION]... [STRING]...  echo [短选项]... [字符串]
-echo LONG-OPTION                    echo 长选项">
-<meta property="og:updated_time" content="2017-03-25T07:02:33.748Z">
+<meta property="og:description" content="配置LAMP–fastcgi模式因为CentOS6上PHP-5.3.2默认不支持fpm机制，并且httpd-2.2默认不支持fcgi协议，所以此模式只在CentOS7上实验，CentOS6.想实现需要编译安装。
+一、结构图
+用三台虚拟机来模拟服务器：
+172.16.2.10--http服务器
+172.16.2.20--php-fpm服务器
+172.16.2.30--mariadb服务器">
+<meta property="og:image" content="http://i1.piimg.com/588144/b79066a706ce5f5d.png">
+<meta property="og:image" content="http://i1.piimg.com/588144/fc2de2d4f61f7d8a.png">
+<meta property="og:image" content="http://i4.buimg.com/588144/02e862318ec3a7d6.png">
+<meta property="og:image" content="http://i4.buimg.com/588144/d69cd4bd37214237.png">
+<meta property="og:updated_time" content="2017-06-06T08:59:22.518Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="echo 命令">
-<meta name="twitter:description" content="ECHONAME    名称
-echo - display a line of text    echo - 在屏幕上显示一段文字
-
-SYNOPSIS    概要
-echo [SHORT-OPTION]... [STRING]...  echo [短选项]... [字符串]
-echo LONG-OPTION                    echo 长选项">
+<meta name="twitter:title" content="lamp">
+<meta name="twitter:description" content="配置LAMP–fastcgi模式因为CentOS6上PHP-5.3.2默认不支持fpm机制，并且httpd-2.2默认不支持fcgi协议，所以此模式只在CentOS7上实验，CentOS6.想实现需要编译安装。
+一、结构图
+用三台虚拟机来模拟服务器：
+172.16.2.10--http服务器
+172.16.2.20--php-fpm服务器
+172.16.2.30--mariadb服务器">
+<meta name="twitter:image" content="http://i1.piimg.com/588144/b79066a706ce5f5d.png">
 
 
 
@@ -151,13 +156,13 @@ echo LONG-OPTION                    echo 长选项">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/25/echo/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/06/lamp/"/>
 
 
 
 
 
-  <title> echo 命令 | LeeSsangZ </title>
+  <title> lamp | LeeSsangZ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -330,7 +335,7 @@ echo LONG-OPTION                    echo 长选项">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/25/echo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/06/lamp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LeeSsangZ">
@@ -351,7 +356,7 @@ echo LONG-OPTION                    echo 长选项">
             
             
               
-                echo 命令
+                lamp
               
             
           </h1>
@@ -366,8 +371,8 @@ echo LONG-OPTION                    echo 长选项">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T12:05:32+08:00">
-                2017-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-06T16:55:07+08:00">
+                2017-06-06
               </time>
             
 
@@ -389,8 +394,8 @@ echo LONG-OPTION                    echo 长选项">
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-命令/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux 命令</span>
+                  <a href="/categories/实验/" itemprop="url" rel="index">
+                    <span itemprop="name">实验</span>
                   </a>
                 </span>
 
@@ -407,7 +412,7 @@ echo LONG-OPTION                    echo 长选项">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/25/echo/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/06/06/lamp/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -434,59 +439,66 @@ echo LONG-OPTION                    echo 长选项">
       
 
       
-        <h2 id="ECHO"><a href="#ECHO" class="headerlink" title="ECHO"></a>ECHO</h2><h3 id="NAME-名称"><a href="#NAME-名称" class="headerlink" title="NAME    名称"></a>NAME    名称</h3><blockquote>
-<pre><code>echo - display a line of text    echo - 在屏幕上显示一段文字
-</code></pre></blockquote>
-<h3 id="SYNOPSIS-概要"><a href="#SYNOPSIS-概要" class="headerlink" title="SYNOPSIS    概要"></a>SYNOPSIS    概要</h3><blockquote>
-<pre><code>echo [SHORT-OPTION]... [STRING]...  echo [短选项]... [字符串]
-echo LONG-OPTION                    echo 长选项
-</code></pre></blockquote>
-<a id="more"></a>
-<h3 id="DESCRIPTION-描述"><a href="#DESCRIPTION-描述" class="headerlink" title="DESCRIPTION     描述"></a>DESCRIPTION     描述</h3><blockquote>
-<pre><code>Echo the STRING(s) to standard output.  Echo是字符的标准输出
+        <h1 id="配置LAMP–fastcgi模式"><a href="#配置LAMP–fastcgi模式" class="headerlink" title="配置LAMP–fastcgi模式"></a>配置LAMP–fastcgi模式</h1><p>因为CentOS6上PHP-5.3.2默认不支持fpm机制，并且httpd-2.2默认不支持fcgi协议，所以此模式只在CentOS7上实验，CentOS6.想实现需要编译安装。</p>
+<h2 id="一、结构图"><a href="#一、结构图" class="headerlink" title="一、结构图"></a>一、结构图</h2><p><img src="http://i1.piimg.com/588144/b79066a706ce5f5d.png" alt="Markdown"></p>
+<p>用三台虚拟机来模拟服务器：</p>
+<pre><code>172.16.2.10--http服务器
+172.16.2.20--php-fpm服务器
+172.16.2.30--mariadb服务器
+</code></pre><a id="more"></a>
+<h2 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h2><p><strong>1.配置mariadb</strong></p>
+<p>在2.30的主机上安装mariadb</p>
+<pre><code>~]# yum install mariadb-server
+</code></pre><p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /etc/my.cnf.d/server.cnf</div><div class="line"># this is read by the standalone daemon and embedded servers</div><div class="line">[server]    #在server下添加</div><div class="line">skip_name_resolve=ON    #跳过名称解析</div><div class="line">innodb_file_per_table=ON    #将共享表空间改为独立表空间</div></pre></td></tr></table></figure></p>
+<p>启动服务</p>
+<pre><code>~]# systemctl start mariadb.service
+</code></pre><p>创建数据库并重启服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mysql</div><div class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</div><div class="line">Your MariaDB connection id is 2</div><div class="line">Server version: 5.5.52-MariaDB MariaDB Server</div><div class="line"></div><div class="line">Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.</div><div class="line"></div><div class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</div><div class="line"></div><div class="line">MariaDB [(none)]&gt; create database testdb; #创建数据库</div><div class="line">Query OK, 1 row affected (0.01 sec)</div><div class="line"></div><div class="line">MariaDB [(none)]&gt; exit</div><div class="line">Bye</div><div class="line">[root@localhost ~]# systemctl restart mariadb.service </div><div class="line">[root@localhost ~]#</div></pre></td></tr></table></figure></p>
+<p><strong>2.配置php-fpm</strong><br>在2.20主机上安装php-fpm以及php与mariadb的驱动php-mysql</p>
+<pre><code>~]# yum install -y php-fpm php-mysql
+</code></pre><p>修改配置文件</p>
+<pre><code>需要修改：
+    listen = 172.16.2.20:9000           #监听本机IP和端口，这里填本机IP
+    listen.allowed_clients = 172.26.2.10        #允许那些客户端连接这里填httpd的IP
+取消注释：
+    pm.status_path = /status        #查看状态信息
 
-   -n     do not output the trailing newline    输出时不自动换行
+    ping.path = /ping               #查看网络信息
+    ping.response = pong
 
-   -e     enable interpretation of backslash escapes    启用\字符功能
+    chdir = /var/www                #网页文件存放目录
 
-   -E     disable  interpretation  of backslash escapes   （默认）不支持\解释功能
-        (default)  
-
-If -e is in effect, the following sequences are rec-ognized:
-启用命令选项-e，若字符串中出现以下字符， 则特别加以处理， 而不会将它当成一般文字输出
-
-\\     backslash         插入\字符
-
-\a     alert (BEL)       发出警告声
-
-\b     backspace         向前删除一个字符
-
-\c     produce no further output    最后不加换行符号           
-
-\f     form feed         换行但光标仍旧停留在原来的位置
-
-\n     new line          换行且光标移至行首
-
-\r     carriage return   回车，即光标移至行首
-
-\t     horizontal tab    插入tab
-
-\v     vertical tab      垂直插入tab，与\f显示相同 
-
-\0NNN  byte with octal value NNN (1 to 3 digits)        
-   插入（nnn）八进制所代表的ASCII字符；
-
- /bin/echo --help     查看help帮助
- /bin/echo --version  查看当前版本echo版本
-</code></pre></blockquote>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo abcdefghijklmnopqrstuvwxyz</div><div class="line">[root@localhost ~]# echo abcdefghijklmnopqrstuvwxyz</div><div class="line">abcdefghijklmnopqrstuvwxyz</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo -n   </div><div class="line">[root@localhost ~]# echo -n abcdefghijklmnopqrstuvwxyz</div><div class="line">abcdefghijklmnopqrstuvwxyz[root@localhost ~]#</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo -e \\</div><div class="line">[root@localhost ~]# echo -e &quot;\\ abcdefghijklmnopqrstuvwxyz&quot;</div><div class="line">\ abcdefghijklmnopqrstuvwxyz</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo -e \b</div><div class="line">[root@localhost ~]# echo -e &quot;abcdefghijklmnopqrstuvwxy\bz&quot;</div><div class="line">abcdefghijklmnopqrstuvwxz</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo -e \c</div><div class="line">[root@localhost ~]# echo -e &quot;abcdefghijklmnopqrstuvwxyz\c&quot;</div><div class="line">abcdefghijklmnopqrstuvwxyz[root@localhost ~]#</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">echo -e \f</div><div class="line">[root@localhost ~]# echo -e &quot;abcd\fefghijklmnopqrstuvwxyz&quot;</div><div class="line">abcd</div><div class="line">    efghijklmnopqrstuvwxyz</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">echo -e \n</div><div class="line">[root@localhost ~]# echo -e &quot;\nabcdefghijklmnopqrstuvwxyz&quot;</div><div class="line"></div><div class="line">abcdefghijklmnopqrstuvwxyz</div></pre></td></tr></table></figure></blockquote>
+    php_value[session.save_path] = /var/lib/php/session 
+    #PHP的session的存放路径，默认没有，需要手动创建，并改属主属组，为apache
+</code></pre><p>创建所需文件并改属主属组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mkdir -pv /var/www/html</div><div class="line">mkdir: created directory ‘/var/www’</div><div class="line">mkdir: created directory ‘/var/www/html’</div><div class="line">[root@localhost ~]# chown -R apache.apache /var/www/</div><div class="line">[root@localhost ~]# </div><div class="line"></div><div class="line">[root@localhost ~]# mkdir -pv /var/lib/php/session </div><div class="line">mkdir: created directory ‘/var/lib/php/session’</div><div class="line">[root@localhost ~]# chown -R apache.apache /var/lib/php/session </div><div class="line">[root@localhost ~]#</div></pre></td></tr></table></figure></p>
+<p>启动服务</p>
+<pre><code>~]# systemctl start php-fpm
+</code></pre><p>3.<strong>配置httpd</strong></p>
+<p>在2.10主机上安装httpd</p>
+<pre><code>~]# yum install httpd
+</code></pre><p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /etc/httpd/conf/httpd.conf</div><div class="line"></div><div class="line">#</div><div class="line"># ServerName gives the name and port that the server uses to identify itself.</div><div class="line"># This can often be determined automatically, but we recommend you specify</div><div class="line"># it explicitly to prevent problems during startup.</div><div class="line">#</div><div class="line"># If your host doesn&apos;t have a registered DNS name, enter its IP address here.</div><div class="line">#</div><div class="line">ServerName 172.16.2.10:80 #这里改为本机IP，因为httpd在本台主机上</div></pre></td></tr></table></figure></p>
+<p>创建虚拟主机<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# vim /etc/httpd/conf.d/virtual.conf</div><div class="line"></div><div class="line">DirectoryIndex index.php</div><div class="line">&lt;VirtualHost *:80&gt;</div><div class="line">    ServerName 172.16.2.10  #服务器名写httpd的IP</div><div class="line">    DocumentRoot &quot;/var/www/html/&quot;  </div><div class="line">    ProxyRequests Off</div><div class="line">    ProxyPassMatch ^/(.*\.php)$ fcgi://172.16.2.20:9000/var/www/html/$1 #这里写php-fpm主机的IP</div><div class="line">    &lt;Directory &quot;/var/www/html/&quot;&gt;   </div><div class="line">        Options None</div><div class="line">        AllowOverride None</div><div class="line">        Require all granted</div><div class="line">    &lt;/Directory&gt;</div><div class="line">&lt;/VirtualHost&gt;</div></pre></td></tr></table></figure></p>
+<p>在php-fpm主机上创建php测试页并重启服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# cd /var/www/html/</div><div class="line">[root@localhost html]# vim index.php</div><div class="line">&lt;?php </div><div class="line">	phpinfo();</div><div class="line">?&gt;</div><div class="line"></div><div class="line">[root@localhost html]# systemctl restart php-fpm</div></pre></td></tr></table></figure></p>
+<p>浏览器输入httpd的ip：</p>
+<p><img src="http://i1.piimg.com/588144/fc2de2d4f61f7d8a.png" alt="Markdown"></p>
+<p>页面成功显示</p>
+<p>表示httpd与php-fpm之间连接通信正常</p>
+<h2 id="三、配置PhpMyAdmin"><a href="#三、配置PhpMyAdmin" class="headerlink" title="三、配置PhpMyAdmin"></a>三、配置PhpMyAdmin</h2><p>1.在php-fpm和httpd主机上，配置phpmyadmin。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# unzip phpMyAdmin-4.0.10.20-all-languages.zip</div><div class="line"></div><div class="line">[root@localhost ~]# ll</div><div class="line">total 7292</div><div class="line">-rw-------. 1 root root    2642 Jun  6  2017 anaconda-ks.cfg</div><div class="line">drwxr-xr-x  9 root root    4096 Mar 28 21:03 phpMyAdmin-4.0.10.20-all-languages</div><div class="line">-rw-r--r--  1 root root 7457007 Jun  5 22:03 phpMyAdmin-4.0.10.20-all-languages.zip</div><div class="line"></div><div class="line">把解压后的文件改名后放到/var/www/html/目录下</div><div class="line"></div><div class="line">[root@localhost ~]# mv phpMyAdmin-4.0.10.20-all-languages pma</div><div class="line">[root@localhost ~]# ll</div><div class="line">total 7292</div><div class="line">-rw-------. 1 root root    2642 Jun  6  2017 anaconda-ks.cfg</div><div class="line">-rw-r--r--  1 root root 7457007 Jun  5 22:03 phpMyAdmin-4.0.10.20-all-languages.zip</div><div class="line">drwxr-xr-x  9 root root    4096 Mar 28 21:03 pma</div><div class="line">[root@localhost ~]# mv pma /var/www/html/</div><div class="line">[root@localhost ~]#</div></pre></td></tr></table></figure>
+<p>修改pma的属主数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@localhost html]# chown -R apache.apache pma</div><div class="line">[root@localhost html]# ll</div><div class="line">total 8</div><div class="line">-rw-r--r-- 1 root   root     22 Jun  5 23:25 index.php</div><div class="line">drwxr-xr-x 9 apache apache 4096 Mar 28 21:03 pma</div><div class="line">[root@localhost html]#</div></pre></td></tr></table></figure></p>
+<p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@localhost pma]# mv config.sample.inc.php config.inc.php</div><div class="line">[root@localhost pma]# vim config.inc.php </div><div class="line">修改</div><div class="line">cfg[&apos;Servers&apos;][$i][&apos;host&apos;] = &apos;172.16.2.30&apos;;  #这里改为mariadb的IP</div><div class="line">cfg[&apos;blowfish_secret&apos;] = &apos;qweqweqwehh8b7c6d&apos;; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */   #在第一个选项后输入即为随机字符，不能输入&apos;/&apos;</div><div class="line"></div><div class="line"></div><div class="line">[root@localhost pma]# vim libraries/config.default.php</div><div class="line">修改</div><div class="line">cfg[&apos;Servers&apos;][$i][&apos;host&apos;] = &apos;172.16.2.30&apos;;  #这里改为mariadb的IP</div></pre></td></tr></table></figure></p>
+<h2 id="四、在mariadb上创建用户授权；"><a href="#四、在mariadb上创建用户授权；" class="headerlink" title="四、在mariadb上创建用户授权；"></a>四、在mariadb上创建用户授权；</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# mysql</div><div class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</div><div class="line">Your MariaDB connection id is 2</div><div class="line">Server version: 5.5.52-MariaDB MariaDB Server</div><div class="line"></div><div class="line">Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.</div><div class="line"></div><div class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</div><div class="line"></div><div class="line">MariaDB [(none)]&gt;  GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;172.16.2.10&apos; IDENTIFIED BY &apos;111111&apos;;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">MariaDB [(none)]&gt;  GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;172.16.2.20&apos; IDENTIFIED BY &apos;111111&apos;;</div><div class="line">Query OK, 0 rows affected (0.01 sec)</div><div class="line"></div><div class="line">MariaDB [(none)]&gt;  GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;172.16.2.30&apos; IDENTIFIED BY &apos;111111&apos;;</div><div class="line">Query OK, 0 rows affected (0.01 sec)</div><div class="line"></div><div class="line">MariaDB [(none)]&gt; exit</div><div class="line">Bye</div><div class="line">[root@localhost ~]#</div></pre></td></tr></table></figure>
+<h2 id="五、重启所有主机服务并测试；"><a href="#五、重启所有主机服务并测试；" class="headerlink" title="五、重启所有主机服务并测试；"></a>五、重启所有主机服务并测试；</h2><p>httpd主机</p>
+<pre><code>[root@localhost ~]# systemctl restart httpd
+[root@localhost ~]# 
+</code></pre><p>php-fpm主机</p>
+<pre><code>[root@localhost ~]# systemctl restart php-fpm
+[root@localhost ~]#
+</code></pre><p>mariadb主机</p>
+<pre><code>[root@localhost ~]# systemctl restart mariadb
+[root@localhost ~]# 
+</code></pre><p>打开网页输入172.16.2.10/pma/index.php</p>
+<p><img src="http://i4.buimg.com/588144/02e862318ec3a7d6.png" alt="Markdown"><br><img src="http://i4.buimg.com/588144/d69cd4bd37214237.png" alt="Markdown"></p>
+<p>成功。</p>
 
       
     </div>
@@ -516,9 +528,13 @@ If -e is in effect, the following sequences are rec-ognized:
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/实验/" rel="tag"># 实验</a>
           
-            <a href="/tags/Linux基础命令/" rel="tag"># Linux基础命令</a>
+            <a href="/tags/httpd/" rel="tag"># httpd</a>
+          
+            <a href="/tags/mariadb/" rel="tag"># mariadb</a>
+          
+            <a href="/tags/php/" rel="tag"># php</a>
           
         </div>
       
@@ -531,8 +547,8 @@ If -e is in effect, the following sequences are rec-ognized:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/24/Linux/" rel="next" title="Linux 基础">
-                <i class="fa fa-chevron-left"></i> Linux 基础
+              <a href="/2017/06/01/dnstest/" rel="next" title="配置DNS解析练习">
+                <i class="fa fa-chevron-left"></i> 配置DNS解析练习
               </a>
             
           </div>
@@ -540,10 +556,6 @@ If -e is in effect, the following sequences are rec-ognized:
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/25/date/" rel="prev" title="date 命令">
-                date 命令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -744,7 +756,7 @@ If -e is in effect, the following sequences are rec-ognized:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ECHO"><span class="nav-number">1.</span> <span class="nav-text">ECHO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAME-名称"><span class="nav-number">1.1.</span> <span class="nav-text">NAME    名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SYNOPSIS-概要"><span class="nav-number">1.2.</span> <span class="nav-text">SYNOPSIS    概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DESCRIPTION-描述"><span class="nav-number">1.3.</span> <span class="nav-text">DESCRIPTION     描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.4.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置LAMP–fastcgi模式"><span class="nav-number">1.</span> <span class="nav-text">配置LAMP–fastcgi模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、结构图"><span class="nav-number">1.1.</span> <span class="nav-text">一、结构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、配置"><span class="nav-number">1.2.</span> <span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、配置PhpMyAdmin"><span class="nav-number">1.3.</span> <span class="nav-text">三、配置PhpMyAdmin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、在mariadb上创建用户授权；"><span class="nav-number">1.4.</span> <span class="nav-text">四、在mariadb上创建用户授权；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、重启所有主机服务并测试；"><span class="nav-number">1.5.</span> <span class="nav-text">五、重启所有主机服务并测试；</span></a></li></ol></li></ol></div>
             
 
           </div>
