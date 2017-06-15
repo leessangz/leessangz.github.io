@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,转载,正则表达式," />
+  <meta name="keywords" content="Linux,iptables," />
 
 
 
@@ -103,31 +103,22 @@
 
 
 
-<meta name="description" content="grep命令及正则表达式以下转自微信公众号：magedu-Linux
-grep基本概念
-grep：global search regular expression and print out the line
-作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。
-模式：由正则表达式字符及文本字符所编写的过滤条件
-正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而">
+<meta name="description" content="iptables1.介绍
+iptables是与Linux最新3.5版本的内核集成的IP信息包过滤系统。如果Linux系统连接到因特网或LAN、服务器连接到因特网或LAN的代理服务器，则该系统有利于在Linux系统上更好的控制IP信息包过滤和防火墙设置。
+防火墙在做信息包过滤决定时，有一套遵循和组成的规则，这些规则存储在专用的信息包过滤表中，而这些表集成在Linux内核中。在信息包过滤表中，规则被分">
 <meta property="og:type" content="article">
-<meta property="og:title" content="grep和正则表达式">
-<meta property="og:url" content="http://yoursite.com/2017/04/06/grep-and-zhengze/index.html">
+<meta property="og:title" content="iptables">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/iptables/index.html">
 <meta property="og:site_name" content="LeeSsangZ">
-<meta property="og:description" content="grep命令及正则表达式以下转自微信公众号：magedu-Linux
-grep基本概念
-grep：global search regular expression and print out the line
-作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。
-模式：由正则表达式字符及文本字符所编写的过滤条件
-正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而">
-<meta property="og:updated_time" content="2017-04-08T04:23:00.493Z">
+<meta property="og:description" content="iptables1.介绍
+iptables是与Linux最新3.5版本的内核集成的IP信息包过滤系统。如果Linux系统连接到因特网或LAN、服务器连接到因特网或LAN的代理服务器，则该系统有利于在Linux系统上更好的控制IP信息包过滤和防火墙设置。
+防火墙在做信息包过滤决定时，有一套遵循和组成的规则，这些规则存储在专用的信息包过滤表中，而这些表集成在Linux内核中。在信息包过滤表中，规则被分">
+<meta property="og:updated_time" content="2017-06-15T06:42:32.105Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="grep和正则表达式">
-<meta name="twitter:description" content="grep命令及正则表达式以下转自微信公众号：magedu-Linux
-grep基本概念
-grep：global search regular expression and print out the line
-作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。
-模式：由正则表达式字符及文本字符所编写的过滤条件
-正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而">
+<meta name="twitter:title" content="iptables">
+<meta name="twitter:description" content="iptables1.介绍
+iptables是与Linux最新3.5版本的内核集成的IP信息包过滤系统。如果Linux系统连接到因特网或LAN、服务器连接到因特网或LAN的代理服务器，则该系统有利于在Linux系统上更好的控制IP信息包过滤和防火墙设置。
+防火墙在做信息包过滤决定时，有一套遵循和组成的规则，这些规则存储在专用的信息包过滤表中，而这些表集成在Linux内核中。在信息包过滤表中，规则被分">
 
 
 
@@ -155,13 +146,13 @@ grep：global search regular expression and print out the line
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/06/grep-and-zhengze/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/15/iptables/"/>
 
 
 
 
 
-  <title> grep和正则表达式 | LeeSsangZ </title>
+  <title> iptables | LeeSsangZ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -334,7 +325,7 @@ grep：global search regular expression and print out the line
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/06/grep-and-zhengze/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/iptables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LeeSsangZ">
@@ -355,7 +346,7 @@ grep：global search regular expression and print out the line
             
             
               
-                grep和正则表达式
+                iptables
               
             
           </h1>
@@ -370,8 +361,8 @@ grep：global search regular expression and print out the line
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-06T13:23:46+08:00">
-                2017-04-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T14:35:35+08:00">
+                2017-06-15
               </time>
             
 
@@ -393,8 +384,8 @@ grep：global search regular expression and print out the line
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/正则表达式/" itemprop="url" rel="index">
-                    <span itemprop="name">正则表达式</span>
+                  <a href="/categories/iptables/" itemprop="url" rel="index">
+                    <span itemprop="name">iptables</span>
                   </a>
                 </span>
 
@@ -411,7 +402,7 @@ grep：global search regular expression and print out the line
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/04/06/grep-and-zhengze/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/06/15/iptables/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -438,93 +429,294 @@ grep：global search regular expression and print out the line
       
 
       
-        <h1 id="grep命令及正则表达式"><a href="#grep命令及正则表达式" class="headerlink" title="grep命令及正则表达式"></a>grep命令及正则表达式</h1><p>以下转自微信公众号：magedu-Linux</p>
-<h1 id="grep基本概念"><a href="#grep基本概念" class="headerlink" title="grep基本概念"></a>grep基本概念</h1><blockquote>
-<p>grep：global search regular expression and print out the line</p>
-<p>作用：文本过滤器，用于文本搜索，用指定“模式”逐行匹配。</p>
-<p>模式：由正则表达式字符及文本字符所编写的过滤条件</p>
-<p>正则表达式：由一类特殊字符和文本字符所编写的模式，其有些字符不表示字符字面意义，而表示控制或通配的功能</p>
+        <h1 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><blockquote>
+<p>iptables是与Linux最新3.5版本的内核集成的IP信息包过滤系统。如果Linux系统连接到因特网或LAN、服务器连接到因特网或LAN的代理服务器，则该系统有利于在Linux系统上更好的控制IP信息包过滤和防火墙设置。</p>
+<p>防火墙在做信息包过滤决定时，有一套遵循和组成的规则，这些规则存储在专用的信息包过滤表中，而这些表集成在Linux内核中。在信息包过滤表中，规则被分组放在链中（chain）。而netfilter/iptables IP信息包 过滤系统是一款功能强大的工具，可对规则进行添加、编辑、和移除的操作。</p>
+<p>netfilter组件也称为内核空间（Kernelspace），是内核的一部分，由一些信息包过滤表组成，这些表包含内核用来控制信息包过滤处理的规则表。</p>
+<p>iptables组件是一种工具，也称为用户空间（userspace），它使插入、修改、和除去信息包过滤表中的规则变得容易。</p>
 </blockquote>
 <a id="more"></a>
-<blockquote>
-<p>比较记忆：</p>
-<p>基本正则表达式：BRE</p>
-<p>扩展正则表达式：ERE</p>
-</blockquote>
-<pre><code>grep -E = egrep
-</code></pre><h2 id="grep语法"><a href="#grep语法" class="headerlink" title="grep语法"></a>grep语法</h2><blockquote>
-<p>grep [OPTIONS] PATTERN [FILE…]</p>
-</blockquote>
-<p>OPTIONS：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">--color=auto：对匹配到的文本着色后高亮显示；</div><div class="line"></div><div class="line">-i：ignorecase，忽略字符的大小写；</div><div class="line"></div><div class="line">-o：仅显示匹配到的字符串本身；</div><div class="line"></div><div class="line">-v, --invert-match：显示不能被模式匹配到的行；</div><div class="line"></div><div class="line">-E：支持使用扩展的正则表达式元字符；</div><div class="line"></div><div class="line">-q, --quiet, --silent：静默模式，即不输出任何信息；</div><div class="line"></div><div class="line">-A #：after, 后#行</div><div class="line"></div><div class="line">-B #：before，前#行</div><div class="line">            </div><div class="line">-C #：context，前后各#行</div></pre></td></tr></table></figure></p>
-<h1 id="基本正则表达式原字符"><a href="#基本正则表达式原字符" class="headerlink" title="基本正则表达式原字符"></a>基本正则表达式原字符</h1><p>字符匹配：</p>
-<pre><code>. ：匹配任意单个字符；
-    []：匹配指定范围内的任意单个字符；
-    [^]：匹配指定范围外的任意单个字符；
-    [:digit:]、[:lower:]、[:upper:]、[:alpha:]、[:alnum:]、[:punct:]、[:space:]
-</code></pre><p>匹配次数：</p>
-<pre><code>  用在要指定其出现的次数的字符的后面，用于限制其前面字符出现的次数；默认工作于贪婪模式；
+<h2 id="2-历史版本"><a href="#2-历史版本" class="headerlink" title="2.历史版本"></a>2.历史版本</h2><pre><code>与Linux内核各版本集成的防火墙历史版本：
+1.     2.0.X内核：ipfwadm
+2.     2.2.X内核：ipchains
+3.     2.4.X内核：iptables
+</code></pre><h2 id="3-内容"><a href="#3-内容" class="headerlink" title="3.内容"></a>3.内容</h2><p>Iptables采用“表”和“链”的分层结构。在REHL4中是三张表五个链。现在REHL5成了四张表五个链了，不过多出来的那个表用的也不太多，所以基本还是和以前一样。</p>
+<p>iptables在内核中一个定义了五个位置：</p>
+<pre><code>1.内核空间中：从一个网络接口进来，到另一个网络接口出去。
+2.数据包从内核流入用户空间。
+3.数据包从用户空间流出
+4.进入/离开本机的外网接口
+5.进入/离开本机的内网接口
+</code></pre><h3 id="链："><a href="#链：" class="headerlink" title="链："></a><strong>链：</strong></h3><p>这五个位置也被称为五个钩子函数（hook functions），也叫五个规则链：</p>
+<pre><code>1.PREROUTING（路由前）
+2.INPUT（数据包流入）
+3.FORWARD（路由转发）
+4.OUTPUT（数据包流出）
+5.POSTROUTING（路由后）
+</code></pre><h3 id="表："><a href="#表：" class="headerlink" title="表："></a><strong>表：</strong></h3><p>表提供特定的功能，iptables内置了4个表，即filter表、nat表、mangle表和raw表，分别用于实现包过滤，网络地址转换、包重构(修改)和数据跟踪处理。</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a><strong>功能</strong></h3><pre><code>表&lt;--&gt;链
+1.Filter表--&gt;三个链：INPUT、FORWARD、OUTPUT
+作用：过滤数据包  内核模块：iptables_filter.
 
-*：匹配其前面的字符任意次；0,1,多次；
-        例如：grep &quot;x\+y&quot;
-                abxy
-                aby
-                xxxxxy
-                yab
-.*：匹配任意长度的任意字符
-\?：匹配其前面的字符0次或1次；即其前面的字符是可有可无的；
-\+：匹配其前面的字符1次或多次；即其面的字符要出现至少1次；
-\{m\}：匹配其前面的字符m次；
-\{m,n\}：匹配其前面的字符至少m次，至多n次；
-\{0,n\}：至多n次
-\{m,\}：至少m次
-</code></pre><p>位置锚定：</p>
-<p>^：行首锚定；用于模式的最左侧；</p>
-<p>$：行尾锚定；用于模式的最右侧；</p>
-<p>^PATTERN$：用于PATTERN来匹配整行；</p>
-<p>^$：空白行；</p>
-<p>^[[:space:]]*$：空行或包含空白字符的行；</p>
-<p>\&lt; 或 \b：词首锚定，用于单词模式的左侧；</p>
-<p>> 或 \b：词尾锚定，用于单词模式的右侧；</p>
-<p>\<pattern\>：匹配完整单词；</pattern\></p>
-<p>单词：非特殊字符组成的连续字符（字符串）都称为单词；</p>
-<p>分组及引用</p>
-<p>()：将一个或多个字符捆绑在一起，当作一个整体进行处理；</p>
-<pre><code>\(xy\)*ab
-</code></pre><p>Note：分组括号中的模式匹配 到的内容会被正则表达式引擎自动记录于内部的变量中，这些变量为：</p>
-<p>\1：模式从左侧起，第一个左括号以及与之匹配的右括号之间的模式所匹配到的字符；</p>
-<p>\2：模式从左侧起，第二个左括号以及与之匹配的右括号之间的模式所匹配到的字符；</p>
-<p>\3<br>      …</p>
-<pre><code>He loves his lover.
-He likes his lover.
-She likes her liker.
-She loves her liker.
+2.Nat表--&gt;三个链：PREROUTING、POSTROUTING、OUTPUT
+作用：用于网络地址转换（IP、端口） 内核模块：iptable_nat
 
-~]# grep  &quot;\(l..e\).*\1&quot;  lovers.txt
-</code></pre><p>后向引用：引用前面的分组括号中的模式所匹配到的字符；</p>
-<h1 id="扩展正则表达式的元字符"><a href="#扩展正则表达式的元字符" class="headerlink" title="扩展正则表达式的元字符"></a>扩展正则表达式的元字符</h1><p>字符匹配：</p>
-<pre><code>.：任意单个字符
-[]：指定范围内的任意单个字符
-[^]：指定范围外的任意单个字符
-次数匹配：
-*：任意次，0,1或多次；
-?：0次或1次，其前的字符是可有可无的；
-+：其前字符至少1次；
-{m}：其前的字符m次；
-{m,n}：至少m次，至多n次; 
-        {0,n}
-        {m,}
-</code></pre><p>位置锚定：</p>
-<pre><code>^：行首锚定；
-$：行尾锚定；
-\&lt;, \b：词首锚定；
-\&gt;, \b：词尾锚定；
-</code></pre><p>分组及引用：</p>
-<pre><code>()：分组；括号内的模式匹配到的字符会被记录于正则表达式引擎的内部变量中；
-后向引用：\1, \2, ...
+3.Mangle表--&gt;五个链：PREROUTING、POSTROUTING、INPUT、OUTPUT、FORWARD
+作用：修改数据包的服务类型、TTL、并且可以配置路由实现QOS内核模块：iptable_mangle
 
-    或：
-</code></pre><p>a|b：a或者b；<br>C|cat：C或cat<br>(c|C)at：cat或Cat</p>
+4.Raw表--&gt;两个链：OUTPUT、PREROUTING
+作用：决定数据包是否被状态跟踪机制处理  内核模块：iptable_raw
 
+优先级（由高而低）：raw -&gt; mangle -&gt; nat -&gt; filter
+</code></pre><h3 id="iptables规则的组成部分："><a href="#iptables规则的组成部分：" class="headerlink" title="iptables规则的组成部分："></a><strong>iptables规则的组成部分：</strong></h3><h3 id="匹配条件："><a href="#匹配条件：" class="headerlink" title="匹配条件："></a><strong>匹配条件：</strong></h3><pre><code>    网络层首部：SourceIP, DestinationIP, ...
+    传输层首部：SourtPort, DestinationPort, TCP Flags(SYN,ACK,FIN,URG,RST,PSH), ...
+    扩展模块引入的辅助检查机制：
+    跳转目标：-j target 
+        内建的处理机制：ACCEPT, DROP, REJECT, SNAT, DNAT, MASQUERADE, MARK, LOG, ...
+        用户自定义链：
+
+添加规则时需要考量的因素：
+    (1) 实现的功能：用于判定将规则添加至哪个表；
+    (2) 报文的流经位置：用于判断将规则添加至哪个链；
+    (3) 报文的流向：判定规则中何为”源“，何为”目标“；
+    (4) 匹配条件：用于编写正确的匹配规则；
+        (a) 专用于某种应用的同类规则，匹配范围小的放前面；
+        (b) 专用于某些应用的不同类规则，匹配到的可能性较多的放前面；同一类别的规则可使用自定义链单独存放；
+        (c) 用于通用目的的规则放前面；                
+
+filter表：过滤，”防火墙“意义的核心所在；
+    INPUT，FORWARD，OUTPUT
+</code></pre><h3 id="语法结构"><a href="#语法结构" class="headerlink" title="语法结构"></a><strong>语法结构</strong></h3><pre><code>iptables [-t 表名] 命令选项 ［链名］ ［条件匹配］ ［-j 目标动作或跳转］
+说明：表名、链名用于指定 iptables命令所操作的表和链，命令选项用于指定管理iptables规则的方式（比如：插入、增加、删除、查看等；
+条件匹配用于指定对符合什么样条件的数据包进行处理；目标动作或跳转用于指定数据包的处理方式（比如允许通过、拒绝、丢弃、跳转（Jump）给其它链处理。
+</code></pre><p>iptables [-t tables] COMMAND chain [-m matchname [per-match-options]] -j targetname [per-target-options]</p>
+<pre><code> [-t tables] 指明是那个表
+     -t table：
+         raw，mangle，nat，[filter]
+COMMAND 指明规则处理命令，使用大写字母，单个表示。
+    链管理：
+         -N new 自定义一条新的规则链
+         -X 删除自定义链
+         -p 设置默认策略；对filter表中的链而言，其默认策略：
+             ACCEPT:接受
+             DROP:丢弃
+             REJECT:拒绝
+         -E 重命名自定义链；应用技术不为0的自定义链，不能够被重命名，也不能被删除
+    规则管理:
+        -I 插入一条规则
+         -A 追加一条规则
+         -D 删除一条规则
+             指明规则序号
+             指明规则本身
+         -R 替换指定链上的指定规则
+         -F 清空指定的规则链
+         -Z 置零
+             iptables的每条规则都有两个计数器
+                     匹配到的报文个数
+                     匹配到的所有报文的大小之和
+     查看：
+         -L：列出指定链上的所有规则
+             -n 以数字格式显示地址和端口号
+             -v 详细信息
+                 -vv -vvv
+             -x 显示计数器结果的精确值
+             --line-numbers 显示规则序号
+         -S 显示指定链上的所有规则
+chain  添加到哪个链
+[-m matchname [per-match-options]]  扩展匹配条件
+    matchname匹配条件
+[per-target-options]   扩展处理机制
+    target跳转目标
+</code></pre><p>小写字母，做匹配条件定义</p>
+<p>大写字母，做处理动作定义</p>
+<p><strong>格式：</strong></p>
+<pre><code> iptables [-t table] {-A|-C|-D} chain rule-specification
+
+iptables [-t table] -I chain [rulenum] rule-specification
+
+iptables [-t table] -R chain rulenum rule-specification
+
+iptables [-t table] -D chain rulenum
+
+iptables [-t table] -S [chain [rulenum]]
+
+iptables [-t table] {-F|-L|-Z} [chain [rulenum]] [options...]
+
+iptables [-t table] -N chain
+
+iptables [-t table] -X [chain]
+
+iptables [-t table] -P chain target
+
+iptables [-t table] -E old-chain-name new-chain-name
+
+    rule-specification = [matches...] [target]
+
+    match = -m matchname [per-match-options]
+
+    target = -j targetname [per-target-options]            
+</code></pre><h3 id="详细命令管理选项"><a href="#详细命令管理选项" class="headerlink" title="详细命令管理选项"></a><strong>详细命令管理选项</strong></h3><pre><code>-A 在指定链的末尾添加（append）一条新的规则
+-D  删除（delete）指定链中的某一条规则，可以按规则序号和内容删除
+-I  在指定链中插入（insert）一条新的规则，默认在第一行添加
+-R  修改、替换（replace）指定链中的某一条规则，可以按规则序号和内容替换
+-L  列出（list）指定链中所有的规则进行查看
+-E  重命名用户定义的链，不改变链本身
+-F  清空（flush）
+-N  新建（new-chain）一条用户自己定义的规则链
+-X  删除指定表中用户自定义的规则链（delete-chain）
+-P  设置指定链的默认策略（policy）
+-Z 将所有表的所有链的字节和数据包计数器清零
+-n  使用数字形式（numeric）显示输出结果
+-v  查看规则表详细信息（verbose）的信息
+-V  查看版本(version)
+-h  获取帮助（help）
+</code></pre><h3 id="匹配条件：-1"><a href="#匹配条件：-1" class="headerlink" title="匹配条件："></a><strong>匹配条件：</strong></h3><pre><code>通用匹配（PARAMETERS）：
+    [!] -s, --source address[/mask][,...]：检查报文的源IP地址是否符合此处指定的范围，或是否等于此处给定的地址；
+    [!] -d, --destination address[/mask][,...]：检查报文的目标IP地址是否符合此处指定的范围，或是否等于此处给定的地址；
+       匹配所有地址写成0.0.0.0
+    [!] -p, --protocol protocol：匹配报文中的协议，可用值tcp, udp,  udplite, icmp,  icmpv6,esp,  ah, sctp, mh 或者  &quot;all&quot;, 亦可以数字格式指明协议；
+     -m, --match match：调用指定的扩展匹配模块来扩展匹配条件检查机制；
+    [!] -i, --in-interface name：限定报文仅能够从指定的接口流入；only for packets entering the INPUT, FORWARD  and  PREROUTING  chains.
+    [!] -o, --out-interface name：限定报文仅能够从指定的接口流出；for packets entering the FORWARD, OUTPUT and POSTROUTING chains.
+扩展匹配（MATCH EXTENSIONS）
+    -m tcp  --sport, --dport
+</code></pre><h3 id="隐式扩展："><a href="#隐式扩展：" class="headerlink" title="隐式扩展："></a><strong>隐式扩展：</strong></h3><pre><code>-p tcp：可直接使用tcp扩展模块的专用选项；
+    [!] --source-port,--sport port[:port]  匹配报文源端口；可以给出多个端口，但只能是连续的端口范围 ；
+    [!] --destination-port,--dport port[:port]   匹配报文目标端口；可以给出多个端口，但只能是连续的端口范围 ；
+    [!] --tcp-flags mask comp  匹配报文中的tcp协议的标志位；Flags are: SYN ACK FIN RST URG PSH ALL NONE；
+        mask：要检查的FLAGS list，以逗号分隔；
+        comp：在mask给定的诸多的FLAGS中，其值必须为1的FLAGS列表，余下的其值必须为0；
+            --tcp-flags SYN,ACK,FIN,RST  SYN
+            --tcp-flags ALL ALL
+            --tcp-flags ALL NONE
+    [!] --syn：    --tcp-flags SYN,ACK,FIN,RST  SYN    
+
+-p udp：可直接使用udp协议扩展模块的专用选项：
+    [!] --source-port,--sport port[:port]
+    [!] --destination-port,--dport port[:port]
+
+[!] --icmp-type {type[/code]|typename}
+    0/0： echo reply
+    8/0：echo request
+</code></pre><h3 id="显式扩展："><a href="#显式扩展：" class="headerlink" title="显式扩展："></a><strong>显式扩展：</strong></h3><pre><code>必须使用-m选项指明要调用的扩展模块的扩展机制；
+
+1、multiport
+
+以离散或连续的 方式定义多端口匹配条件，最多15个；
+
+[!] --source-ports,--sports port[,port|,port:port]...：指定多个源端口；
+[!] --destination-ports,--dports port[,port|,port:port]...：指定多个目标端口；
+
+# iptables -I INPUT  -d 172.16.0.7 -p tcp -m multiport --dports 22,80,139,445,3306 -j ACCEPT
+
+2、iprange
+
+以连续地址块的方式来指明多IP地址匹配条件；
+[!] --src-range from[-to]
+[!] --dst-range from[-to]
+
+# iptables -I INPUT -d 172.16.0.7 -p tcp -m multiport --dports 22,80,139,445,3306 -m iprange --src-range 172.16.0.61-172.16.0.70 -j REJECT
+
+3、time
+
+This  matches  if the packet arrival time/date is within a given range.
+
+ --timestart hh:mm[:ss]
+ --timestop hh:mm[:ss]
+
+ [!] --weekdays day[,day...]
+
+ [!] --monthdays day[,day...]
+
+--datestart YYYY[-MM[-DD[Thh[:mm[:ss]]]]]
+--datestop YYYY[-MM[-DD[Thh[:mm[:ss]]]]]
+
+ --kerneltz：使用内核配置的时区而非默认的UTC；
+
+4、string
+
+This modules matches a given string by using some pattern matching strategy. 
+
+--algo {bm|kmp}
+[!] --string pattern
+[!] --hex-string pattern
+
+--from offset
+--to offset
+
+~]# iptables -I OUTPUT -m string --algo bm --string &quot;gay&quot; -j REJECT
+
+5、connlimit 
+
+Allows  you  to  restrict  the  number  of parallel connections to a server per client IP address (or client address block).
+
+--connlimit-upto n
+--connlimit-above n
+
+~]# iptables -I INPUT -d 172.16.0.7 -p tcp --syn --dport 22 -m connlimit --connlimit-above 2 -j REJECT
+
+6、limit 
+
+This  module  matches  at  a limited rate using a token bucket filter. 
+
+--limit rate[/second|/minute|/hour|/day]
+--limit-burst number
+
+~]# iptables -I OUTPUT -s 172.16.0.7 -p icmp --icmp-type 0 -j ACCEPT
+
+7、state
+
+The &quot;state&quot; extension is a subset of the &quot;conntrack&quot; module.  &quot;state&quot; allows access to the connection tracking state for this packet.
+
+[!] --state state
+    INVALID, ESTABLISHED, NEW, RELATED or UNTRACKED.
+
+    NEW: 新连接请求；
+    ESTABLISHED：已建立的连接；
+    INVALID：无法识别的连接；
+    RELATED：相关联的连接，当前连接是一个新请求，但附属于某个已存在的连接；
+    UNTRACKED：未追踪的连接；
+
+state扩展：
+    内核模块装载：
+        nf_conntrack
+        nf_conntrack_ipv4
+
+        手动装载：
+            nf_conntrack_ftp 
+
+                追踪到的连接：
+                    /proc/net/nf_conntrack
+
+                调整可记录的连接数量最大值：
+                    /proc/sys/net/nf_conntrack_max
+
+                超时时长：
+                    /proc/sys/net/netfilter/*timeout*
+</code></pre><h3 id="处理动作（跳转目标）："><a href="#处理动作（跳转目标）：" class="headerlink" title="处理动作（跳转目标）："></a><strong>处理动作（跳转目标）：</strong></h3><pre><code>-j targetname [per-target-options]
+    简单target：
+        ACCEPT， DROP
+
+    扩展target：
+        REJECT
+            This is used to send back an error packet in response to the matched packet: otherwise it is equivalent to  DROP  so it  is  a  terminating  TARGET,  ending  rule traversal.
+
+            --reject-with type
+                The type given can be icmp-net-unreachable, icmp-host-unreachable, icmp-port-unreachable, icmp-proto-unreach‐ able, icmp-net-prohibited, icmp-host-prohibited, or icmp-admin-prohibited (*), which return  the  appropriate ICMP  error  message (icmp-port-unreachable is the default).
+
+        LOG
+            Turn  on  kernel  logging of matching packets.
+
+            --log-level
+            --log-prefix
+
+    自定义链做为target：
+</code></pre><h3 id="保存和载入规则："><a href="#保存和载入规则：" class="headerlink" title="保存和载入规则："></a><strong>保存和载入规则：</strong></h3><pre><code>保存：iptables-save &gt; /PATH/TO/SOME_RULE_FILE
+重载：iptabls-restore &lt; /PATH/FROM/SOME_RULE_FILE
+    -n, --noflush：不清除原有规则
+    -t, --test：仅分析生成规则集，但不提交
+</code></pre><p>================================================================================</p>
+<embed src="http://www.xiami.com/widget/39024329_1776080300,_600_145_cccccc_dddddd_1/multiPlayer.swf" type="application/x-shockwave-flash" width="600" height="145" wmode="opaque">
       
     </div>
 
@@ -555,9 +747,7 @@ $：行尾锚定；
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/转载/" rel="tag"># 转载</a>
-          
-            <a href="/tags/正则表达式/" rel="tag"># 正则表达式</a>
+            <a href="/tags/iptables/" rel="tag"># iptables</a>
           
         </div>
       
@@ -570,8 +760,8 @@ $：行尾锚定；
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/06/zhengzebiaodashi/" rel="next" title="常用正则表达式集合">
-                <i class="fa fa-chevron-left"></i> 常用正则表达式集合
+              <a href="/2017/06/06/lamp/" rel="next" title="lamp">
+                <i class="fa fa-chevron-left"></i> lamp
               </a>
             
           </div>
@@ -579,10 +769,6 @@ $：行尾锚定；
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/06/linux-COMMAND/" rel="prev" title="linux COMMAND">
-                linux COMMAND <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -941,7 +1127,7 @@ $：行尾锚定；
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grep命令及正则表达式"><span class="nav-number">1.</span> <span class="nav-text">grep命令及正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grep基本概念"><span class="nav-number">2.</span> <span class="nav-text">grep基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#grep语法"><span class="nav-number">2.1.</span> <span class="nav-text">grep语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本正则表达式原字符"><span class="nav-number">3.</span> <span class="nav-text">基本正则表达式原字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展正则表达式的元字符"><span class="nav-number">4.</span> <span class="nav-text">扩展正则表达式的元字符</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iptables"><span class="nav-number">1.</span> <span class="nav-text">iptables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1.介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-历史版本"><span class="nav-number">1.2.</span> <span class="nav-text">2.历史版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-内容"><span class="nav-number">1.3.</span> <span class="nav-text">3.内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链："><span class="nav-number">1.3.1.</span> <span class="nav-text">链：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表："><span class="nav-number">1.3.2.</span> <span class="nav-text">表：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能"><span class="nav-number">1.3.3.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iptables规则的组成部分："><span class="nav-number">1.3.4.</span> <span class="nav-text">iptables规则的组成部分：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配条件："><span class="nav-number">1.3.5.</span> <span class="nav-text">匹配条件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法结构"><span class="nav-number">1.3.6.</span> <span class="nav-text">语法结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详细命令管理选项"><span class="nav-number">1.3.7.</span> <span class="nav-text">详细命令管理选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配条件：-1"><span class="nav-number">1.3.8.</span> <span class="nav-text">匹配条件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式扩展："><span class="nav-number">1.3.9.</span> <span class="nav-text">隐式扩展：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显式扩展："><span class="nav-number">1.3.10.</span> <span class="nav-text">显式扩展：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理动作（跳转目标）："><span class="nav-number">1.3.11.</span> <span class="nav-text">处理动作（跳转目标）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存和载入规则："><span class="nav-number">1.3.12.</span> <span class="nav-text">保存和载入规则：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
