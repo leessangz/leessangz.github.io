@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,keepalived," />
+  <meta name="keywords" content="Linux,nginx," />
 
 
 
@@ -103,55 +103,16 @@
 
 
 
-<meta name="description" content="keepalived实例–双主环境：RS：real_server 以下全部简称
-两台RS配置IP
-172.16.2.10/16
-172.16.2.20/16
-安装httpd，每台上面做一个不同的测试页，以便区分。实际中主备必须一样。
-
-
-
-调度器：director
-两台调度器
-172.16.2.30/16
-172.16.2.40/16
-安装keepalived
-安装ipvsadm（这里配置用不到，">
+<meta name="description" content="Nginx配置指令（二）客户端请求的相关配置：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="keepalived实例--双主">
-<meta property="og:url" content="http://yoursite.com/2017/06/25/keepalivedtest/index.html">
+<meta property="og:title" content="Nginx配置指令（二）">
+<meta property="og:url" content="http://yoursite.com/2017/06/18/nginx3/index.html">
 <meta property="og:site_name" content="LeeSsangZ">
-<meta property="og:description" content="keepalived实例–双主环境：RS：real_server 以下全部简称
-两台RS配置IP
-172.16.2.10/16
-172.16.2.20/16
-安装httpd，每台上面做一个不同的测试页，以便区分。实际中主备必须一样。
-
-
-
-调度器：director
-两台调度器
-172.16.2.30/16
-172.16.2.40/16
-安装keepalived
-安装ipvsadm（这里配置用不到，">
-<meta property="og:updated_time" content="2017-06-25T01:58:46.306Z">
+<meta property="og:description" content="Nginx配置指令（二）客户端请求的相关配置：">
+<meta property="og:updated_time" content="2017-06-25T01:58:40.855Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="keepalived实例--双主">
-<meta name="twitter:description" content="keepalived实例–双主环境：RS：real_server 以下全部简称
-两台RS配置IP
-172.16.2.10/16
-172.16.2.20/16
-安装httpd，每台上面做一个不同的测试页，以便区分。实际中主备必须一样。
-
-
-
-调度器：director
-两台调度器
-172.16.2.30/16
-172.16.2.40/16
-安装keepalived
-安装ipvsadm（这里配置用不到，">
+<meta name="twitter:title" content="Nginx配置指令（二）">
+<meta name="twitter:description" content="Nginx配置指令（二）客户端请求的相关配置：">
 
 
 
@@ -179,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/25/keepalivedtest/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/18/nginx3/"/>
 
 
 
 
 
-  <title> keepalived实例--双主 | LeeSsangZ </title>
+  <title> Nginx配置指令（二） | LeeSsangZ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -358,7 +319,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/keepalivedtest/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/18/nginx3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LeeSsangZ">
@@ -379,7 +340,7 @@
             
             
               
-                keepalived实例--双主
+                Nginx配置指令（二）
               
             
           </h1>
@@ -394,8 +355,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T09:42:20+08:00">
-                2017-06-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-18T09:40:45+08:00">
+                2017-06-18
               </time>
             
 
@@ -417,8 +378,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/keepalived/" itemprop="url" rel="index">
-                    <span itemprop="name">keepalived</span>
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -435,7 +396,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/06/25/keepalivedtest/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/06/18/nginx3/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -462,53 +423,47 @@
       
 
       
-        <h1 id="keepalived实例–双主"><a href="#keepalived实例–双主" class="headerlink" title="keepalived实例–双主"></a>keepalived实例–双主</h1><h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><pre><code>RS：real_server 以下全部简称
-两台RS配置IP
-172.16.2.10/16
-172.16.2.20/16
-安装httpd，每台上面做一个不同的测试页，以便区分。实际中主备必须一样。
-
-
-
-调度器：director
-两台调度器
-172.16.2.30/16
-172.16.2.40/16
-安装keepalived
-安装ipvsadm（这里配置用不到，只做测试用）
-
-vip：virtual ip 客户端发送请求的IP
-vip组
-172.16.2.88/16
-172.16.2.99/16
-</code></pre><p><strong>以上主机全部同步时间</strong></p>
-<a id="more"></a>
-<h2 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h2><h3 id="RS配置"><a href="#RS配置" class="headerlink" title="RS配置"></a>RS配置</h3><p>两台RS使用脚本配置回环网卡IP(vip)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">vip=&apos;172.16.2.99&apos;   #dr模式下的必须操作，vip是什么，变量内vip就写什么。这里配置成88和99.</div><div class="line">netmask=&apos;255.255.255.255&apos;</div><div class="line">iface=&apos;lo:0&apos;        #网卡别名。依次排序，不能重复</div><div class="line"></div><div class="line">case $1 in</div><div class="line">start)</div><div class="line">	echo 1 &gt; /proc/sys/net/ipv4/conf/all/arp_ignore</div><div class="line">	echo 1 &gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</div><div class="line">	echo 2 &gt; /proc/sys/net/ipv4/conf/all/arp_announce</div><div class="line">	echo 2 &gt; /proc/sys/net/ipv4/conf/lo/arp_announce</div><div class="line"></div><div class="line">	ifconfig $iface $vip netmask $netmask broadcast $vip up</div><div class="line">	route add -host $vip dev $iface</div><div class="line">	;;</div><div class="line">stop)</div><div class="line">	ifconfig $iface down</div><div class="line"></div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/all/arp_ignore</div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/all/arp_announce</div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/lo/arp_announce</div><div class="line">	;;</div><div class="line">*)</div><div class="line">	echo &quot;Usage : $(basename $0) start|stop&quot;</div><div class="line">	exit 1</div><div class="line">	;;</div><div class="line">esac</div></pre></td></tr></table></figure>
-<p>两台RS安装httpd</p>
-<pre><code>安装
-yum install httpd
-提供测试页
-echo RS1 &gt; /var/www/html/index.html
-</code></pre><p>RS2 同上</p>
-<p>完成后启动服务，在调度器主机上能访问即可。</p>
-<h3 id="调度器配置"><a href="#调度器配置" class="headerlink" title="调度器配置"></a>调度器配置</h3><p>安装好keepalived、ipvsadm后开始配置</p>
-<h4 id="配置keepalived"><a href="#配置keepalived" class="headerlink" title="配置keepalived"></a>配置keepalived</h4><p>修改配置文件。添加vrrp和virtual_server,配置如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line">! Configuration File for keepalived</div><div class="line"></div><div class="line">global_defs &#123;</div><div class="line">   notification_email &#123;</div><div class="line">        root@localhost</div><div class="line">   &#125;</div><div class="line">   notification_email_from keepalived@localhost</div><div class="line">   smtp_server 127.0.0.1</div><div class="line">   smtp_connect_timeout 30</div><div class="line">   router_id node1</div><div class="line">   vrrp_mcast_group4 224.1.101.33</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance VI_1 &#123;</div><div class="line">    state MASTER</div><div class="line">    priority 100</div><div class="line">    interface eno16777736</div><div class="line">    virtual_router_id 33</div><div class="line">    advert_int 1</div><div class="line">    authentication &#123;</div><div class="line">        auth_type PASS</div><div class="line">        auth_pass RT3SKUI2</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        172.16.2.99/16 dev eno16777736 label eno16777736:0</div><div class="line">    &#125;</div><div class="line">#    notify_master &quot;/etc/keepalived/notify.sh master&quot;</div><div class="line">#    notify_backup &quot;/etc/keepalived/notify.sh backup&quot;</div><div class="line">#    notify_fault &quot;/etc/keepalived/notify.sh fault&quot;</div><div class="line">&#125;</div><div class="line">virtual_server 172.16.2.99 80 &#123;</div><div class="line">    delay_loop 1</div><div class="line">    lb_algo wrr</div><div class="line">    lb_kind DR</div><div class="line">    protocol TCP</div><div class="line">    sorry_server 127.0.0.1 80</div><div class="line"></div><div class="line">    real_server 172.16.2.10 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    real_server 172.16.2.20 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance VI_2 &#123;</div><div class="line">    state BACKUP</div><div class="line">    priority 95</div><div class="line">    interface eno16777736</div><div class="line">    virtual_router_id 34</div><div class="line">    advert_int 1</div><div class="line">    authentication &#123;</div><div class="line">        auth_type PASS</div><div class="line">        auth_pass OT4SKOI2</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        172.16.2.88/16 dev eno16777736 label eno16777736:1</div><div class="line">    &#125;</div><div class="line">#    notify_master &quot;/etc/keepalived/notify.sh master&quot;</div><div class="line">#    notify_backup &quot;/etc/keepalived/notify.sh backup&quot;</div><div class="line">#    notify_fault &quot;/etc/keepalived/notify.sh fault&quot;</div><div class="line">&#125;</div><div class="line">virtual_server 172.16.2.88 80 &#123;</div><div class="line">    delay_loop 1</div><div class="line">    lb_algo wrr</div><div class="line">    lb_kind DR</div><div class="line">    protocol TCP</div><div class="line">    sorry_server 127.0.0.1 80</div><div class="line"></div><div class="line">    real_server 172.16.2.10 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    real_server 172.16.2.20 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>附上代码中注释的邮件提醒服务脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">contact=&apos;root@localhost&apos;</div><div class="line"></div><div class="line">notify() &#123;</div><div class="line">	mailsubject=&quot;$(hostname) to be $1, vip floating&quot;</div><div class="line">	mailbody=&quot;$(date +&apos;%F %T&apos;): vrrp transition, $(hostname) changed to be $1&quot;</div><div class="line">	echo &quot;$mailbody&quot; | mail -s &quot;$mailsubject&quot; $contact</div><div class="line">&#125;</div><div class="line"></div><div class="line">case $1 in</div><div class="line">master)</div><div class="line">	notify master</div><div class="line">	;;</div><div class="line">backup)</div><div class="line">	notify backup</div><div class="line">	;;</div><div class="line">fault)</div><div class="line">	notify fault</div><div class="line">	;;</div><div class="line">*)</div><div class="line">	echo &quot;Usage: $(basename $0) &#123;master|backup|fault&#125;&quot;</div><div class="line">	exit 1</div><div class="line">	;;</div><div class="line">esac</div></pre></td></tr></table></figure>
-<p>启动keepalived</p>
-<h4 id="检查成功与否："><a href="#检查成功与否：" class="headerlink" title="检查成功与否："></a>检查成功与否：</h4><pre><code>ifconfig查IP
-    确保在主节点上可以看到设置的网卡别名，以及IP
-
-ipvsadm -ln 查规则
-    确保后端两台RS已经被加入到集群里。
-    注意：这里的规则不是使用ipvsadm添加。是keepalived根据配置文件从内核中直接生成的。
-
-systemctl status keepalived 查看keepalived的状态
-    可以看到keepalived的详细状态信息。
-</code></pre><p>确保以上三项全部没问题以后再使用一台客户端对vip进行访问就可以了。</p>
-<p>还可以进行测试。停掉后端一台RS的http服务。查看访问结果。</p>
+        <h1 id="Nginx配置指令（二）"><a href="#Nginx配置指令（二）" class="headerlink" title="Nginx配置指令（二）"></a>Nginx配置指令（二）</h1><h2 id="客户端请求的相关配置："><a href="#客户端请求的相关配置：" class="headerlink" title="客户端请求的相关配置："></a>客户端请求的相关配置：</h2><a id="more"></a>
+<p><strong>1. keepalive_timeout</strong></p>
+<p>设定保持连接的超时时长，0表示禁止长连接；默认为75s；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Syntax: 	keepalive_timeout timeout [header_timeout];</div><div class="line">Default: 	keepalive_timeout 75s;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">The first parameter sets a timeout during which a keep-alive client connection will </div><div class="line">stay open on the server side. </div><div class="line">The zero value disables keep-alive client connections. The optional second parameter sets</div><div class="line">a value in the “Keep-Alive: timeout=time” response header field. Two parameters may differ.</div><div class="line"></div><div class="line">The “Keep-Alive: timeout=time” header field is recognized by Mozilla and Konqueror. </div><div class="line">MSIE closes keep-alive connections by itself in about 60 seconds.</div></pre></td></tr></table></figure></p>
+<p><strong>2. keepalive_requests</strong></p>
+<p>在一次长连接上所允许请求的资源的最大数量，默认为100;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Syntax: 	keepalive_requests number;</div><div class="line">Default: 	keepalive_requests 100;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">This directive appeared in version 0.8.0.</div><div class="line"></div><div class="line">Sets the maximum number of requests that can be served through one keep-alive connection.</div><div class="line">After the maximum number of requests are made, the connection is closed.</div></pre></td></tr></table></figure></p>
+<p><strong>3. keepalive_disable</strong></p>
+<p>对哪种浏览器禁用长连接；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Syntax: 	keepalive_disable none | browser ...;</div><div class="line">Default: 	</div><div class="line"></div><div class="line">keepalive_disable msie6;</div><div class="line"></div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Disables keep-alive connections with misbehaving browsers. The browser parameters specify which browsers will be affected. </div><div class="line">The value msie6 disables keep-alive connections with old versions of MSIE, once a POST request is received. </div><div class="line">The value safari disables keep-alive connections with Safari and Safari-like browsers on macOS and macOS-like operating systems. </div><div class="line">The value none enables keep-alive connections with all browsers.</div></pre></td></tr></table></figure></p>
+<p><strong>4. send_timeout</strong></p>
+<p>向客户端发送响应报文的超时时长，此处，是指两次写操作之间的间隔时长；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Syntax: 	send_timeout time;</div><div class="line">Default: 	send_timeout 60s;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets a timeout for transmitting a response to the client. </div><div class="line">The timeout is set only between two successive write operations, </div><div class="line">not for the transmission of the whole response. </div><div class="line">If the client does not receive anything within this time, the connection is closed.</div></pre></td></tr></table></figure></p>
+<p><strong>5. client_body_buffer_size</strong></p>
+<p>用于接收客户端请求报文的body部分的缓冲区大小；默认为16k；超出此大小时，其将被暂存到磁盘上的由client_body_temp_path指令所定义的位置；<br>上传数据量不大时，默认大小不必要修改。例如论坛等一次性上传较大数据时，需要调整默认大小。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Syntax: 	client_body_buffer_size size;</div><div class="line">Default: 	client_body_buffer_size 8k|16k;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets buffer size for reading client request body. In case the request body is larger than the buffer, </div><div class="line">the whole body or only its part is written to a temporary file. </div><div class="line">By default, buffer size is equal to two memory pages. This is 8K on x86, other 32-bit platforms, </div><div class="line">and x86-64. It is usually 16K on other 64-bit platforms.</div></pre></td></tr></table></figure></p>
+<p><strong>6. client_body_temp_path</strong></p>
+<p>设定用于存储客户端请求报文的body部分的临时存储路径及子目录结构和数量；</p>
+<p>16进制的数字；</p>
+<pre><code>client_body_temp_path   /var/tmp/ [2 [1 [1]]]
+    1：表示用一位16进制数字表示一级子目录；0-f
+    2：表示用2位16进程数字表示二级子目录：00-ff
+    2：表示用2位16进程数字表示三级子目录：00-ff
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Syntax: 	client_body_temp_path path [level1 [level2 [level3]]];</div><div class="line">Default: 	client_body_temp_path client_body_temp;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Defines a directory for storing temporary files holding client request bodies. </div><div class="line">Up to three-level subdirectory hierarchy can be used under the specified directory. </div><div class="line">For example, in the following configuration</div><div class="line"></div><div class="line">    client_body_temp_path /spool/nginx/client_temp 1 2;</div><div class="line"></div><div class="line">a path to a temporary file might look like this:</div><div class="line"></div><div class="line">    /spool/nginx/client_temp/7/45/00000123457</div></pre></td></tr></table></figure>
+<h2 id="对客户端进行限制的相关配置："><a href="#对客户端进行限制的相关配置：" class="headerlink" title="对客户端进行限制的相关配置："></a>对客户端进行限制的相关配置：</h2><p><strong>1. limit_rate;</strong></p>
+<p>限制响应给客户端的传输速率，单位是bytes/second，0表示无限制；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Syntax: 	limit_rate rate;</div><div class="line">Default:    limit_rate 0;</div><div class="line">Context: 	http, server, location, if in location</div><div class="line"></div><div class="line">Limits the rate of response transmission to a client. </div><div class="line">The rate is specified in bytes per second.</div><div class="line">The zero value disables rate limiting. </div><div class="line">The limit is set per a request, and so if a client simultaneously opens two connections,</div><div class="line">the overall rate will be twice as much as the specified limit.</div><div class="line"></div><div class="line">Rate limit can also be set in the $limit_rate variable. </div><div class="line">It may be useful in cases where rate should be limited depending on a certain condition:</div><div class="line"></div><div class="line">    server &#123;</div><div class="line"></div><div class="line">        if ($slow) &#123;</div><div class="line">            set $limit_rate 4k;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line"></div><div class="line">Rate limit can also be set in the “X-Accel-Limit-Rate” header field of a proxied server response. </div><div class="line">This capability can be disabled using the proxy_ignore_headers, fastcgi_ignore_headers,</div><div class="line">uwsgi_ignore_headers, and scgi_ignore_headers directives.</div></pre></td></tr></table></figure></p>
+<p><strong>2. limit_except method</strong></p>
+<p>限制对指定的请求方法之外的其它方法的使用客户端；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Syntax: 	limit_except method ... &#123; ... &#125;</div><div class="line">Default: 	—</div><div class="line">Context: 	location</div><div class="line"></div><div class="line">Limits allowed HTTP methods inside a location. </div><div class="line">The method parameter can be one of the following: GET, HEAD, POST, PUT, DELETE, </div><div class="line">MKCOL, COPY, MOVE, OPTIONS, PROPFIND, PROPPATCH, LOCK, UNLOCK, or PATCH. </div><div class="line">Allowing the GET method makes the HEAD method also allowed. Access to other methods can</div><div class="line">be limited using the ngx_http_access_module and ngx_http_auth_basic_module modules directives:</div><div class="line"></div><div class="line">    limit_except GET &#123;</div><div class="line">        allow 192.168.1.0/32;</div><div class="line">        deny  all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">Please note that this will limit access to all methods except GET and HEAD.</div></pre></td></tr></table></figure></p>
+<h2 id="文件操作优化的配置"><a href="#文件操作优化的配置" class="headerlink" title="文件操作优化的配置:"></a>文件操作优化的配置:</h2><p><strong>1. aio</strong></p>
+<p>详情：<a href="http://www.tuicool.com/articles/AvmUz2b" target="_blank" rel="external">http://www.tuicool.com/articles/AvmUz2b</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Syntax: 	aio on | off | threads[=pool];</div><div class="line">Default: 	aio off;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">This directive appeared in version 0.8.11.</div><div class="line"></div><div class="line">Enables or disables the use of asynchronous file I/O (AIO) on FreeBSD and Linux:</div><div class="line"></div><div class="line">    location /video/ &#123;</div><div class="line">        aio            on;</div><div class="line">        output_buffers 1 64k;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p><strong>2. directio size</strong></p>
+<p>在Linux主机启用O_DIRECT标记，此处意味文件大于等于给定的大小时使用，例如directio 4m;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Syntax: 	directio size | off;</div><div class="line">Default: 	</div><div class="line"></div><div class="line">directio off;</div><div class="line"></div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">This directive appeared in version 0.7.7.</div><div class="line"></div><div class="line">Enables the use of the O_DIRECT flag (FreeBSD, Linux), the F_NOCACHE flag (macOS), or the directio() function (Solaris), when reading files that are larger than or equal to the specified size. The directive automatically disables (0.7.15) the use of sendfile for a given request. It can be useful for serving large files:</div><div class="line"></div><div class="line">    directio 4m;</div><div class="line"></div><div class="line">or when using aio on Linux.</div></pre></td></tr></table></figure></p>
+<p><strong>3. open_file_cache</strong></p>
+<p>open_file_cache max=N [inactive=time];</p>
+<p>nginx可以缓存以下三种信息：</p>
+<pre><code>(1) 文件的描述符、文件大小和最近一次的修改时间；
+(2) 打开的目录结构；
+(3) 没有找到的或者没有权限访问的文件的相关信息；
+</code></pre><p>max=N：可缓存的缓存项上限；达到上限后会使用LRU算法实现缓存管理；</p>
+<p>inactive=time：缓存项的非活动时长，在此处指定的时长内未被命中的或命中的次数少于<br>open_file_cache_min_uses指令所指定的次数的缓存项即为非活动项；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache off;</div><div class="line">open_file_cache max=N [inactive=time];</div><div class="line">Default: 	open_file_cache off;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Configures a cache that can store:</div><div class="line"></div><div class="line">    open file descriptors, their sizes and modification times;</div><div class="line">    information on existence of directories;</div><div class="line">    file lookup errors, such as “file not found”, “no read permission”, and so on.</div><div class="line"></div><div class="line">        Caching of errors should be enabled separately by the open_file_cache_errors directive. </div><div class="line"></div><div class="line">The directive has the following parameters:</div><div class="line"></div><div class="line">max</div><div class="line">    sets the maximum number of elements in the cache; on cache overflow the least recently used (LRU) elements are removed; </div><div class="line">inactive</div><div class="line">    defines a time after which an element is removed from the cache if it has not been accessed during this time; by default, it is 60 seconds; </div><div class="line">off</div><div class="line">    disables the cache. </div><div class="line"></div><div class="line">Example:</div><div class="line"></div><div class="line">    open_file_cache          max=1000 inactive=20s;</div><div class="line">    open_file_cache_valid    30s;</div><div class="line">    open_file_cache_min_uses 2;</div><div class="line">    open_file_cache_errors   on;</div></pre></td></tr></table></figure></p>
+<p><strong>4. open_file_cache_valid</strong></p>
+<p>缓存项有效性的检查频率；默认为60s;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache_valid time;</div><div class="line">Default: 	open_file_cache_valid 60s;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets a time after which open_file_cache elements should be validated.</div></pre></td></tr></table></figure></p>
+<p><strong>5. open_file_cache_min_uses</strong></p>
+<p>在open_file_cache指令的inactive参数指定的时长内，至少应该被命中多少次方可被归类为活动项；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache_min_uses number;</div><div class="line">Default: 	open_file_cache_min_uses 1;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets the minimum number of file accesses during the period configured by the inactive parameter of the </div><div class="line">open_file_cache directive, required for a file descriptor to remain open in the cache.</div></pre></td></tr></table></figure></p>
+<p><strong>6. open_file_cache_errors</strong></p>
+<p>是否缓存查找时发生错误的文件一类的信息；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache_errors on | off;</div><div class="line">Default: 	open_file_cache_errors off;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Enables or disables caching of file lookup errors by open_file_cache.</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -540,7 +495,7 @@ systemctl status keepalived 查看keepalived的状态
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/keepalived/" rel="tag"># keepalived</a>
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
           
         </div>
       
@@ -553,8 +508,8 @@ systemctl status keepalived 查看keepalived的状态
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/18/nginx3/" rel="next" title="Nginx配置指令（二）">
-                <i class="fa fa-chevron-left"></i> Nginx配置指令（二）
+              <a href="/2017/06/17/nginx2/" rel="next" title="Nginx配置指令（一）">
+                <i class="fa fa-chevron-left"></i> Nginx配置指令（一）
               </a>
             
           </div>
@@ -562,6 +517,10 @@ systemctl status keepalived 查看keepalived的状态
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/25/keepalivedtest/" rel="prev" title="keepalived实例--双主">
+                keepalived实例--双主 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -920,7 +879,7 @@ systemctl status keepalived 查看keepalived的状态
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#keepalived实例–双主"><span class="nav-number">1.</span> <span class="nav-text">keepalived实例–双主</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境："><span class="nav-number">1.1.</span> <span class="nav-text">环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置："><span class="nav-number">1.2.</span> <span class="nav-text">配置：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RS配置"><span class="nav-number">1.2.1.</span> <span class="nav-text">RS配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度器配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">调度器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置keepalived"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">配置keepalived</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检查成功与否："><span class="nav-number">1.2.2.2.</span> <span class="nav-text">检查成功与否：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx配置指令（二）"><span class="nav-number">1.</span> <span class="nav-text">Nginx配置指令（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端请求的相关配置："><span class="nav-number">1.1.</span> <span class="nav-text">客户端请求的相关配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对客户端进行限制的相关配置："><span class="nav-number">1.2.</span> <span class="nav-text">对客户端进行限制的相关配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作优化的配置"><span class="nav-number">1.3.</span> <span class="nav-text">文件操作优化的配置:</span></a></li></ol></li></ol></div>
             
 
           </div>
