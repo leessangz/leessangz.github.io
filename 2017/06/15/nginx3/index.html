@@ -1,0 +1,1202 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,nginx," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LeeSsangZ" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Nginx配置指令（二）客户端请求的相关配置：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx配置指令（二）">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/nginx3/index.html">
+<meta property="og:site_name" content="LeeSsangZ">
+<meta property="og:description" content="Nginx配置指令（二）客户端请求的相关配置：">
+<meta property="og:updated_time" content="2017-06-25T01:44:24.607Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx配置指令（二）">
+<meta name="twitter:description" content="Nginx配置指令（二）客户端请求的相关配置：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/15/nginx3/"/>
+
+
+
+
+
+  <title> Nginx配置指令（二） | LeeSsangZ </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LeeSsangZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeeSsangZ's SS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/nginx3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Nginx配置指令（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T09:40:45+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/06/15/nginx3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Nginx配置指令（二）"><a href="#Nginx配置指令（二）" class="headerlink" title="Nginx配置指令（二）"></a>Nginx配置指令（二）</h1><h2 id="客户端请求的相关配置："><a href="#客户端请求的相关配置：" class="headerlink" title="客户端请求的相关配置："></a>客户端请求的相关配置：</h2><a id="more"></a>
+<p><strong>1. keepalive_timeout</strong></p>
+<p>设定保持连接的超时时长，0表示禁止长连接；默认为75s；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Syntax: 	keepalive_timeout timeout [header_timeout];</div><div class="line">Default: 	keepalive_timeout 75s;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">The first parameter sets a timeout during which a keep-alive client connection will </div><div class="line">stay open on the server side. </div><div class="line">The zero value disables keep-alive client connections. The optional second parameter sets</div><div class="line">a value in the “Keep-Alive: timeout=time” response header field. Two parameters may differ.</div><div class="line"></div><div class="line">The “Keep-Alive: timeout=time” header field is recognized by Mozilla and Konqueror. </div><div class="line">MSIE closes keep-alive connections by itself in about 60 seconds.</div></pre></td></tr></table></figure></p>
+<p><strong>2. keepalive_requests</strong></p>
+<p>在一次长连接上所允许请求的资源的最大数量，默认为100;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Syntax: 	keepalive_requests number;</div><div class="line">Default: 	keepalive_requests 100;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">This directive appeared in version 0.8.0.</div><div class="line"></div><div class="line">Sets the maximum number of requests that can be served through one keep-alive connection.</div><div class="line">After the maximum number of requests are made, the connection is closed.</div></pre></td></tr></table></figure></p>
+<p><strong>3. keepalive_disable</strong></p>
+<p>对哪种浏览器禁用长连接；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Syntax: 	keepalive_disable none | browser ...;</div><div class="line">Default: 	</div><div class="line"></div><div class="line">keepalive_disable msie6;</div><div class="line"></div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Disables keep-alive connections with misbehaving browsers. The browser parameters specify which browsers will be affected. </div><div class="line">The value msie6 disables keep-alive connections with old versions of MSIE, once a POST request is received. </div><div class="line">The value safari disables keep-alive connections with Safari and Safari-like browsers on macOS and macOS-like operating systems. </div><div class="line">The value none enables keep-alive connections with all browsers.</div></pre></td></tr></table></figure></p>
+<p><strong>4. send_timeout</strong></p>
+<p>向客户端发送响应报文的超时时长，此处，是指两次写操作之间的间隔时长；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Syntax: 	send_timeout time;</div><div class="line">Default: 	send_timeout 60s;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets a timeout for transmitting a response to the client. </div><div class="line">The timeout is set only between two successive write operations, </div><div class="line">not for the transmission of the whole response. </div><div class="line">If the client does not receive anything within this time, the connection is closed.</div></pre></td></tr></table></figure></p>
+<p><strong>5. client_body_buffer_size</strong></p>
+<p>用于接收客户端请求报文的body部分的缓冲区大小；默认为16k；超出此大小时，其将被暂存到磁盘上的由client_body_temp_path指令所定义的位置；<br>上传数据量不大时，默认大小不必要修改。例如论坛等一次性上传较大数据时，需要调整默认大小。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Syntax: 	client_body_buffer_size size;</div><div class="line">Default: 	client_body_buffer_size 8k|16k;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets buffer size for reading client request body. In case the request body is larger than the buffer, </div><div class="line">the whole body or only its part is written to a temporary file. </div><div class="line">By default, buffer size is equal to two memory pages. This is 8K on x86, other 32-bit platforms, </div><div class="line">and x86-64. It is usually 16K on other 64-bit platforms.</div></pre></td></tr></table></figure></p>
+<p><strong>6. client_body_temp_path</strong></p>
+<p>设定用于存储客户端请求报文的body部分的临时存储路径及子目录结构和数量；</p>
+<p>16进制的数字；</p>
+<pre><code>client_body_temp_path   /var/tmp/ [2 [1 [1]]]
+    1：表示用一位16进制数字表示一级子目录；0-f
+    2：表示用2位16进程数字表示二级子目录：00-ff
+    2：表示用2位16进程数字表示三级子目录：00-ff
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Syntax: 	client_body_temp_path path [level1 [level2 [level3]]];</div><div class="line">Default: 	client_body_temp_path client_body_temp;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Defines a directory for storing temporary files holding client request bodies. </div><div class="line">Up to three-level subdirectory hierarchy can be used under the specified directory. </div><div class="line">For example, in the following configuration</div><div class="line"></div><div class="line">    client_body_temp_path /spool/nginx/client_temp 1 2;</div><div class="line"></div><div class="line">a path to a temporary file might look like this:</div><div class="line"></div><div class="line">    /spool/nginx/client_temp/7/45/00000123457</div></pre></td></tr></table></figure>
+<h2 id="对客户端进行限制的相关配置："><a href="#对客户端进行限制的相关配置：" class="headerlink" title="对客户端进行限制的相关配置："></a>对客户端进行限制的相关配置：</h2><p><strong>1. limit_rate;</strong></p>
+<p>限制响应给客户端的传输速率，单位是bytes/second，0表示无限制；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Syntax: 	limit_rate rate;</div><div class="line">Default:    limit_rate 0;</div><div class="line">Context: 	http, server, location, if in location</div><div class="line"></div><div class="line">Limits the rate of response transmission to a client. </div><div class="line">The rate is specified in bytes per second.</div><div class="line">The zero value disables rate limiting. </div><div class="line">The limit is set per a request, and so if a client simultaneously opens two connections,</div><div class="line">the overall rate will be twice as much as the specified limit.</div><div class="line"></div><div class="line">Rate limit can also be set in the $limit_rate variable. </div><div class="line">It may be useful in cases where rate should be limited depending on a certain condition:</div><div class="line"></div><div class="line">    server &#123;</div><div class="line"></div><div class="line">        if ($slow) &#123;</div><div class="line">            set $limit_rate 4k;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line"></div><div class="line">Rate limit can also be set in the “X-Accel-Limit-Rate” header field of a proxied server response. </div><div class="line">This capability can be disabled using the proxy_ignore_headers, fastcgi_ignore_headers,</div><div class="line">uwsgi_ignore_headers, and scgi_ignore_headers directives.</div></pre></td></tr></table></figure></p>
+<p><strong>2. limit_except method</strong></p>
+<p>限制对指定的请求方法之外的其它方法的使用客户端；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Syntax: 	limit_except method ... &#123; ... &#125;</div><div class="line">Default: 	—</div><div class="line">Context: 	location</div><div class="line"></div><div class="line">Limits allowed HTTP methods inside a location. </div><div class="line">The method parameter can be one of the following: GET, HEAD, POST, PUT, DELETE, </div><div class="line">MKCOL, COPY, MOVE, OPTIONS, PROPFIND, PROPPATCH, LOCK, UNLOCK, or PATCH. </div><div class="line">Allowing the GET method makes the HEAD method also allowed. Access to other methods can</div><div class="line">be limited using the ngx_http_access_module and ngx_http_auth_basic_module modules directives:</div><div class="line"></div><div class="line">    limit_except GET &#123;</div><div class="line">        allow 192.168.1.0/32;</div><div class="line">        deny  all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">Please note that this will limit access to all methods except GET and HEAD.</div></pre></td></tr></table></figure></p>
+<h2 id="文件操作优化的配置"><a href="#文件操作优化的配置" class="headerlink" title="文件操作优化的配置:"></a>文件操作优化的配置:</h2><p><strong>1. aio</strong></p>
+<p>详情：<a href="http://www.tuicool.com/articles/AvmUz2b" target="_blank" rel="external">http://www.tuicool.com/articles/AvmUz2b</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Syntax: 	aio on | off | threads[=pool];</div><div class="line">Default: 	aio off;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">This directive appeared in version 0.8.11.</div><div class="line"></div><div class="line">Enables or disables the use of asynchronous file I/O (AIO) on FreeBSD and Linux:</div><div class="line"></div><div class="line">    location /video/ &#123;</div><div class="line">        aio            on;</div><div class="line">        output_buffers 1 64k;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p><strong>2. directio size</strong></p>
+<p>在Linux主机启用O_DIRECT标记，此处意味文件大于等于给定的大小时使用，例如directio 4m;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Syntax: 	directio size | off;</div><div class="line">Default: 	</div><div class="line"></div><div class="line">directio off;</div><div class="line"></div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">This directive appeared in version 0.7.7.</div><div class="line"></div><div class="line">Enables the use of the O_DIRECT flag (FreeBSD, Linux), the F_NOCACHE flag (macOS), or the directio() function (Solaris), when reading files that are larger than or equal to the specified size. The directive automatically disables (0.7.15) the use of sendfile for a given request. It can be useful for serving large files:</div><div class="line"></div><div class="line">    directio 4m;</div><div class="line"></div><div class="line">or when using aio on Linux.</div></pre></td></tr></table></figure></p>
+<p><strong>3. open_file_cache</strong></p>
+<p>open_file_cache max=N [inactive=time];</p>
+<p>nginx可以缓存以下三种信息：</p>
+<pre><code>(1) 文件的描述符、文件大小和最近一次的修改时间；
+(2) 打开的目录结构；
+(3) 没有找到的或者没有权限访问的文件的相关信息；
+</code></pre><p>max=N：可缓存的缓存项上限；达到上限后会使用LRU算法实现缓存管理；</p>
+<p>inactive=time：缓存项的非活动时长，在此处指定的时长内未被命中的或命中的次数少于<br>open_file_cache_min_uses指令所指定的次数的缓存项即为非活动项；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache off;</div><div class="line">open_file_cache max=N [inactive=time];</div><div class="line">Default: 	open_file_cache off;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Configures a cache that can store:</div><div class="line"></div><div class="line">    open file descriptors, their sizes and modification times;</div><div class="line">    information on existence of directories;</div><div class="line">    file lookup errors, such as “file not found”, “no read permission”, and so on.</div><div class="line"></div><div class="line">        Caching of errors should be enabled separately by the open_file_cache_errors directive. </div><div class="line"></div><div class="line">The directive has the following parameters:</div><div class="line"></div><div class="line">max</div><div class="line">    sets the maximum number of elements in the cache; on cache overflow the least recently used (LRU) elements are removed; </div><div class="line">inactive</div><div class="line">    defines a time after which an element is removed from the cache if it has not been accessed during this time; by default, it is 60 seconds; </div><div class="line">off</div><div class="line">    disables the cache. </div><div class="line"></div><div class="line">Example:</div><div class="line"></div><div class="line">    open_file_cache          max=1000 inactive=20s;</div><div class="line">    open_file_cache_valid    30s;</div><div class="line">    open_file_cache_min_uses 2;</div><div class="line">    open_file_cache_errors   on;</div></pre></td></tr></table></figure></p>
+<p><strong>4. open_file_cache_valid</strong></p>
+<p>缓存项有效性的检查频率；默认为60s;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache_valid time;</div><div class="line">Default: 	open_file_cache_valid 60s;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets a time after which open_file_cache elements should be validated.</div></pre></td></tr></table></figure></p>
+<p><strong>5. open_file_cache_min_uses</strong></p>
+<p>在open_file_cache指令的inactive参数指定的时长内，至少应该被命中多少次方可被归类为活动项；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache_min_uses number;</div><div class="line">Default: 	open_file_cache_min_uses 1;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Sets the minimum number of file accesses during the period configured by the inactive parameter of the </div><div class="line">open_file_cache directive, required for a file descriptor to remain open in the cache.</div></pre></td></tr></table></figure></p>
+<p><strong>6. open_file_cache_errors</strong></p>
+<p>是否缓存查找时发生错误的文件一类的信息；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Syntax: 	open_file_cache_errors on | off;</div><div class="line">Default: 	open_file_cache_errors off;</div><div class="line">Context: 	http, server, location</div><div class="line"></div><div class="line">Enables or disables caching of file lookup errors by open_file_cache.</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/14/nginx2/" rel="next" title="Nginx配置指令（一）">
+                <i class="fa fa-chevron-left"></i> Nginx配置指令（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/15/iptables/" rel="prev" title="iptables">
+                iptables <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg"
+               alt="LeeSsangZ" />
+          <p class="site-author-name" itemprop="name">LeeSsangZ</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+        <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()'><i class="fa fa-music"></i> High</a>
+
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/your-user-name" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/your-user-name" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx配置指令（二）"><span class="nav-number">1.</span> <span class="nav-text">Nginx配置指令（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端请求的相关配置："><span class="nav-number">1.1.</span> <span class="nav-text">客户端请求的相关配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对客户端进行限制的相关配置："><span class="nav-number">1.2.</span> <span class="nav-text">对客户端进行限制的相关配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作优化的配置"><span class="nav-number">1.3.</span> <span class="nav-text">文件操作优化的配置:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017.7.8 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeSsangZ</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "23a5925f955a4d1e919ddd321bb17921",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<% if (theme.canvas_nest) { %>
+<script type="text/javascript"
+color="0,0,0" opacity='0.9' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<% } %>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/duoshuoshuo.js"></script>
+</body>
+</html>s

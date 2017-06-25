@@ -317,6 +317,192 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/keepalivedtest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/25/keepalivedtest/" itemprop="url">
+                  keepalived实例--双主
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T09:42:20+08:00">
+                2017-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/keepalived/" itemprop="url" rel="index">
+                    <span itemprop="name">keepalived</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="keepalived实例–双主"><a href="#keepalived实例–双主" class="headerlink" title="keepalived实例–双主"></a>keepalived实例–双主</h1><h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><pre><code>RS：real_server 以下全部简称
+两台RS配置IP
+172.16.2.10/16
+172.16.2.20/16
+安装httpd，每台上面做一个不同的测试页，以便区分。实际中主备必须一样。
+
+调度器：director
+两台调度器
+172.16.2.30/16
+172.16.2.40/16
+安装keepalived
+安装ipvsadm（这里配置用不到，只做测试用）
+
+vip：virtual ip 客户端发送请求的IP
+vip组
+172.16.2.88/16
+172.16.2.99/16
+</code></pre><p><strong>以上主机全部同步时间</strong></p>
+<h2 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h2><h3 id="RS配置"><a href="#RS配置" class="headerlink" title="RS配置"></a>RS配置</h3><p>两台RS使用脚本配置回环网卡IP(vip)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">vip=&apos;172.16.2.99&apos;   #dr模式下的必须操作，vip是什么，变量内vip就写什么。这里配置成88和99.</div><div class="line">netmask=&apos;255.255.255.255&apos;</div><div class="line">iface=&apos;lo:0&apos;        #网卡别名。依次排序，不能重复</div><div class="line"></div><div class="line">case $1 in</div><div class="line">start)</div><div class="line">	echo 1 &gt; /proc/sys/net/ipv4/conf/all/arp_ignore</div><div class="line">	echo 1 &gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</div><div class="line">	echo 2 &gt; /proc/sys/net/ipv4/conf/all/arp_announce</div><div class="line">	echo 2 &gt; /proc/sys/net/ipv4/conf/lo/arp_announce</div><div class="line"></div><div class="line">	ifconfig $iface $vip netmask $netmask broadcast $vip up</div><div class="line">	route add -host $vip dev $iface</div><div class="line">	;;</div><div class="line">stop)</div><div class="line">	ifconfig $iface down</div><div class="line"></div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/all/arp_ignore</div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/all/arp_announce</div><div class="line">	echo 0 &gt; /proc/sys/net/ipv4/conf/lo/arp_announce</div><div class="line">	;;</div><div class="line">*)</div><div class="line">	echo &quot;Usage : $(basename $0) start|stop&quot;</div><div class="line">	exit 1</div><div class="line">	;;</div><div class="line">esac</div></pre></td></tr></table></figure>
+<p>两台RS安装httpd</p>
+<pre><code>安装
+yum install httpd
+提供测试页
+echo RS1 &gt; /var/www/html/index.html
+</code></pre><p>RS2 同上</p>
+<p>完成后启动服务，在调度器主机上能访问即可。</p>
+<h3 id="调度器配置"><a href="#调度器配置" class="headerlink" title="调度器配置"></a>调度器配置</h3><p>安装好keepalived、ipvsadm、nginx后开始配置</p>
+<h4 id="配置keepalived"><a href="#配置keepalived" class="headerlink" title="配置keepalived"></a>配置keepalived</h4><p>修改配置文件。添加vrrp和virtual_server,配置如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line">! Configuration File for keepalived</div><div class="line"></div><div class="line">global_defs &#123;</div><div class="line">   notification_email &#123;</div><div class="line">        root@localhost</div><div class="line">   &#125;</div><div class="line">   notification_email_from keepalived@localhost</div><div class="line">   smtp_server 127.0.0.1</div><div class="line">   smtp_connect_timeout 30</div><div class="line">   router_id node1</div><div class="line">   vrrp_mcast_group4 224.1.101.33</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance VI_1 &#123;</div><div class="line">    state MASTER</div><div class="line">    priority 100</div><div class="line">    interface eno16777736</div><div class="line">    virtual_router_id 33</div><div class="line">    advert_int 1</div><div class="line">    authentication &#123;</div><div class="line">        auth_type PASS</div><div class="line">        auth_pass RT3SKUI2</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        172.16.2.99/16 dev eno16777736 label eno16777736:0</div><div class="line">    &#125;</div><div class="line">#    notify_master &quot;/etc/keepalived/notify.sh master&quot;</div><div class="line">#    notify_backup &quot;/etc/keepalived/notify.sh backup&quot;</div><div class="line">#    notify_fault &quot;/etc/keepalived/notify.sh fault&quot;</div><div class="line">&#125;</div><div class="line">virtual_server 172.16.2.99 80 &#123;</div><div class="line">    delay_loop 1</div><div class="line">    lb_algo wrr</div><div class="line">    lb_kind DR</div><div class="line">    protocol TCP</div><div class="line">    sorry_server 127.0.0.1 80</div><div class="line"></div><div class="line">    real_server 172.16.2.10 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    real_server 172.16.2.20 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance VI_2 &#123;</div><div class="line">    state BACKUP</div><div class="line">    priority 95</div><div class="line">    interface eno16777736</div><div class="line">    virtual_router_id 34</div><div class="line">    advert_int 1</div><div class="line">    authentication &#123;</div><div class="line">        auth_type PASS</div><div class="line">        auth_pass OT4SKOI2</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        172.16.2.88/16 dev eno16777736 label eno16777736:1</div><div class="line">    &#125;</div><div class="line">#    notify_master &quot;/etc/keepalived/notify.sh master&quot;</div><div class="line">#    notify_backup &quot;/etc/keepalived/notify.sh backup&quot;</div><div class="line">#    notify_fault &quot;/etc/keepalived/notify.sh fault&quot;</div><div class="line">&#125;</div><div class="line">virtual_server 172.16.2.88 80 &#123;</div><div class="line">    delay_loop 1</div><div class="line">    lb_algo wrr</div><div class="line">    lb_kind DR</div><div class="line">    protocol TCP</div><div class="line">    sorry_server 127.0.0.1 80</div><div class="line"></div><div class="line">    real_server 172.16.2.10 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    real_server 172.16.2.20 80 &#123;</div><div class="line">       weight 1</div><div class="line">       HTTP_GET &#123;</div><div class="line">          url &#123;</div><div class="line">                path /index.html</div><div class="line">                status_code 200</div><div class="line">           &#125;</div><div class="line">           nb_get_retry 3</div><div class="line">           delay_before_retry 2</div><div class="line">           connect_timeout 3</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>附上代码中注释的邮件提醒服务脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">contact=&apos;root@localhost&apos;</div><div class="line"></div><div class="line">notify() &#123;</div><div class="line">	mailsubject=&quot;$(hostname) to be $1, vip floating&quot;</div><div class="line">	mailbody=&quot;$(date +&apos;%F %T&apos;): vrrp transition, $(hostname) changed to be $1&quot;</div><div class="line">	echo &quot;$mailbody&quot; | mail -s &quot;$mailsubject&quot; $contact</div><div class="line">&#125;</div><div class="line"></div><div class="line">case $1 in</div><div class="line">master)</div><div class="line">	notify master</div><div class="line">	;;</div><div class="line">backup)</div><div class="line">	notify backup</div><div class="line">	;;</div><div class="line">fault)</div><div class="line">	notify fault</div><div class="line">	;;</div><div class="line">*)</div><div class="line">	echo &quot;Usage: $(basename $0) &#123;master|backup|fault&#125;&quot;</div><div class="line">	exit 1</div><div class="line">	;;</div><div class="line">esac</div></pre></td></tr></table></figure>
+<p>启动keepalived</p>
+<h4 id="检查成功与否："><a href="#检查成功与否：" class="headerlink" title="检查成功与否："></a>检查成功与否：</h4><pre><code>ifconfig查IP
+    确保在主节点上可以看到设置的网卡别名，以及IP
+
+ipvsadm -ln 查规则
+    确保后端两台RS已经被加入到集群里。
+    注意：这里的规则不是使用ipvsadm添加。是keepalived根据配置文件从内核中直接生成的。
+
+systemctl status keepalived 查看keepalived的状态
+    可以看到keepalived的详细状态信息。
+</code></pre><p>确保以上三项全部没问题以后再使用一台客户端对vip进行访问就可以了。</p>
+<p>还可以进行测试。停掉后端一台RS的http服务。查看访问结果。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/iptables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -424,6 +610,458 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/06/15/iptables/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/nginx3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/15/nginx3/" itemprop="url">
+                  Nginx配置指令（二）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T09:40:45+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Nginx配置指令（二）"><a href="#Nginx配置指令（二）" class="headerlink" title="Nginx配置指令（二）"></a>Nginx配置指令（二）</h1><h2 id="客户端请求的相关配置："><a href="#客户端请求的相关配置：" class="headerlink" title="客户端请求的相关配置："></a>客户端请求的相关配置：</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/15/nginx3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/nginx2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/14/nginx2/" itemprop="url">
+                  Nginx配置指令（一）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T09:39:10+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Nginx配置指令（一）"><a href="#Nginx配置指令（一）" class="headerlink" title="Nginx配置指令（一）"></a>Nginx配置指令（一）</h1><h2 id="main配置段常见的配置指令："><a href="#main配置段常见的配置指令：" class="headerlink" title="main配置段常见的配置指令："></a>main配置段常见的配置指令：</h2><pre><code>分类：
+    正常运行必备的配置
+    优化性能相关的配置
+    用于调试及定位问题相关的配置
+    事件驱动相关的配置
+</code></pre><h2 id="正常运行必备的配置："><a href="#正常运行必备的配置：" class="headerlink" title="正常运行必备的配置："></a>正常运行必备的配置：</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/14/nginx2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/nginx1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LeeSsangZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LeeSsangZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/13/nginx1/" itemprop="url">
+                  Nginx安装以及配置文件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T09:36:11+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Nginx安装以及配置文件"><a href="#Nginx安装以及配置文件" class="headerlink" title="Nginx安装以及配置文件"></a>Nginx安装以及配置文件</h1><h2 id="Nginx功能概述："><a href="#Nginx功能概述：" class="headerlink" title="Nginx功能概述："></a>Nginx功能概述：</h2><h3 id="HTTP基础功能："><a href="#HTTP基础功能：" class="headerlink" title="HTTP基础功能："></a>HTTP基础功能：</h3><ul>
+<li>处理静态文件，索引文件以及自动索引；</li>
+<li>反向代理加速（无缓存），简单的负载均衡和容错；</li>
+<li>FastCGI，简单的负载均衡和容错；</li>
+<li>模块化的结构，包括gzipping，byte ranges，chunked responses，以及SSI-filter。在SSI过滤器中，到同一个proxy或者FastCGI的多个子请求并发处理；</li>
+<li>SSL和TLS SNI 支持；</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/13/nginx1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1225,620 +1863,6 @@ TLS: transport layer Security
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/xiti1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LeeSsangZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LeeSsangZ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/21/xiti1/" itemprop="url">
-                  shell脚本练习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-21T16:02:22+08:00">
-                2017-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-编程/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux 编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="常见shel题型"><a href="#常见shel题型" class="headerlink" title="常见shel题型"></a>常见shel题型</h1><h2 id="第一题：99乘法表"><a href="#第一题：99乘法表" class="headerlink" title="第一题：99乘法表"></a>第一题：99乘法表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line">for ((i=1;i&lt;=10;i++));do</div><div class="line"></div><div class="line">	for ((j=1;j&lt;=i;j++));do</div><div class="line"></div><div class="line">		echo -e &quot;$j*$i=$(($j*$i))\t\c&quot;</div><div class="line"></div><div class="line">	done</div><div class="line">	</div><div class="line">    echo</div><div class="line"></div><div class="line">done</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/21/xiti1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/bianchenghanshu2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LeeSsangZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LeeSsangZ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/13/bianchenghanshu2/" itemprop="url">
-                  编程函数（二）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-13T22:14:37+08:00">
-                2017-05-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux编程/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="函数返回值："><a href="#函数返回值：" class="headerlink" title="函数返回值："></a>函数返回值：</h2><pre><code>函数的执行结果返回值：
-        显示使用echo或print命令输出；
-        函数体中调用的命令的执行结果；
-函数的退出状态码：
-    默认取决与函数体中执行的最后一条命令的退出状态码
-    自定义：return
-函数可以接受参数：
-     传递参数给函数：
-        在函数体当中，可以使用$1 $2 ...引用传递给函数的参数
-        在调用函数时，在函数名后面以空白符分隔给定参数列表即可，例如testfunc arg1 arg2 arg3
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/13/bianchenghanshu2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/12/bianchenghanshu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LeeSsangZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LeeSsangZ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/12/bianchenghanshu/" itemprop="url">
-                  编程函数（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T22:14:37+08:00">
-                2017-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux编程/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="编程函数"><a href="#编程函数" class="headerlink" title="编程函数"></a>编程函数</h1><h2 id="case-语句"><a href="#case-语句" class="headerlink" title="case 语句"></a>case 语句</h2><p><strong>多分支if语句</strong></p>
-<pre><code>if CONDITION1；then
-    分支1
-elif CONDITION2 ；then
-    分支2
-else CONDITION ；then
-    分支n
-
-fi
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/12/bianchenghanshu/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/11/grub-conf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LeeSsangZ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i1.piimg.com/588144/529ce2681f28e3b8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LeeSsangZ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/grub-conf/" itemprop="url">
-                  grub.conf格式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T21:53:09+08:00">
-                2017-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux启动流程/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux启动流程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="grub-conf格式"><a href="#grub-conf格式" class="headerlink" title="grub.conf格式"></a>grub.conf格式</h1><pre><code>生成时间是安装系统的时间
-
-
-default=0
-timeout=3
-password --md5 密码   进入单用户时需要输入口令，保护所有内核版本系统grub-md5-crypt生成md5加密密码  
-         --encrypted                                            grub-crypt生成sha512加密密码
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/11/grub-conf/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1888,7 +1912,7 @@ password --md5 密码   进入单用户时需要输入口令，保护所有内�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1899,7 +1923,7 @@ password --md5 密码   进入单用户时需要输入口令，保护所有内�
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1910,7 +1934,7 @@ password --md5 密码   进入单用户时需要输入口令，保护所有内�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
